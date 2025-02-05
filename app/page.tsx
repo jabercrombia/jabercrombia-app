@@ -5,9 +5,9 @@ import Date from "./date";
 import CoverImage from "./cover-image";
 import Avatar from "./avatar";
 import MoreStories from "./more-stories";
-import Button from "../components/Button";
+// import Button from "../components/Button";
 
-import { getAllPosts, getHomepageSections } from "@/lib/api";
+import { getHomepageSections } from "@/lib/api";
 import { CMS_NAME, CMS_URL } from "@/lib/constants";
 
 function Intro() {
@@ -98,7 +98,7 @@ export default async function Page() {
                 <div className={index % 2 !== 0 ? "order-2 basis-1/2 m-auto text-right" : "order-1 basis-1/2 m-auto"}>
                   <h2 className="capitalize text-4xl">{elem.title}</h2>
                   <p className="text-xl">{elem.body}</p>
-                  <Button bg={"blue-100"} btnText={"Follow me"} textColor={"white"}></Button>
+                  {/* <Button bg={"blue-100"} btnText={"Follow me"} textColor={"white"}></Button> */}
                   <Link href={`/posts/${elem.title}`} className="hover:underline">
               Visit
             </Link>
