@@ -1,30 +1,14 @@
-const POST_GRAPHQL_FIELDS = `
-  slug
+const HOMEPAGE_GRAPHQL_FIELDS = `
+  sys {
+    id
+  }
   title
-  coverImage {
-    url
-  }
-  date
-  author {
-    name
-    picture {
-      url
-    }
-  }
-  excerpt
-  content {
-    json
-    links {
-      assets {
-        block {
-          sys {
-            id
-          }
-          url
-          description
-        }
-      }
-    }
+  body
+  heroImage {
+    title
+    url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 400})
+    width
+    height
   }
 `;
 
@@ -42,79 +26,61 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
         }`,
       },
       body: JSON.stringify({ query }),
-      next: { tags: ["posts"] },
     },
   ).then((response) => response.json());
 }
 
-function extractPost(fetchResponse: any): any {
-  return fetchResponse?.data?.postCollection?.items?.[0];
+function extractHomePageSections(fetchResponse: any) {
+  console.log(fetchResponse);
+  return fetchResponse?.data;
+}
+
+export async function getHomepageSections(
+
+  // By default this function will return published content but will provide an option to
+  // return draft content for reviewing homepageSections before they are live
+  isDraftMode = false,
+) {
+  const homepageSections = await fetchGraphQL(
+    `query {
+        pageHeaderCollection(where: {
+        AND: [
+          { title_not: "justin abercrombia" },
+          {title_not: "home"}
+        ]
+  }) {
+          items {
+            ${HOMEPAGE_GRAPHQL_FIELDS}
+          }
+        }
+      }`,
+  );
+  return extractHomePageSections(homepageSections);
 }
 
 function extractPostEntries(fetchResponse: any): any[] {
-  return fetchResponse?.data?.postCollection?.items;
+  return fetchResponse?.data;
 }
 
-export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
-  const entry = await fetchGraphQL(
-    `query {
-      postCollection(where: { slug: "${slug}" }, preview: true, limit: 1) {
-        items {
-          ${POST_GRAPHQL_FIELDS}
-        }
-      }
-    }`,
-    true,
-  );
-  return extractPost(entry);
-}
+// export async function getPostAndMorePosts(
+//   slug: string,
+//   preview: boolean,
+// ): Promise<any> {
+//   const entry = await fetchGraphQL(
+//     `query {
+//       postCollection(where: { slug: "${slug}" }, preview: ${
+//         preview ? "true" : "false"
+//       }, limit: 1) {
+//         items {
+//           ${POST_GRAPHQL_FIELDS}
+//         }
+//       }
+//     }`,
+//     preview,
+//   );
 
-export async function getAllPosts(isDraftMode: boolean): Promise<any[]> {
-  const entries = await fetchGraphQL(
-    `query {
-      postCollection(where: { slug_exists: true }, order: date_DESC, preview: ${
-        isDraftMode ? "true" : "false"
-      }) {
-        items {
-          ${POST_GRAPHQL_FIELDS}
-        }
-      }
-    }`,
-    isDraftMode,
-  );
-  return extractPostEntries(entries);
-}
-
-export async function getPostAndMorePosts(
-  slug: string,
-  preview: boolean,
-): Promise<any> {
-  const entry = await fetchGraphQL(
-    `query {
-      postCollection(where: { slug: "${slug}" }, preview: ${
-        preview ? "true" : "false"
-      }, limit: 1) {
-        items {
-          ${POST_GRAPHQL_FIELDS}
-        }
-      }
-    }`,
-    preview,
-  );
-  const entries = await fetchGraphQL(
-    `query {
-      postCollection(where: { slug_not_in: "${slug}" }, order: date_DESC, preview: ${
-        preview ? "true" : "false"
-      }, limit: 2) {
-        items {
-          ${POST_GRAPHQL_FIELDS}
-        }
-      }
-    }`,
-    preview,
-  );
-  return {
-    post: extractPost(entry),
-    morePosts: extractPostEntries(entries),
-  };
-}
+//   return {
+//     post: extractPost(entry),
+//     morePosts: extractPostEntries(entries),
+//   };
+// }

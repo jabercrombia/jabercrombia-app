@@ -9,6 +9,17 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        sm: '600px',
+        md: '728px',
+        lg: '984px',
+        xl: '1140px',
+        '2xl': '1140px',
+      },
+      colors: {
+        'darkBlue': '#151421',
+        'whiteBG': '#FFFFFF',
+      },
       fontFamily: {
         sans: ["var(--font-inter)"],
       },

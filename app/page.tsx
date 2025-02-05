@@ -5,8 +5,9 @@ import Date from "./date";
 import CoverImage from "./cover-image";
 import Avatar from "./avatar";
 import MoreStories from "./more-stories";
+import Button from "../components/Button";
 
-import { getAllPosts } from "@/lib/api";
+import { getAllPosts, getHomepageSections } from "@/lib/api";
 import { CMS_NAME, CMS_URL } from "@/lib/constants";
 
 function Intro() {
@@ -16,7 +17,7 @@ function Intro() {
         Blog.
       </h1>
       <h2 className="text-center md:text-left text-lg mt-5 md:pl-8">
-        A statically generated blog example using{" "}
+        A staticallys generated blog example using{" "}
         <a
           href="https://nextjs.org/"
           className="underline hover:text-success duration-200 transition-colors"
@@ -77,25 +78,39 @@ function HeroPost({
 }
 
 export default async function Page() {
-  const { isEnabled } = draftMode();
-  const allPosts = await getAllPosts(isEnabled);
-  const heroPost = allPosts[0];
-  const morePosts = allPosts.slice(1);
+  let homepageSections = await getHomepageSections();
+  homepageSections = homepageSections?.pageHeaderCollection?.items;
+  //const allPosts = await getAllPosts();
+  {
+    homepageSections.map(function (elem: { title: string; body: string; heroImage: { url: string } }) {
+      console.log(elem.title);
+    });
+  }
 
   return (
-    <div className="container mx-auto px-5">
+    <div>
       <Intro />
-      {heroPost && (
-        <HeroPost
-          title={heroPost.title}
-          coverImage={heroPost.coverImage}
-          date={heroPost.date}
-          author={heroPost.author}
-          slug={heroPost.slug}
-          excerpt={heroPost.excerpt}
-        />
+      {homepageSections.map(
+        (elem: { title: string; body: string; heroImage: { url: string, title: string } }, index: number) => (
+          <div className={`py-20 ${index % 2 == 0 ? `bg-gray-200` : `bg-transparent`}`}  key={index}>
+            <div className="container mx-auto">
+              <div className="flex flex-row">
+                <div className={index % 2 !== 0 ? "order-2 basis-1/2 m-auto text-right" : "order-1 basis-1/2 m-auto"}>
+                  <h2 className="capitalize text-4xl">{elem.title}</h2>
+                  <p className="text-xl">{elem.body}</p>
+                  <Button bg={"blue-100"} btnText={"Follow me"} textColor={"white"}></Button>
+                  <Link href={`/posts/${elem.title}`} className="hover:underline">
+              Visit
+            </Link>
+                </div>
+                <div className={index % 2 !== 0 ? "order-1 basis-1/2" : "order-2 basis-1/2"}>
+                  <img src={elem.heroImage.url} className={index % 2 == 0 ? "h-auto pl-10" : "h-auto pr-10"} alt={elem.heroImage.title}/>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
       )}
-      <MoreStories morePosts={morePosts} />
     </div>
   );
 }
