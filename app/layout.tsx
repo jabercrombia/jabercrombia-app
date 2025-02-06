@@ -1,10 +1,11 @@
 import "./globals.css";
 import { Roboto } from 'next/font/google'
 import { EXAMPLE_PATH, CMS_NAME } from "@/lib/constants";
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 
 import Footer from "../components/footer";
 import Header from "../components/header";
-import Head from 'next/head'
 
 export const metadata = {
   title: `jabercrombia`,
@@ -41,6 +42,7 @@ export default function RootLayout({
               <Footer />
             </div>
         </body>
+        <GoogleAnalytics gaId={process.env.GOOGLE_TRACKIND_ID} />
       </html>
     </>
   );
