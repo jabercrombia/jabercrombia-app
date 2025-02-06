@@ -42,7 +42,7 @@ export default function RootLayout({
               <Footer />
             </div>
         </body>
-        <GoogleAnalytics gaId={process.env.GOOGLE_TRACKIND_ID} />
+        <GoogleAnalytics gaId={process.env.GOOGLE_TRACKIND_ID || ''} />
       </html>
     </>
   );
