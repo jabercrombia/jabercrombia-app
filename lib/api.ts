@@ -1,9 +1,18 @@
 const HOMEPAGE_GRAPHQL_FIELDS = `
-  sys {
-    id
-  }
   title
   body
+  heroImage {
+    title
+    url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 400})
+    width
+    height
+  }
+`;
+
+const WEB_GRAPHQL_FIELDS = `
+  title
+  body
+  slug
   heroImage {
     title
     url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 400})
@@ -30,17 +39,11 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
   ).then((response) => response.json());
 }
 
-function extractHomePageSections(fetchResponse: any) {
-  console.log(fetchResponse);
+function extractHomePageSections(fetchResponse: any): any {
   return fetchResponse?.data;
 }
 
-export async function getHomepageSections(
-
-  // By default this function will return published content but will provide an option to
-  // return draft content for reviewing homepageSections before they are live
-  isDraftMode = false,
-) {
+export async function getHomepageSections() {
   const homepageSections = await fetchGraphQL(
     `query {
         pageHeaderCollection(where: {
@@ -58,29 +61,57 @@ export async function getHomepageSections(
   return extractHomePageSections(homepageSections);
 }
 
-function extractPostEntries(fetchResponse: any): any[] {
+function extractWebCollectionSection(fetchResponse: any) {
   return fetchResponse?.data;
 }
 
-// export async function getPostAndMorePosts(
-//   slug: string,
-//   preview: boolean,
-// ): Promise<any> {
-//   const entry = await fetchGraphQL(
-//     `query {
-//       postCollection(where: { slug: "${slug}" }, preview: ${
-//         preview ? "true" : "false"
-//       }, limit: 1) {
-//         items {
-//           ${POST_GRAPHQL_FIELDS}
-//         }
-//       }
-//     }`,
-//     preview,
-//   );
+// Web Page GraphQL
+export async function getWebCollection() {
+  const webCollectionSection = await fetchGraphQL(
+    `query {
+        webCollection {
+          items {
+            ${WEB_GRAPHQL_FIELDS}
+          }
+        }
+      }`,
+  );
+  return extractWebCollectionSection(webCollectionSection);
+}
 
-//   return {
-//     post: extractPost(entry),
-//     morePosts: extractPostEntries(entries),
-//   };
-// }
+function extractWebCollectionEntries(fetchResponse: any): any {
+  return fetchResponse?.data;
+}
+
+// Individual Web Page GraphQL
+export async function getWebCollectionEntry( slug: string) {
+  const webCollectionEntry = await fetchGraphQL(
+    `query {
+        webCollection (where: {slug: "${slug}"}) {
+          items {
+            title
+            body
+            slug
+            heroImage {
+              url
+            }
+            link
+            imageGalleryCollection {
+              items {
+                url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 400})
+                title
+              }
+            }
+            technologyCollection (limit: 5) {
+              items {
+                technologyName
+                fontawesomeName
+                fontawesomeTypes
+              }
+            }
+          }
+        }
+      }`,
+  );
+  return extractWebCollectionEntries(webCollectionEntry);
+}

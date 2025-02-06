@@ -5,37 +5,10 @@ import Date from "./date";
 import CoverImage from "./cover-image";
 import Avatar from "./avatar";
 import MoreStories from "./more-stories";
-// import Button from "../components/Button";
-
+import VisitButton from "../components/visitButton";
+import Image from 'next/image';
 import { getHomepageSections } from "@/lib/api";
 import { CMS_NAME, CMS_URL } from "@/lib/constants";
-
-function Intro() {
-  return (
-    <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
-      <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8">
-        Blog.
-      </h1>
-      <h2 className="text-center md:text-left text-lg mt-5 md:pl-8">
-        A staticallys generated blog example using{" "}
-        <a
-          href="https://nextjs.org/"
-          className="underline hover:text-success duration-200 transition-colors"
-        >
-          Next.js
-        </a>{" "}
-        and{" "}
-        <a
-          href={CMS_URL}
-          className="underline hover:text-success duration-200 transition-colors"
-        >
-          {CMS_NAME}
-        </a>
-        .
-      </h2>
-    </section>
-  );
-}
 
 function HeroPost({
   title,
@@ -80,16 +53,16 @@ function HeroPost({
 export default async function Page() {
   let homepageSections = await getHomepageSections();
   homepageSections = homepageSections?.pageHeaderCollection?.items;
-  //const allPosts = await getAllPosts();
-  {
-    homepageSections.map(function (elem: { title: string; body: string; heroImage: { url: string } }) {
-      console.log(elem.title);
-    });
-  }
 
   return (
     <div>
-      <Intro />
+
+      <div className="bg-[url(/homepage/sf-banner.jpg)] bg-center w-full h-[500px] flex items-center">
+        <div className="container mx-auto">
+        <h1 className="text-9xl font-medium uppercase text-white opacity-50">Justin Abercrombia</h1>
+        </div>
+      </div>
+
       {homepageSections.map(
         (elem: { title: string; body: string; heroImage: { url: string, title: string } }, index: number) => (
           <div className={`py-20 ${index % 2 == 0 ? `bg-gray-200` : `bg-transparent`}`}  key={index}>
@@ -98,10 +71,7 @@ export default async function Page() {
                 <div className={index % 2 !== 0 ? "order-2 basis-1/2 m-auto text-right" : "order-1 basis-1/2 m-auto"}>
                   <h2 className="capitalize text-4xl">{elem.title}</h2>
                   <p className="text-xl">{elem.body}</p>
-                  {/* <Button bg={"blue-100"} btnText={"Follow me"} textColor={"white"}></Button> */}
-                  <Link href={`/posts/${elem.title}`} className="hover:underline">
-              Visit
-            </Link>
+                  <VisitButton bg={"black"} btnText={"Visit"} textColor={"white"} linkDestination={elem.title} buttonLocation={index % 2 !== 0}/>
                 </div>
                 <div className={index % 2 !== 0 ? "order-1 basis-1/2" : "order-2 basis-1/2"}>
                   <img src={elem.heroImage.url} className={index % 2 == 0 ? "h-auto pl-10" : "h-auto pr-10"} alt={elem.heroImage.title}/>

@@ -19,6 +19,7 @@ export default {
       colors: {
         'darkBlue': '#151421',
         'whiteBG': '#FFFFFF',
+        'cloudGray':'#8b94a5'
       },
       fontFamily: {
         sans: ["var(--font-inter)"],
