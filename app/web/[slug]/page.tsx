@@ -6,10 +6,9 @@ export default async function PostPage({
 }: {
   params: { slug: string };
 }) {
-
+console.log(params?.slug);
 let dataGraphQL = await getWebCollectionEntry(params?.slug);
 const webCollection = dataGraphQL?.webCollection?.items[0];
-console.log(webCollection);
 
   return (
     <div className="container mx-auto">

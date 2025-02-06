@@ -21,6 +21,18 @@ const WEB_GRAPHQL_FIELDS = `
   }
 `;
 
+const PHOTOS_GRAPHQL_FIELDS = `
+  title
+  description
+  slug
+  photosCollection (limit:1) {
+    items {
+      title
+      url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 400})
+    }
+  }
+`;
+
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
   return fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
@@ -114,4 +126,54 @@ export async function getWebCollectionEntry( slug: string) {
       }`,
   );
   return extractWebCollectionEntries(webCollectionEntry);
+}
+
+function extractPhotosCollectionSection(fetchResponse: any) {
+  console.log(fetchResponse?.data);
+  return fetchResponse?.data;
+}
+
+// Photo Page GraphQL
+export async function getPhotosCollection() {
+  const collection = await fetchGraphQL(
+    `query {
+        photosCollection {
+          items {
+            ${PHOTOS_GRAPHQL_FIELDS}
+          }
+        }
+      }`,
+  );
+  return extractPhotosCollectionSection(collection);
+}
+
+//Individual Photo Page
+
+function extractPhotoCollectionEntries(fetchResponse: any): any {
+  console.log(fetchResponse?.data);
+  return fetchResponse?.data;
+}
+
+// Individual Photo Page GraphQL
+export async function getPhotoCollectionEntry( slug: string) {
+  console.log('getpho');
+  console.log(slug);
+  const photoGraphQL = await fetchGraphQL(
+    `query {
+        photosCollection (where: {slug: "${slug}"}) {
+          items {
+            title
+            description
+            slug
+            photosCollection {
+              items {
+                title
+                url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 400})
+              }
+            }
+          }
+        }
+      }`,
+  );
+  return extractPhotoCollectionEntries(photoGraphQL);
 }
