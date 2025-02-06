@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { getWebCollectionEntry } from "@/lib/api";
 
-
-
 export default async function PostPage({
   params,
 }: {

@@ -1,13 +1,5 @@
 import Link from "next/link";
-import { draftMode } from "next/headers";
- 
-import { useSearchParams } from 'next/navigation'
-import MoreStories from "../../more-stories";
-import Avatar from "../../avatar";
-import Date from "../../date";
-import CoverImage from "../../cover-image";
 
-import { Markdown } from "@/lib/markdown";
 import { getWebCollection } from "@/lib/api";
 
 
