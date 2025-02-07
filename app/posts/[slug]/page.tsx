@@ -9,16 +9,6 @@ import CoverImage from "../../cover-image";
 import { Markdown } from "@/lib/markdown";
 import { getWebCollection } from "@/lib/api";
 
-// export async function generateStaticParams() {
-  
-//   let allPosts = await getWebCollection();
-//   allPosts = allPosts.webCollection.items;
-//   console.log(allPosts);
-//   return allPosts.webCollection.items.map((post: any) => ({
-//     slug: post.slug,
-//   }));
-// }
-
 export default async function PostPage({
   params,
 }: {
@@ -26,10 +16,8 @@ export default async function PostPage({
 }) {
 
   const allPosts = await getWebCollection();
-  console.log('params it');
-  console.log(params);
+
   const posts = allPosts.webCollection.items;
-  console.log(posts);
 
   return (
     <div className="grid grid-cols-2 container mx-auto">

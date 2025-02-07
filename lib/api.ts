@@ -33,6 +33,17 @@ const PHOTOS_GRAPHQL_FIELDS = `
   }
 `;
 
+const DESIGN_GRAPHQL_FIELDS = `
+  title
+  slug
+  designGalleryCollection (limit:1) {
+    items {
+      title
+      url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 600})
+    }
+  }
+`;
+
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
   return fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
@@ -128,12 +139,11 @@ export async function getWebCollectionEntry( slug: string) {
   return extractWebCollectionEntries(webCollectionEntry);
 }
 
+// Photo Page GraphQL
 function extractPhotosCollectionSection(fetchResponse: any) {
-  console.log(fetchResponse?.data);
   return fetchResponse?.data;
 }
 
-// Photo Page GraphQL
 export async function getPhotosCollection() {
   const collection = await fetchGraphQL(
     `query {
@@ -148,16 +158,11 @@ export async function getPhotosCollection() {
 }
 
 //Individual Photo Page
-
 function extractPhotoCollectionEntries(fetchResponse: any): any {
-  console.log(fetchResponse?.data);
   return fetchResponse?.data;
 }
 
-// Individual Photo Page GraphQL
 export async function getPhotoCollectionEntry( slug: string) {
-  console.log('getpho');
-  console.log(slug);
   const photoGraphQL = await fetchGraphQL(
     `query {
         photosCollection (where: {slug: "${slug}"}) {
@@ -176,4 +181,73 @@ export async function getPhotoCollectionEntry( slug: string) {
       }`,
   );
   return extractPhotoCollectionEntries(photoGraphQL);
+}
+
+// Design Page GraphQL
+function extractDesignCollectionSection(fetchResponse: any) {
+  console.log(fetchResponse.data);
+  return fetchResponse?.data;
+}
+
+export async function getDesignCollection() {
+  const collection = await fetchGraphQL(
+    `query {
+        designCollection {
+          items {
+            ${DESIGN_GRAPHQL_FIELDS}
+          }
+        }
+      }`,
+  );
+  return extractDesignCollectionSection(collection);
+}
+
+//Individual Design Page
+function extractDesignCollectionEntries(fetchResponse: any): any {
+  return fetchResponse?.data;
+}
+
+export async function getDesignCollectionEntry( slug: string) {
+  const photoGraphQL = await fetchGraphQL(
+    `query {
+        designCollection (where: {slug: "${slug}"}) {
+          items {
+            title
+            body
+            swatches
+            designGalleryCollection {
+              items {
+                title
+                url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 600})
+                width
+                height
+              }
+            }
+          }
+        }
+      }`,
+  );
+  return extractDesignCollectionEntries(photoGraphQL);
+}
+
+//Page Header
+function extractPageHeaderEntries(fetchResponse: any): any {
+  return fetchResponse?.data;
+}
+
+export async function getPageHeaderCollection( title: string) {
+  const photoGraphQL = await fetchGraphQL(
+    `query {
+        pageHeaderCollection (where:{title : "${title}"}) {
+          items {
+            title
+            body
+            heroImage {
+              url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:2000, height: 300})
+            }
+          }
+        }
+      }`,
+  );
+  return extractPageHeaderEntries(photoGraphQL);
 }
