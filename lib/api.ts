@@ -72,7 +72,8 @@ export async function getHomepageSections() {
         pageHeaderCollection(where: {
         AND: [
           { title_not: "justin abercrombia" },
-          {title_not: "home"}
+          {title_not: "home"},
+          {title_not: "life"}
         ]
   }) {
           items {

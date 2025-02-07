@@ -67,7 +67,7 @@ export default async function Page() {
         (elem: { title: string; body: string; heroImage: { url: string, title: string } }, index: number) => (
           <div className={`py-20 ${index % 2 == 0 ? `bg-gray-200` : `bg-transparent`}`}  key={index}>
             <div className="container mx-auto">
-              <div className="flex flex-row">
+              <div className="flex flex-row px-[15px]">
                 <div className={index % 2 !== 0 ? "order-2 basis-1/2 m-auto text-right" : "order-1 basis-1/2 m-auto"}>
                   <h2 className="capitalize text-4xl">{elem.title}</h2>
                   <p className="text-xl">{elem.body}</p>

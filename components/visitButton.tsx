@@ -11,7 +11,7 @@ interface ButtonProps {
 const Button = ({bg, btnText, textColor, linkDestination, buttonLocation}: ButtonProps) => {
     return (
 
-        <Link className={`block w-1/6 text-center bg-${bg} hover:bg-slate-800 mt-5 px-1 py-1 text-${textColor} ${buttonLocation ? 'float-end' : 'float-start'}`} href={`/` + linkDestination}>
+        <Link className={`block text-center bg-${bg} hover:bg-slate-800 mt-5 px-[10px] py-1 text-${textColor} ${buttonLocation ? 'float-end' : 'float-start'}`} href={`/` + linkDestination}>
             {btnText}
         </Link>
 
