@@ -1,19 +1,7 @@
 import Link from "next/link";
 
 import { getWebCollection } from "@/lib/api";
-
-
-
-
-// export async function generateStaticParams() {
-  
-//   let allPosts = await getWebCollection();
-//   allPosts = allPosts.webCollection.items;
-//   console.log(allPosts);
-//   return allPosts.webCollection.items.map((post: any) => ({
-//     slug: post.slug,
-//   }));
-// }
+import PageHeader from "../../components/pageheader";
 
 export default async function PostPage({
   params,
@@ -25,8 +13,10 @@ export default async function PostPage({
   const posts = allPosts?.webCollection?.items;
 
   return (
+    <>
 
-    <div className="grid grid-cols-2 container mx-auto">
+    <PageHeader pageID="web"/>
+    <div className="grid md:grid-cols-2 sm:grid-cols-1 container mx-auto">
 
       {posts.map(
         (elem: { title: string; body: string; heroImage: { url: string }; slug: string }, index: number) => (
@@ -41,5 +31,6 @@ export default async function PostPage({
         )
       )}
     </div>
+    </>
   );
 }

@@ -18,7 +18,7 @@ export default {
         '2xl': '1140px',
       },
       colors: {
-        'darkBlue': '#151421',
+        'activeLink': '#151421',
         'whiteBG': '#FFFFFF',
         'cloudGray':'#8b94a5'
       },

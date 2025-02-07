@@ -1,6 +1,6 @@
 import { getPageHeaderCollection } from "@/lib/api";
 import Image from 'next/image'
-
+import Link from "next/link";   
 interface PageHeaderProps {
     pageID: string;
 }
@@ -11,11 +11,11 @@ async function ImageHeader(pageID: any) {
     pageHeader = pageHeader?.pageHeaderCollection?.items[0];
 
     return (
-        <div className="w-full bg-black flex-none relative">
-            <img src={pageHeader?.heroImage?.url} className="object-cover opacity-50"/>
-            <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-center text-white">
+  
+        <div className="container mx-auto mt-[20px]">
+            <div className="px-[15px] w-full text-center text-black">
                 <h1 className="uppercase">{pageHeader.title}</h1>
-                <p className="tracking-[2px]">{pageHeader.body}</p>
+                <p className="md:text-lg text-xs tracking-[2px]">{pageHeader.body}</p>
             </div>
         </div>
     )

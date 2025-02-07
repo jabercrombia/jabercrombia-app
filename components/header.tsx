@@ -9,7 +9,7 @@ function Header() {
 
   return (
 
-    <header className="bg-black text-white py-3 text-center w-full">
+    <header className="bg-black text-white p-[15px] text-center w-full">
         <div className="container mx-auto flex items-center">
           <Logo/>
           <div className="uppercase text-xs">

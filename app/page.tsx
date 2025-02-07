@@ -58,8 +58,8 @@ export default async function Page() {
     <div>
 
       <div className="bg-[url(/homepage/sf-banner.jpg)] bg-center w-full h-[500px] flex items-center">
-        <div className="container mx-auto">
-        <h1 className="text-9xl font-medium uppercase text-white opacity-50">Justin Abercrombia</h1>
+        <div className="container mx-auto px-[15px]">
+        <h1 className="lg:text-9xl text-[30px] text-center font-medium uppercase text-white opacity-50">Justin Abercrombia</h1>
         </div>
       </div>
 

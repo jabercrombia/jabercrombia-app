@@ -5,7 +5,7 @@ function Logo() {
 
     return (
         <Link href="/">
-            <div className="mr-8">
+            <div className="mr-[20px]">
                 <svg version="1.1" viewBox="0 0 500 500" className="fill-white h-[30px] hover:fill-cloudGray">
                     <g>
                         <polygon points="373.35,396.66 257.52,74.59 192.5,254.84 	"/>

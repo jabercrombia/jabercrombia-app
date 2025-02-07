@@ -16,10 +16,10 @@ export default async function PostPage({
   return (
     <>
       <PageHeader pageID="design"/>
-      <div className="flex flex-wrap justify-center container mx-auto mt-10">
+      <div className="grid md:grid-cols-3 sm:grid-cols-1 justify-center container mx-auto mt-10">
         {design?.map(
           (elem: { title: string; slug: string, designGalleryCollection: { items: { url: string, title: string }[] } }, index: number) => (
-              <div className={`w-1/3 p-10`} key={index}>
+              <div className="p-10" key={index}>
                 <Link href={`design/${elem.slug}`}>
                 <img src={elem?.designGalleryCollection?.items[0]?.url} alt={elem?.designGalleryCollection?.items[0]?.title} />
                 <h2 className="text-black text-center tracking-[2px] uppercase text-2xl mt-[10px]">{elem?.title}</h2>
