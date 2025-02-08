@@ -67,14 +67,15 @@ export default async function Page() {
         (elem: { title: string; body: string; heroImage: { url: string, title: string } }, index: number) => (
           <div className={`py-20 ${index % 2 == 0 ? `bg-gray-200` : `bg-transparent`}`}  key={index}>
             <div className="container mx-auto">
-              <div className="flex flex-row px-[15px]">
-                <div className={index % 2 !== 0 ? "order-2 basis-1/2 m-auto text-right" : "order-1 basis-1/2 m-auto"}>
+              <div className="flex flex-wrap px-[15px]">
+                <div className={index % 2 !== 0 ? "lg:order-2 lg:basis-1/2 basis-full m-auto lg:text-right" : "lg:order-1 lg:basis-1/2 basis-full m-auto"}>
                   <h2 className="capitalize text-4xl">{elem.title}</h2>
-                  <p className="text-xl">{elem.body}</p>
-                  <VisitButton bg={"black"} btnText={"Visit"} textColor={"white"} linkDestination={elem.title} buttonLocation={index % 2 !== 0}/>
+                  <p className="text-xl mb-[10px] lg:mb-0">{elem.body}</p>
+                  <VisitButton classes="mb-[10px] hidden lg:block" bg={"black"} btnText={"Visit"} textColor={"white"} linkDestination={elem.title} linkDestinationExternal={false} buttonLocation={index % 2 !== 0}/>
                 </div>
-                <div className={index % 2 !== 0 ? "order-1 basis-1/2" : "order-2 basis-1/2"}>
-                  <img src={elem.heroImage.url} className={index % 2 == 0 ? "h-auto pl-10" : "h-auto pr-10"} alt={elem.heroImage.title}/>
+                <div className={index % 2 !== 0 ? "lg:order-1 lg:basis-1/2 basis-full" : "lg:order-2 lg:basis-1/2 basis-full"}>
+                  <img src={elem.heroImage.url} className={index % 2 == 0 ? "h-auto lg:pl-10" : "h-auto lg:pr-10"} alt={elem.heroImage.title}/>
+                  <VisitButton classes="mb-[10px] lg:hidden block" bg={"black"} btnText={"Visit"} textColor={"white"} linkDestination={elem.title} linkDestinationExternal={false} buttonLocation={index % 2 !== 0}/>
                 </div>
               </div>
             </div>

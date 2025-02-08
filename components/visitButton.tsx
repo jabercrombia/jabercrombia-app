@@ -7,12 +7,13 @@ interface ButtonProps {
     linkDestination: string;
     buttonLocation: boolean;
     linkDestinationExternal: boolean;
+    classes: string;
 }
 
-const Button = ({bg, btnText, textColor, linkDestination, linkDestinationExternal, buttonLocation}: ButtonProps) => {
+const Button = ({bg, btnText, textColor, linkDestination, linkDestinationExternal, buttonLocation, classes}: ButtonProps) => {
     return (
 
-        <Link className={`block text-center bg-${bg} hover:bg-slate-800 mt-5 px-[10px] py-1 text-${textColor} ${buttonLocation ? 'float-end' : 'float-start'}`} href={`${linkDestinationExternal ? linkDestination : '/' + linkDestination}`}>
+        <Link className={`${classes} block text-center bg-${bg} hover:bg-slate-800 mt-5 px-[10px] py-1 text-${textColor} ${buttonLocation ? 'lg:float-end' : 'lg:float-start'}`} href={`${linkDestinationExternal ? linkDestination : '/' + linkDestination}`}>
             {btnText}
         </Link>
 
