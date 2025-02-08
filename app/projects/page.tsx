@@ -25,7 +25,7 @@ export default async function PostPage({
               <div className="md:w-1/2 w-full content-center p-[10px]">
                 <h2>{elem.title}</h2>
                 <p>{elem.description}</p>
-                <VisitButton bg={"black"} btnText={"Visit"} textColor={"white"} linkDestination={elem.url} linkDestinationExternal={true} buttonLocation={index % 2 !== 0}/>
+                <VisitButton bg={"black"} btnText={"Visit"} classes="" textColor={"white"} linkDestination={elem.url} linkDestinationExternal={true} buttonLocation={index % 2 !== 0}/>
               </div>
               <div className="md:w-1/2 w-full  p-[10px]">
                 <img src={elem.photosCollection.items[0].url} alt={elem.photosCollection.items[0].title} className="border-2 border-grey p-2"/>
