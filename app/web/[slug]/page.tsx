@@ -13,7 +13,7 @@ const webCollection = dataGraphQL?.webCollection?.items[0];
 
   return (
     <div className="container mx-auto">
-      <BreadCrumb parent="web" slug={params?.slug}/>
+      
       <div className="flex flex-wrap justify-center">
       {webCollection?.imageGalleryCollection?.items.map(
         (elem: { title: string; body: string; slug: string; url: string }, index: number) => (

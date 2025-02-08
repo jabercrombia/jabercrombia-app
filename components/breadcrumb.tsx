@@ -1,30 +1,43 @@
 'use client'
  
 import { usePathname } from 'next/navigation'
-
-import { getPageHeaderCollection } from "@/lib/api";
-import Image from 'next/image'
 import Link from "next/link";   
 
 
+function concatPreviousRecursive(arr: string[], index = 0, result: { name: string, path: string }[] = []) {
+  if (index >= arr.length) {return result}; // Base case: Stop when the index reaches the array length
 
-function BreadCrumb(breadcrumb: any) {
+  if (index === 0) {
+      result.push({name: 'home', path: arr[index]}); // First element remains the same
+  } else {
+      result.push({name: arr[index], path: result[index - 1].path + '/' + arr[index]}); // Concatenate with previous result
+  }
 
+  return concatPreviousRecursive(arr, index + 1, result); // Recursive call for the next element
+
+}
+
+
+function BreadCrumb() {
+  
     const pathname = usePathname();
     const breadcrumb_array = pathname.split('/');
-console.log(breadcrumb_array);
-
-
+    const breadcrumb_obj = concatPreviousRecursive(breadcrumb_array);
+    console.log(breadcrumb_obj);
     return (
-        <div className='breadcrumb'>
-          {breadcrumb_array.map(
-            (elem, index: number) => (
-              <Link href={`${breadcrumb_array[index] == '' ? '/' : breadcrumb_array[index]}`} key={index}>
-                {breadcrumb_array[index] == '' ? 'home' : breadcrumb_array[index]}
-              </Link> 
-            )
-          )}
-        </div>
+
+      breadcrumb_obj[1].name !== '' && (
+        <>
+          <div className='breadcrumb container mx-auto px-[15px]'>
+            {breadcrumb_obj.map(
+              (elem, index: number) => (
+                <Link href={elem.path == '' ? '/' : elem.path} key={index}>{elem.name.replace(/-/g, " ")}</Link>
+              )
+            )}
+          </div>
+        </>   
+      ) 
+  
     )
 };
     
