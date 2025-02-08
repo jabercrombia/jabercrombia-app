@@ -75,7 +75,7 @@ export async function getHomepageSections() {
           {title_not: "home"},
           {title_not: "life"}
         ]
-  }) {
+  },order:title_ASC) {
           items {
             ${HOMEPAGE_GRAPHQL_FIELDS}
           }
@@ -186,7 +186,6 @@ export async function getPhotoCollectionEntry( slug: string) {
 
 // Design Page GraphQL
 function extractDesignCollectionSection(fetchResponse: any) {
-  console.log(fetchResponse.data);
   return fetchResponse?.data;
 }
 
@@ -202,6 +201,33 @@ export async function getDesignCollection() {
   );
   return extractDesignCollectionSection(collection);
 }
+
+// Project Page GraphQL
+function extractProjectCollectionSection(fetchResponse: any) {
+  console.log(fetchResponse?.data);
+  return fetchResponse?.data;
+}
+
+export async function getProjectCollection() {
+  const collection = await fetchGraphQL(
+    `query {
+        projectsCollection {
+          items {
+            description
+            title
+            url
+            photosCollection {
+              items {
+                url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:1280, height: 900})
+              }
+            }
+          }
+        }
+      }`,
+  );
+  return extractProjectCollectionSection(collection);
+}
+
 
 //Individual Design Page
 function extractDesignCollectionEntries(fetchResponse: any): any {

@@ -6,10 +6,9 @@ export default async function PostPage({
 }: {
   params: { slug: string };
 }) {
-
-let dataGraphQL = await getPhotoCollectionEntry(params?.slug);
+const slug = await params?.slug;
+let dataGraphQL = await getPhotoCollectionEntry(slug);
 dataGraphQL = dataGraphQL.photosCollection.items[0];
-console.log(dataGraphQL);
 
   return (
     <div className="container mx-auto text-center">
