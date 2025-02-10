@@ -2,10 +2,11 @@
  
 import { usePathname } from 'next/navigation'
 import Link from "next/link";   
+import { sendGTMEvent } from '@next/third-parties/google'
 
 
 function concatArray(arr: string[], index = 0, result: { name: string, path: string }[] = []) {
-  if (index >= arr.length) {return result}; // Base case: Stop when the index reaches the array length
+  if (index >= arr.length) {return result}; // Stop when the index reaches the array length
 
   if (index === 0) {
       result.push({name: 'home', path: arr[index]}); // First element nothing changes
@@ -31,7 +32,7 @@ function BreadCrumb() {
           <div className='breadcrumb container mx-auto px-[15px]'>
             {breadcrumb_obj.map(
               (elem, index: number) => (
-                <Link href={elem.path == '' ? '/' : elem.path} key={index}>{elem.name.replace(/-/g, " ")}</Link>
+                <Link onClick={() => sendGTMEvent({ event: 'breadcrumb clicked', value: elem.name.replace(/-/g, " ") })} href={elem.path == '' ? '/' : elem.path} key={index}>{elem.name.replace(/-/g, " ")}</Link>
               )
             )}
           </div>
