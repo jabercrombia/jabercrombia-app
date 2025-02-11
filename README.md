@@ -53,10 +53,7 @@ yarn start
 ```
 
 ## Deployment
-The site is automatically deployed to Vercel on each push to the `main` branch. To deploy manually:
-```sh
-vercel
-```
+The site is automatically deployed to Vercel on each push to the `main` branch.
 
 ## Contributing
 Feel free to fork this repository and submit pull requests for improvements or feature additions.
