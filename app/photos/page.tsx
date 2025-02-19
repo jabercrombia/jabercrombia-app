@@ -3,12 +3,15 @@ import PageHeader from "../../components/pageheader";
 
 import { getPhotosCollection } from "@/lib/api";
 
-
+export const metadata = {
+  title: 'jabercrombia:Photos',
+}
 export default async function PostPage({
   params,
 }: {
   params: { slug: string };
 }) {
+  
 
   let photos = await getPhotosCollection();
   photos = photos?.photosCollection?.items;

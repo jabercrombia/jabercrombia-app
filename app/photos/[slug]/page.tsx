@@ -1,6 +1,7 @@
 
 import { getPhotoCollectionEntry } from "@/lib/api";
 import ImageModal from "../../../components/imagemodal";
+
 export default async function PostPage({
   params,
 }: {

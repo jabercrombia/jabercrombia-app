@@ -4,7 +4,9 @@ import PageHeader from "../../components/pageheader";
 import { getProjectCollection } from "@/lib/api";
 import VisitButton from "@/components/visitButton";
 
-
+export const metadata = {
+  title: 'jabercrombia:Projects',
+}
 export default async function PostPage({
   params,
 }: {
