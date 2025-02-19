@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getWebCollectionEntry } from "@/lib/api";
+import ImageModal from "../../../components/imagemodal";
 import BreadCrumb from "@/components/breadcrumb";
 
 export default async function PostPage({
@@ -16,9 +17,9 @@ const webCollection = dataGraphQL?.webCollection?.items[0];
       
       <div className="flex flex-wrap justify-center">
       {webCollection?.imageGalleryCollection?.items.map(
-        (elem: { title: string; body: string; slug: string; url: string }, index: number) => (
+        (elem: { title: string; body: string; slug: string; url: string; thumbnail: string }, index: number) => (
           <div className="w-1/4 m-6 border-2 border-solid" key={index}>
-            <img src={elem.url} alt={elem.title}/>
+            <ImageModal imageData={elem}/>
           </div>
         )
       )}

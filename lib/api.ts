@@ -39,7 +39,8 @@ const DESIGN_GRAPHQL_FIELDS = `
   designGalleryCollection (limit:1) {
     items {
       title
-      url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 600})
+      thumbnail: url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:350, height: 350, quality:30})
+      url
     }
   }
 `;
@@ -122,7 +123,8 @@ export async function getWebCollectionEntry( slug: string) {
             link
             imageGalleryCollection {
               items {
-                url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 400})
+                thumbnail: url(transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:300, height: 200, quality: 30})
+                url
                 title
               }
             }
@@ -174,7 +176,8 @@ export async function getPhotoCollectionEntry( slug: string) {
             photosCollection {
               items {
                 title
-                url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 400})
+                thumbnail: url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:350, height: 250, quality:30})
+                url
               }
             }
           }
@@ -228,14 +231,13 @@ export async function getProjectCollection() {
   return extractProjectCollectionSection(collection);
 }
 
-
 //Individual Design Page
 function extractDesignCollectionEntries(fetchResponse: any): any {
   return fetchResponse?.data;
 }
 
 export async function getDesignCollectionEntry( slug: string) {
-  const photoGraphQL = await fetchGraphQL(
+  const designGraphQL = await fetchGraphQL(
     `query {
         designCollection (where: {slug: "${slug}"}) {
           items {
@@ -245,7 +247,8 @@ export async function getDesignCollectionEntry( slug: string) {
             designGalleryCollection {
               items {
                 title
-                url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 600})
+                thumbnail: url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:300, height: 300, quality:30})
+                url
                 width
                 height
               }
@@ -254,7 +257,7 @@ export async function getDesignCollectionEntry( slug: string) {
         }
       }`,
   );
-  return extractDesignCollectionEntries(photoGraphQL);
+  return extractDesignCollectionEntries(designGraphQL);
 }
 
 //Page Header
@@ -263,7 +266,7 @@ function extractPageHeaderEntries(fetchResponse: any): any {
 }
 
 export async function getPageHeaderCollection( title: string) {
-  const photoGraphQL = await fetchGraphQL(
+  const pageHeaderQL = await fetchGraphQL(
     `query {
         pageHeaderCollection (where:{title : "${title}"}) {
           items {
@@ -276,5 +279,5 @@ export async function getPageHeaderCollection( title: string) {
         }
       }`,
   );
-  return extractPageHeaderEntries(photoGraphQL);
+  return extractPageHeaderEntries(pageHeaderQL);
 }

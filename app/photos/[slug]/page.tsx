@@ -1,6 +1,6 @@
 
 import { getPhotoCollectionEntry } from "@/lib/api";
-
+import ImageModal from "../../../components/imagemodal";
 export default async function PostPage({
   params,
 }: {
@@ -16,15 +16,13 @@ dataGraphQL = dataGraphQL.photosCollection.items[0];
        <p className="text-2xl">{dataGraphQL.description}</p>
       <div className="flex flex-wrap justify-center">
         {dataGraphQL?.photosCollection.items.map(
-          (elem: { title: string; url: string }, index: number) => (
+          (elem: { title: string; url: string; thumbnail: string }, index: number) => (
             <div className="w-full lg:w-1/4 m-6 border-2 border-solid" key={index}>
-              <img src={elem.url} alt={elem.title}/>
+              <ImageModal imageData={elem} />
             </div>
           )
         )}
       </div>
-     
-
     </div>
   );
 }

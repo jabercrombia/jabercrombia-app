@@ -1,5 +1,5 @@
 import { getDesignCollectionEntry } from "@/lib/api";
-
+import ImageModal from "../../../components/imagemodal";
 export default async function PostPage({
   params,
 }: {
@@ -19,9 +19,10 @@ dataGraphQL = dataGraphQL?.designCollection.items[0];
         </div>
         <div className="flex flex-wrap justify-center">
           {dataGraphQL?.designGalleryCollection.items.map(
-            (elem: { title: string; url: string }, index: number) => (
+            (elem: { title: string; url: string; thumbnail: string }, index: number) => (
               <div className="w-1/2 p-4" key={index}>
-                <img src={elem.url} alt={elem.title} className="border-2 border-solid"/>
+                {/* <img src={elem.url} alt={elem.title} className="border-2 border-solid"/> */}
+                <ImageModal imageData={elem} />
               </div>
             )
           )}

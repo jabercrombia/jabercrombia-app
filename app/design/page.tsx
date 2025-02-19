@@ -18,10 +18,10 @@ export default async function PostPage({
       <PageHeader pageID="design"/>
       <div className="grid md:grid-cols-3 sm:grid-cols-1 justify-center container mx-auto mt-10">
         {design?.map(
-          (elem: { title: string; slug: string, designGalleryCollection: { items: { url: string, title: string }[] } }, index: number) => (
+          (elem: { title: string; slug: string, designGalleryCollection: { items: { thumbnail: string; url: string, title: string }[] } }, index: number) => (
               <div className="p-10" key={index}>
                 <Link href={`design/${elem.slug}`}>
-                <img src={elem?.designGalleryCollection?.items[0]?.url} alt={elem?.designGalleryCollection?.items[0]?.title} />
+                <img src={elem?.designGalleryCollection?.items[0]?.thumbnail} alt={elem?.designGalleryCollection?.items[0]?.title} />
                 <h2 className="text-black text-center tracking-[2px] uppercase text-2xl mt-[10px]">{elem?.title}</h2>
                 </Link>
               </div>
