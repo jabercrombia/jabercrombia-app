@@ -25,7 +25,7 @@ export default async function PostPage({
           (elem: { title: string; slug: string, photosCollection: { items: { url: string, title: string }[] } }, index: number) => (
               <div className="p-3" key={index}>
                 <Link href={`photos/${elem.slug}`}>
-                <img src={elem?.photosCollection?.items[0]?.url} alt={elem?.photosCollection?.items[0]?.title} />
+                <img className="cursor-pointer" src={elem?.photosCollection?.items[0]?.url} alt={elem?.photosCollection?.items[0]?.title} />
                 <h2 className="text-black text-center tracking-[2px] uppercase lg:text-2xl mt-[10px]">{elem?.title}</h2>
                 </Link>
               </div>

@@ -21,7 +21,6 @@ dataGraphQL = dataGraphQL?.designCollection.items[0];
           {dataGraphQL?.designGalleryCollection.items.map(
             (elem: { title: string; url: string; thumbnail: string }, index: number) => (
               <div className="w-1/2 p-4" key={index}>
-                {/* <img src={elem.url} alt={elem.title} className="border-2 border-solid"/> */}
                 <ImageModal imageData={elem} />
               </div>
             )

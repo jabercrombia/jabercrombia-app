@@ -26,7 +26,7 @@ export default async function PostPage({
             pathname: '/web/' + elem.slug,
           }} key={index}>
             <div className="p-6 mb-3 hover:brightness-50 hover:text-black-100 text-cloudGray">
-                <img src={elem.heroImage.url} alt={elem.title}/>
+                <img className="cursor-pointer" src={elem.heroImage.url} alt={elem.title}/>
                 <h3 className="uppercase text-xl mt-2">{elem.title}</h3>
             </div>
           </Link>
