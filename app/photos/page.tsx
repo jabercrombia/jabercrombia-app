@@ -4,7 +4,7 @@ import PageHeader from "../../components/pageheader";
 import { getPhotosCollection } from "@/lib/api";
 
 export const metadata = {
-  title: 'jabercrombia:Photos',
+  title: 'jabercrombia | Photos',
 }
 export default async function PostPage({
   params,

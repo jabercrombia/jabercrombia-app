@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getWebCollection } from "@/lib/api";
 import PageHeader from "../../components/pageheader";
 export const metadata = {
-  title: 'jabercrombia:Web',
+  title: 'jabercrombia | Web',
 }
 export default async function PostPage({
   params,

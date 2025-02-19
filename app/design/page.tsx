@@ -4,7 +4,7 @@ import PageHeader from "../../components/pageheader";
 import { getDesignCollection } from "@/lib/api";
 
 export const metadata = {
-  title: 'jabercrombia:Design',
+  title: 'jabercrombia | Design',
 }
 export default async function PostPage({
   params,
