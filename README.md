@@ -9,7 +9,7 @@ This is the repository for my personal website, built with Next.js, powered by C
 - **Contentful CMS** for easy content management
 - **Vercel** for seamless deployment and hosting
 - **SEO Optimized** with meta tags and Open Graph support
-- **Responsive Design** to ensure compatibility across devices
+- **Responsive Design** to ensure compatibility across devices 
 
 ## Technologies Used
 - [Next.js](https://nextjs.org/)
