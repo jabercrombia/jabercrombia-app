@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getWebCollectionEntry } from "@/lib/api";
 import ImageModal from "../../../components/imagemodal";
-import BreadCrumb from "@/components/breadcrumb";
+import ReactMarkdown from 'react-markdown';
 
 export default async function PostPage({
   params,
@@ -27,7 +27,7 @@ const webCollection = dataGraphQL?.webCollection?.items[0];
       <div className="flex">
         <div className="w-3/3">
           <h1 className="uppercase text-2xl">{webCollection?.title}</h1>
-          <p>{webCollection?.body}</p>
+          <ReactMarkdown>{webCollection?.body}</ReactMarkdown>
           <p className="pt-4">[<Link href={webCollection.link} className="text-blue-500">Visit</Link>]</p>
         </div>
         <div>

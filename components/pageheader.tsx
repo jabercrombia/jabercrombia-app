@@ -12,10 +12,10 @@ async function ImageHeader(pageID: any) {
 
     return (
   
-        <div className="container mx-auto mt-[20px]">
+        <div className="mx-auto mt-[20px] container">
             <div className="px-[15px] w-full text-center text-black">
-                <h1 className="uppercase">{pageHeader.title}</h1>
-                <p className="md:text-lg text-xs tracking-[2px]">{pageHeader.body}</p>
+                <h1 className="uppercase text-2xl">{pageHeader.title}</h1>
+                <p className="">{pageHeader.body}</p>
             </div>
         </div>
     )

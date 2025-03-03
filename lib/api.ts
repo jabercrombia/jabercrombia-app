@@ -76,7 +76,7 @@ export async function getHomepageSections() {
           {title_not: "home"},
           {title_not: "life"}
         ]
-  },order:title_ASC) {
+  },order:title_DESC) {
           items {
             ${HOMEPAGE_GRAPHQL_FIELDS}
           }
@@ -247,7 +247,7 @@ export async function getDesignCollectionEntry( slug: string) {
             designGalleryCollection {
               items {
                 title
-                thumbnail: url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:300, height: 300, quality:30})
+                thumbnail: url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:450, height: 450, quality:50})
                 url
                 width
                 height

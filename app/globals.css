@@ -3,22 +3,6 @@
 @tailwind utilities;
 
 
-
-h1 {
-    letter-spacing: 3px;
-    font-weight: 100;
-    font-size: 3em;
-}
-
-h2 {
-    font-size: 2em;
-}
-
-p {
-    font-weight: 300;
-    font-size: 1.25em;
-}
-
 .swatches {
     content: "";
     width: 20px;
@@ -26,7 +10,14 @@ p {
 }
 
 nav {
-    font-size: 10px;
+    font-size: 12px;
+}
+
+ul {
+    margin-left: 20px;
+    li {
+        list-style-type: disc;
+    }
 }
 
 .breadcrumb {

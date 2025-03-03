@@ -13,8 +13,8 @@ dataGraphQL = dataGraphQL.photosCollection.items[0];
 
   return (
     <div className="container mx-auto text-center">
-       <h1 className="uppercase mt-[20px]">{dataGraphQL.title}</h1>
-       <p className="text-2xl">{dataGraphQL.description}</p>
+       <h1 className="uppercase mt-[20px] text-xl">{dataGraphQL.title}</h1>
+       <p className="">{dataGraphQL.description}</p>
       <div className="flex flex-wrap justify-center">
         {dataGraphQL?.photosCollection.items.map(
           (elem: { title: string; url: string; thumbnail: string }, index: number) => (
