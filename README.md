@@ -10,6 +10,7 @@ This is the repository for my personal website, built with Next.js, powered by C
 - **Vercel** for seamless deployment and hosting
 - **SEO Optimized** with meta tags and Open Graph support
 - **Responsive Design** to ensure compatibility across devices 
+- **Cypress Testing** for end-to-end testing to ensure site functionality
 
 ## Technologies Used
 - [Next.js](https://nextjs.org/)
@@ -17,6 +18,7 @@ This is the repository for my personal website, built with Next.js, powered by C
 - [Contentful](https://www.contentful.com/)
 - [Vercel](https://vercel.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [Cypress](https://www.cypress.io/) for end-to-end testing
 
 ## Getting Started
 
@@ -52,6 +54,15 @@ yarn build
 yarn start
 ```
 
+## Running Cypress Tests
+To run the Cypress end-to-end tests, use the following command:
+```sh
+npm run cypress:open
+# or
+yarn cypress:open
+```
+This will open the Cypress test runner, allowing you to run tests and ensure everything is working as expected.
+
 ## Deployment
 The site is automatically deployed to Vercel on each push to the `main` branch.
 
@@ -60,4 +71,3 @@ Feel free to fork this repository and submit pull requests for improvements or f
 
 ## License
 This project is licensed under the MIT License.
-
