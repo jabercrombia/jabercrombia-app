@@ -207,7 +207,6 @@ export async function getDesignCollection() {
 
 // Project Page GraphQL
 function extractProjectCollectionSection(fetchResponse: any) {
-  console.log(fetchResponse?.data);
   return fetchResponse?.data;
 }
 

@@ -3,7 +3,7 @@ import React from "react"
 
 import Logo from "../components/logo";
 
-const navigationArray = ['web','photos','design','projects'];
+const navigationArray = ['web', 'projects','photos','design',];
 
 function Header() {
 
