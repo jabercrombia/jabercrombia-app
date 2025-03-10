@@ -14,17 +14,9 @@ interface ButtonProps {
 
 const Button = ({bg, btnText, textColor, linkDestination, linkDestinationExternal, buttonLocation, classes}: ButtonProps) => {
 
-    const handleClick = () => {
-        event({
-          action: "button_click",
-          category: "User Interaction",
-          label: "Sign Up Button",
-          value: 1,
-        });
-      };
     return (
 
-        <Link onClick={handleClick} className={`${classes} block text-center bg-${bg} hover:bg-slate-800 mt-5 px-[10px] py-1 text-${textColor} ${buttonLocation ? 'lg:float-end' : 'lg:float-start'}`} href={`${linkDestinationExternal ? linkDestination : '/' + linkDestination}`}>
+        <Link className={`${classes} block text-center bg-${bg} hover:bg-slate-800 mt-5 px-[10px] py-1 text-${textColor} ${buttonLocation ? 'lg:float-end' : 'lg:float-start'}`} href={`${linkDestinationExternal ? linkDestination : '/' + linkDestination}`}>
             {btnText}
         </Link>
 
