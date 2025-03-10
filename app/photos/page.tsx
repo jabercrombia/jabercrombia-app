@@ -4,7 +4,6 @@ import Link from "next/link";
 import PageHeader from "../../components/pageheader";
 import Head from "next/head";
 import { getPhotosCollection } from "@/lib/api";
-import { sendGAEvent } from "@/lib/gtag";
 
 // export const metadata = {
 //   title: 'jabercrombia | Photos',
@@ -15,14 +14,6 @@ export default async function PostPage({
   params: { slug: string };
 }) {
   
-
-  const handleClick = () => {
-    sendGAEvent({
-      action: "button_click",
-      category: "User Interaction",
-      label: "Subscribe Button",
-    });
-  };
 
 
   let photos = await getPhotosCollection();
@@ -40,7 +31,7 @@ export default async function PostPage({
         {photos?.map(
           (elem: { title: string; slug: string, photosCollection: { items: { url: string, title: string }[] } }, index: number) => (
               <div className="p-3" key={index}>
-                <Link onClick={handleClick} href={`photos/${elem.slug}`}>
+                <Link href={`photos/${elem.slug}`}>
                 <img className="cursor-pointer" src={elem?.photosCollection?.items[0]?.url} alt={elem?.photosCollection?.items[0]?.title} />
                 <h2 className="text-black text-center tracking-[2px] uppercase lg:text-2xl mt-[10px]">{elem?.title}</h2>
                 </Link>
