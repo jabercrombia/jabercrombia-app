@@ -1,14 +1,23 @@
 'use client'
 
-
-import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
+import { Dialog, DialogPanel} from '@headlessui/react';
 import React, { useEffect, useState } from "react";
-
+import { event } from "../../../lib/gtag";
 interface ModalProps {
     imageData: { title: string; url: string; thumbnail: string };
   }
 
 function modal({ imageData }: ModalProps) {
+
+    const handleClick = () => {
+        event({
+          action: "button_click",
+          category: "User Interaction",
+          label: `${imageData?.title} Photo`,
+          value: 1,
+        });
+      };
+
     let [isOpen, setIsOpen] = useState(false);
     return (
         <>

@@ -1,5 +1,5 @@
 import { getDesignCollectionEntry } from "@/lib/api";
-import ImageModal from "../../../components/imagemodal";
+import ImageModal from "../../../components/links/photos/imagemodal";
 export default async function PostPage({
   params,
 }: {

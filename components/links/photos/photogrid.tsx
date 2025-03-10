@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { event } from "../../lib/gtag";
+import { event } from "../../../lib/gtag";
 
 interface PhotoLinkProps {
   elem: { title: string; slug: string; photosCollection: { items: { url: string; title: string }[] } };

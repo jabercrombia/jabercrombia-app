@@ -1,8 +1,7 @@
-import Link from "next/link";
 import PageHeader from "../../components/pageheader";
 import Head from "next/head";
 import { getPhotosCollection } from "@/lib/api";
-import PhotoLink from "@/components/links/photolink";
+import PhotoLink from "../../components/links/photos/photogrid";
 
 export default async function PostPage({
   params,

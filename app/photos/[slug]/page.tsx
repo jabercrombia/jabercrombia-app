@@ -1,12 +1,12 @@
 
 import { getPhotoCollectionEntry } from "@/lib/api";
-import ImageModal from "../../../components/imagemodal";
-
+import ImageModal from "../../../components/links/photos/imagemodal";
 export default async function PostPage({
   params,
 }: {
   params: { slug: string };
 }) {
+
 const slug = await params?.slug;
 let dataGraphQL = await getPhotoCollectionEntry(slug);
 dataGraphQL = dataGraphQL.photosCollection.items[0];

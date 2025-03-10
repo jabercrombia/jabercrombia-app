@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getWebCollectionEntry } from "@/lib/api";
-import ImageModal from "../../../components/imagemodal";
+import ImageModal from "../../../components/links/photos/imagemodal";
 import ReactMarkdown from 'react-markdown';
 
 export default async function PostPage({
@@ -31,10 +31,8 @@ const webCollection = dataGraphQL?.webCollection?.items[0];
           <p className="pt-4">[<Link href={webCollection.link} className="text-blue-500">Visit</Link>]</p>
         </div>
         <div>
-         
         </div>
       </div>
-
     </div>
   );
 }
