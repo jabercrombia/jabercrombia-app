@@ -1,6 +1,5 @@
 import { getPageHeaderCollection } from "@/lib/api";
-import Image from 'next/image'
-import Link from "next/link";   
+
 interface PageHeaderProps {
     pageID: string;
 }

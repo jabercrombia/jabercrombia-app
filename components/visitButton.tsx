@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link";
-import { sendGTMEvent } from '@next/third-parties/google'
 
 interface ButtonProps {
     bg: string;
@@ -14,9 +13,18 @@ interface ButtonProps {
 }
 
 const Button = ({bg, btnText, textColor, linkDestination, linkDestinationExternal, buttonLocation, classes}: ButtonProps) => {
+
+    const handleClick = () => {
+        event({
+          action: "button_click",
+          category: "User Interaction",
+          label: "Sign Up Button",
+          value: 1,
+        });
+      };
     return (
 
-        <Link onClick={() => sendGTMEvent({ event: 'buttonClicked', value: linkDestination })} className={`${classes} block text-center bg-${bg} hover:bg-slate-800 mt-5 px-[10px] py-1 text-${textColor} ${buttonLocation ? 'lg:float-end' : 'lg:float-start'}`} href={`${linkDestinationExternal ? linkDestination : '/' + linkDestination}`}>
+        <Link onClick={handleClick} className={`${classes} block text-center bg-${bg} hover:bg-slate-800 mt-5 px-[10px] py-1 text-${textColor} ${buttonLocation ? 'lg:float-end' : 'lg:float-start'}`} href={`${linkDestinationExternal ? linkDestination : '/' + linkDestination}`}>
             {btnText}
         </Link>
 

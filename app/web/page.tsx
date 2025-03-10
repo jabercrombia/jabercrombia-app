@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { event } from "../../lib/gtag";
+import WebLink from "../../components/weblink";
 
 import { getWebCollection } from "@/lib/api";
 import PageHeader from "../../components/pageheader";
@@ -11,10 +13,13 @@ export default async function PostPage({
   params: { slug: string };
 }) {
 
+  
+
   const allPosts = await getWebCollection();
   const posts = allPosts?.webCollection?.items;
 
   return (
+    
     <>
 
     <PageHeader pageID="web"/>
@@ -22,14 +27,7 @@ export default async function PostPage({
 
       {posts.map(
         (elem: { title: string; body: string; heroImage: { url: string }; slug: string }, index: number) => (
-          <Link href={{
-            pathname: '/web/' + elem.slug,
-          }} key={index}>
-            <div className="p-6 mb-3 hover:brightness-50 hover:text-black-100 text-cloudGray">
-                <img className="cursor-pointer" src={elem.heroImage.url} alt={elem.title}/>
-                <h3 className="uppercase text-xl mt-2">{elem.title}</h3>
-            </div>
-          </Link>
+          <WebLink elem={elem} index={index} key={index}/>
         )
       )}
     </div>
