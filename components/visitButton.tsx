@@ -20,7 +20,7 @@ const Button = ({bg, btnText, textColor, linkDestination, linkDestinationExterna
         if (typeof window !== "undefined" && window.gtag) {
             window.gtag("event", "visit_btn", {
             event_category: "User Interaction",
-            event_label: btnText,
+            event_label: btnText + '_' + linkDestination,
             value: 1,
             });
         }
