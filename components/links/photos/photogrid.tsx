@@ -11,13 +11,14 @@ interface PhotoLinkProps {
 const PhotoLink: React.FC<PhotoLinkProps> = ({ elem }) => {
 
   const handleClick = () => {
-      event({
-        action: "button_click",
-        category: "User Interaction",
-        label: `${elem?.title} Photo Link`,
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "photo_click", {
+        event_category: "User Interaction",
+        event_label: elem?.title,
         value: 1,
       });
-    }; 
+    }
+  }; 
 
     return (
       <Link onClick={handleClick} href={`photos/${elem.slug}`}>

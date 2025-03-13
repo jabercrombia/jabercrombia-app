@@ -18,8 +18,6 @@ const WebLink: React.FC<WebLinkProps> = ({ elem, index }) => {
           event_label: "Web",
           value: 1,
         });
-      } else {
-        console.warn("Google Analytics not initialized");
       }
     }; 
 

@@ -2,7 +2,6 @@
 
 import { Dialog, DialogPanel} from '@headlessui/react';
 import React, { useEffect, useState } from "react";
-import { event } from "../../../lib/gtag";
 interface ModalProps {
     imageData: { title: string; url: string; thumbnail: string };
   }
@@ -10,13 +9,14 @@ interface ModalProps {
 function modal({ imageData }: ModalProps) {
 
     const handleClick = () => {
-        event({
-          action: "button_click",
-          category: "User Interaction",
-          label: `${imageData?.title} Photo`,
-          value: 1,
-        });
-      };
+        if (typeof window !== "undefined" && window.gtag) {
+          window.gtag("event", "modal_click", {
+            event_category: "User Interaction",
+            event_label: imageData.title,
+            value: 1,
+          });
+        }
+      }; 
 
     let [isOpen, setIsOpen] = useState(false);
     return (
