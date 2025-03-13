@@ -15,7 +15,7 @@ const WebLink: React.FC<WebLinkProps> = ({ elem, index }) => {
       event({
         action: "button_click",
         category: "User Interaction",
-        label: "Sign Up Button",
+        label: "Web",
         value: 1,
       });
     }; 
