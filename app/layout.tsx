@@ -35,6 +35,7 @@ export default function RootLayout({
   return (
     <>
       <html lang="en" className={roboto.className}>
+      <GoogleAnalytics gaId={process.env.GOOGLE_TRACKIND_ID || ''} />
         <body>
             <div className="flex flex-col min-h-screen">
               <Header/>
@@ -43,7 +44,6 @@ export default function RootLayout({
               <Footer />
             </div>
         </body>
-        <GoogleAnalytics gaId={process.env.GOOGLE_TRACKIND_ID || ''} />
       </html>
     </>
   );

@@ -12,12 +12,15 @@ interface WebLinkProps {
 const WebLink: React.FC<WebLinkProps> = ({ elem, index }) => {
 
   const handleClick = () => {
-      event({
-        action: "button_click",
-        category: "User Interaction",
-        label: "Web",
-        value: 1,
-      });
+      if (typeof window !== "undefined" && window.gtag) {
+        window.gtag("event", "button_click", {
+          event_category: "User Interaction",
+          event_label: "Web",
+          value: 1,
+        });
+      } else {
+        console.warn("Google Analytics not initialized");
+      }
     }; 
 
     return (
