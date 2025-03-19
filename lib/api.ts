@@ -213,14 +213,16 @@ function extractProjectCollectionSection(fetchResponse: any) {
 export async function getProjectCollection() {
   const collection = await fetchGraphQL(
     `query {
-        projectsCollection {
+        projectsCollection (order: order_DESC) {
           items {
             description
             title
             url
+            githubUrl
             photosCollection {
               items {
                 url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:1280, height: 900})
+                thumbnail: url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 400, quality:30})
               }
             }
           }
