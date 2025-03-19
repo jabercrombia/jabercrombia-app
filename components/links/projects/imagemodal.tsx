@@ -18,14 +18,16 @@ function modal({ imageData }: ModalProps) {
                     <DialogPanel className="max-w-5xl space-y-4 border border-black bg-white p-[10px]">
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
                         <div>
-                            <img src={imageData.photosCollection.items[0].thumbnail} alt={imageData.title} className='border border-solid border-black' />
+                            <Link href={imageData.url + `?utm_source=jabercrombia&utm_medium=internet&utm_campaign=jabercrombia`} target="_blank" title="visit site">
+                                <img src={imageData.photosCollection.items[0].thumbnail} alt={imageData.title} className='border border-solid border-black' />
+                            </Link>
                         </div>
                         <div className="grid place-items-center">
                             <div>
                             <h3>{imageData.title}</h3>
                             <p className='text-xs'>{imageData.description}</p>
                             {imageData.githubUrl && <p className='text-xs'><span className='font-bold'>Github:</span> <Link href={imageData.githubUrl} title="github" className='text-xs hover:text-gray-500'>{imageData.githubUrl}</Link></p> }
-                            <Link href={imageData.url} title="visit site" className='text-sm hover:text-gray-500 block'>Visit Site &gt;</Link>
+                            <Link href={imageData.url + `?utm_source=jabercrombia&utm_medium=internet&utm_campaign=jabercrombia`} target="_blank" title="visit site" className='text-sm hover:text-gray-500 block'>Visit Site &gt;</Link>
                             </div>
                         </div>
                     </div>
