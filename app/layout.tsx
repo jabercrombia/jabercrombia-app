@@ -3,6 +3,7 @@ import { Roboto } from 'next/font/google'
 import { EXAMPLE_PATH, CMS_NAME } from "@/lib/constants";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import BreadCrumb from "@/components/breadcrumb";
+import { Analytics } from "@vercel/analytics/react"
 
 import Footer from "../components/footer";
 import Header from "../components/header";
@@ -43,6 +44,7 @@ export default function RootLayout({
                 <main className="flex-grow">{children}</main>
               <Footer />
             </div>
+            <Analytics />
         </body>
       </html>
     </>

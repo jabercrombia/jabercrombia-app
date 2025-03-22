@@ -27,7 +27,7 @@ function modal({ imageData }: ModalProps) {
                             <h3>{imageData.title}</h3>
                             <p className='text-xs'>{imageData.description}</p>
                             {imageData.githubUrl && <p className='text-xs'><span className='font-bold'>Github:</span> <Link href={imageData.githubUrl} title="github" className='text-xs hover:text-gray-500'>{imageData.githubUrl}</Link></p> }
-                            <Link href={imageData.url + `?utm_source=jabercrombia&utm_medium=internet&utm_campaign=jabercrombia`} target="_blank" title="visit site" className='text-sm hover:text-gray-500 block'>Visit Site &gt;</Link>
+                            <Link href={imageData.url + `?utm_source=jabercrombia&utm_medium=internet&utm_campaign=jabercrombia`} target="_blank" title="visit site" className='text-sm hover:text-gray-500 block mt-[10px]'>Visit Site &gt;</Link>
                             </div>
                         </div>
                     </div>
