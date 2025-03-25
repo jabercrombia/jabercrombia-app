@@ -3,13 +3,14 @@ import { getWebCollectionEntry } from "@/lib/api";
 import ImageModal from "../../../components/links/photos/imagemodal";
 import ReactMarkdown from 'react-markdown';
 
-export default async function PostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
 
-let dataGraphQL = await getWebCollectionEntry(params?.slug);
+export default async function PlatformPage({ params }: PageProps) {
+
+const { slug } = await params;
+let dataGraphQL = await getWebCollectionEntry(slug);
 const webCollection = dataGraphQL?.webCollection?.items[0];
 
   return (

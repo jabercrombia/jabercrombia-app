@@ -1,13 +1,16 @@
 
 import { getPhotoCollectionEntry } from "@/lib/api";
 import ImageModal from "../../../components/links/photos/imagemodal";
-export default async function PostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
 
-const slug = await params?.slug;
+
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function PlatformPage({ params }: PageProps) {
+
+const { slug } = await params;
+
 let dataGraphQL = await getPhotoCollectionEntry(slug);
 dataGraphQL = dataGraphQL.photosCollection.items[0];
 
