@@ -219,6 +219,7 @@ export async function getProjectCollection() {
             title
             url
             githubUrl
+            technologyList
             photosCollection {
               items {
                 url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 450})
