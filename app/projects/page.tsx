@@ -5,11 +5,7 @@ import ImageModal from "../../components/links/projects/imagemodal";
 export const metadata = {
   title: 'jabercrombia | Projects',
 }
-export default async function PostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function PostPage() {
 
   let projects = await getProjectCollection();
   projects = projects?.projectsCollection?.items;
