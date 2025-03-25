@@ -221,7 +221,7 @@ export async function getProjectCollection() {
             githubUrl
             photosCollection {
               items {
-                url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:1280, height: 900})
+                url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 450})
                 thumbnail: url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 400, quality:30})
               }
             }
