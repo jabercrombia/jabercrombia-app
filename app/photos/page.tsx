@@ -3,13 +3,7 @@ import Head from "next/head";
 import { getPhotosCollection } from "@/lib/api";
 import PhotoLink from "../../components/links/photos/photogrid";
 
-export default async function PostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  
-
+export default async function PostPage() {
 
   let photos = await getPhotosCollection();
   photos = photos?.photosCollection?.items;

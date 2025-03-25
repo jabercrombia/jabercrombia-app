@@ -7,13 +7,7 @@ import PageHeader from "../../components/pageheader";
 export const metadata = {
   title: 'jabercrombia | Web',
 }
-export default async function PostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-
-  
+export default async function PostPage() {
 
   const allPosts = await getWebCollection();
   const posts = allPosts?.webCollection?.items;
