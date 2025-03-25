@@ -6,12 +6,9 @@ import { getDesignCollection } from "@/lib/api";
 export const metadata = {
   title: 'jabercrombia | Design',
 }
-export default async function PostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
 
+export default async function PlatformPage() {
+  
   let design = await getDesignCollection();
   design = design?.designCollection?.items;
 

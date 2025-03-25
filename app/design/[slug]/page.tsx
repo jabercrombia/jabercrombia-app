@@ -1,14 +1,14 @@
 import { getDesignCollectionEntry } from "@/lib/api";
 import ImageModal from "../../../components/links/photos/imagemodal";
 
-
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export default async function PlatformPage({ params }: PageProps) {
 
-  const { slug } = await params;
+const { slug } = await params;
+
 let dataGraphQL = await getDesignCollectionEntry(slug);
 dataGraphQL = dataGraphQL?.designCollection.items[0];
 
