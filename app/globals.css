@@ -15,6 +15,10 @@ p > a {
     height: 20px;
 }
 
+.custom-sheet-width {
+    width: 75% !important;
+  }
+
 nav {
     font-size: 12px;
 }

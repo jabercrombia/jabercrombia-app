@@ -213,7 +213,7 @@ function extractProjectCollectionSection(fetchResponse: any) {
 export async function getProjectCollection() {
   const collection = await fetchGraphQL(
     `query {
-        projectsCollection (order: order_DESC) {
+        projectsCollection (order: order_ASC) {
           items {
             description
             title
@@ -222,8 +222,9 @@ export async function getProjectCollection() {
             technologyList
             photosCollection {
               items {
-                url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 450})
-                thumbnail: url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:600, height: 400, quality:30})
+                url
+                thumbnail: url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:500, height: 350, quality:30})
+                dialog: url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:800,quality:30})
               }
             }
           }

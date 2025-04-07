@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getWebCollectionEntry } from "@/lib/api";
 import ImageModal from "../../../components/links/photos/imagemodal";
 import ReactMarkdown from 'react-markdown';
+import { Button } from "@/components/ui/button"
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -29,7 +30,7 @@ const webCollection = dataGraphQL?.webCollection?.items[0];
         <div className="w-3/3">
           <h1 className="uppercase text-2xl">{webCollection?.title}</h1>
           <ReactMarkdown>{webCollection?.body}</ReactMarkdown>
-          <p className="pt-4">[<Link href={webCollection.link} className="text-blue-500">Visit</Link>]</p>
+          <Button className="mt-[15px]"><Link href={webCollection.link}>Go to Page</Link></Button>
         </div>
         <div>
         </div>

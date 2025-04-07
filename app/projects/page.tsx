@@ -2,6 +2,7 @@ import PageHeader from "../../components/pageheader";
 
 import { getProjectCollection } from "@/lib/api";
 import Sheet from "../../components/links/projects/sheet";
+import Dialog from "../../components/links/projects/dialog";
 export const metadata = {
   title: 'jabercrombia | Projects',
 }
@@ -18,7 +19,7 @@ export default async function PostPage() {
         {projects?.map(
           (elem: { title: string; githubUrl: string; description: string, url: string, technologyList: string; photosCollection: { items: { url: string, thumbnail: string, title: string }[] } }, index: number) => (
             <div key={index}>
-              <Sheet data={elem}/>
+              <Dialog data={elem}/>
             </div>
           )
         )}
