@@ -1,7 +1,6 @@
 import PageHeader from "../../components/pageheader";
 
 import { getProjectCollection } from "@/lib/api";
-import Sheet from "../../components/links/projects/sheet";
 import Dialog from "../../components/links/projects/dialog";
 export const metadata = {
   title: 'jabercrombia | Projects',
