@@ -7,9 +7,14 @@ import StackIcon from "tech-stack-icons";
 interface Item {
   id: number;
   name: string;
+  title:string;
+  slug: string;
   category: string;
-  technologyList?: string[];
-  technologyNameListCollection?: { items: { name: string }[] };
+  githubUrl: string;
+  description: string;
+  url: string;
+  technologyNameListCollection: { items: { name: string, techStackIconName: string }[] };
+  photosCollection: { items: { title: string, thumbnail: string, url:string }[] };
 }
 
 
@@ -18,7 +23,7 @@ interface FilterListProps {
 }
 
 export default function FilterList({ data }: FilterListProps) {
-    
+    console.log(data);
     const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
 
     type TechnologyItem = {

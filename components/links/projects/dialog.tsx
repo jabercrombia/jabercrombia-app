@@ -19,7 +19,6 @@ interface ModalProps {
     data: {  
         title: string; 
         githubUrl: string; 
-        technologyList: string; 
         description: string, 
         url: string, 
         photosCollection: { items: { url: string, thumbnail: string, title: string }[] }
