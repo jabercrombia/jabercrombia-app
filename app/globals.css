@@ -30,6 +30,21 @@ ul {
     }
 }
 
+.technologyList {
+    svg {
+        height: 20px !important;
+        width: 20px !important;
+    }
+}
+
+Button svg {
+    height: 20px !important;
+    width: 20px !important;
+    path {
+        fill: #fff;
+    }
+}
+
 .breadcrumb {
     margin-top: 10px;
     text-transform: uppercase;

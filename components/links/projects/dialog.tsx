@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import StackIcon from "tech-stack-icons";
 
 import Link from "next/link"
 import {
@@ -15,7 +16,15 @@ import {
 
 
 interface ModalProps {
-    data: {  title: string; githubUrl: string; technologyList: string; description: string, url: string, photosCollection: { items: { url: string, thumbnail: string, title: string }[] }};
+    data: {  
+        title: string; 
+        githubUrl: string; 
+        technologyList: string; 
+        description: string, 
+        url: string, 
+        photosCollection: { items: { url: string, thumbnail: string, title: string }[] }
+        technologyNameListCollection: { items: { name: string, techStackIconName: string }[] }
+    }    
 }
 
 
@@ -41,6 +50,14 @@ export default function DialogDemo({ data }: ModalProps) {
 
             </DialogDescription>
             </DialogHeader>
+            <div className="flex flex-wrap gap-2 items-center technologyList">
+                <span className="text-xs">Tech Stack:</span>
+                {data.technologyNameListCollection.items.map((elem: { name: string, techStackIconName: string }, index: number) => (
+                    <div key={index} className="flex items-center">
+                        <StackIcon name={elem.techStackIconName} />
+                    </div>
+                ))}
+            </div>
             <img className="border border-black mt-[10px]" src={data.photosCollection.items[0].url} alt={data.title} />
             <DialogFooter>
                 <div className={`flex  ${data.githubUrl ? `justify-between`: `justify-end`} w-full`}>

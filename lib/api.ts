@@ -213,13 +213,18 @@ function extractProjectCollectionSection(fetchResponse: any) {
 export async function getProjectCollection() {
   const collection = await fetchGraphQL(
     `query {
-        projectsCollection (order: order_ASC) {
+         projectsCollection (order: order_ASC) {
           items {
             description
             title
             url
             githubUrl
-            technologyList
+            technologyNameListCollection (limit:3) {
+              items {
+                name
+                techStackIconName
+              }
+            }
             photosCollection {
               items {
                 url
@@ -228,7 +233,7 @@ export async function getProjectCollection() {
               }
             }
           }
-        }
+        } 
       }`,
   );
   return extractProjectCollectionSection(collection);
