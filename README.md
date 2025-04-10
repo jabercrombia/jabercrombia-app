@@ -17,6 +17,7 @@ This is the repository for my personal website, built with Next.js, powered by C
 - [React](https://reactjs.org/)
 - [Contentful](https://www.contentful.com/)
 - [Vercel](https://vercel.com/)
+- [Shadcn](https://ui.shadcn.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Cypress](https://www.cypress.io/) for end-to-end testing
 
