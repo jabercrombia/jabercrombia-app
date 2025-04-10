@@ -72,7 +72,7 @@ export default function FilterList({ data }: FilterListProps) {
 
   return (
     <div className="container mx-auto">
-      <div className="flex gap-4 mb-4 justify-center pt-[20px]">
+      <div className="flex flex-wrap gap-4 mb-4 justify-center pt-[20px] px-[15px]">
       {uniqueTechItems.map((tech : {name : string, techStackIconName? : string}, index) => (
             <label key={index} className="flex items-center space-x-2">
               <input
