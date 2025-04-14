@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react"
-
+import Search from "../components/search";
 import Logo from "../components/logo";
 
 const navigationArray = ['web', 'projects','photos','design',];
@@ -10,7 +10,7 @@ function Header() {
   return (
 
     <header className="bg-black text-white p-[15px] text-center w-full">
-        <div className="container mx-auto flex items-center">
+        <div className="container mx-auto flex w-full items-center">
           <Logo/>
           <nav className="uppercase">
           {navigationArray.map(
@@ -23,6 +23,9 @@ function Header() {
             )
           )}
           </nav>
+          <div className="flex-1 relative">
+            <Search/>
+          </div>
         </div>
     </header>
   )

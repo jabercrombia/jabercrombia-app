@@ -30,6 +30,22 @@ ul {
     }
 }
 
+ul.search {
+    background-color: #fff;
+    li {
+        list-style-type: none;
+        &:hover {
+            background-color: #f5f5f5;
+        }
+    }
+    a {
+        color: #000;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
 .technologyList {
     svg {
         height: 20px !important;

@@ -23,7 +23,7 @@ interface FilterListProps {
 }
 
 export default function FilterList({ data }: FilterListProps) {
-    console.log(data);
+
     const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
 
     type TechnologyItem = {
