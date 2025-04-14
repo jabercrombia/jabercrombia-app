@@ -11,6 +11,7 @@ This is the repository for my personal website, built with Next.js, powered by C
 - **SEO Optimized** with meta tags and Open Graph support
 - **Responsive Design** to ensure compatibility across devices 
 - **Cypress Testing** for end-to-end testing to ensure site functionality
+- **Search Component** using GraphQL to dynamically filter and search through projects and technologies
 
 ## Technologies Used
 - [Next.js](https://nextjs.org/)
@@ -20,55 +21,36 @@ This is the repository for my personal website, built with Next.js, powered by C
 - [Shadcn](https://ui.shadcn.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Cypress](https://www.cypress.io/) for end-to-end testing
+- **GraphQL** for querying data from Contentful and powering the search functionality
 
-## Getting Started
+## Search Component
 
-### Prerequisites
-Ensure you have the following installed:
-- Node.js (LTS version recommended)
-- npm or yarn
+The site includes a **search component** that allows users to search for projects and technologies. This feature is powered by a GraphQL query that dynamically filters Contentful data.
 
-### Environment Variables
-Create a `.env.local` file in the root directory and add the following variables:
-```
-NEXT_PUBLIC_CONTENTFUL_SPACE_ID=your_space_id
-NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN=your_access_token
-```
-Replace `your_space_id` and `your_access_token` with your actual Contentful credentials.
+### Key Features:
+- **Dynamic Search**: Uses GraphQL to filter projects based on title and technology names.
+- **Technology Filtering**: The search allows filtering based on technologies used in the projects. Users can select checkboxes for each technology (e.g., "NextJS", "Tailwind") to filter results.
+  
+### How it Works:
+The search component queries the Contentful CMS for the list of projects and their associated technologies. It uses the GraphQL `projectsCollection` query, which includes the filtering capability to narrow down results based on the selected technologies and project titles.
 
-### Running the Development Server
-Start the local development server with:
-```sh
-npm run dev
-# or
-yarn dev
-```
-The website will be available at `http://localhost:3000/`.
-
-### Building for Production
-To build and test the production version locally:
-```sh
-npm run build
-npm start
-# or
-yarn build
-yarn start
-```
-
-## Running Cypress Tests
-To run the Cypress end-to-end tests, use the following command:
-```sh
-npm run cypress:open
-# or
-yarn cypress:open
-```
-This will open the Cypress test runner, allowing you to run tests and ensure everything is working as expected.
-
-## Deployment
-The site is automatically deployed to Vercel on each push to the `main` branch.
-
-## Contributing
-Feel free to fork this repository and submit pull requests for improvements or feature additions.
-
-## License
-This project is licensed under the MIT License.
+Example of GraphQL query used in the search:
+```graphql
+query SearchProjects($keyword: String, $tech: String) {
+  projectsCollection(where: {
+    OR: [
+      { title_contains: $keyword },
+      { technologyNameListCollection_some: { name_contains: $tech } }
+    ]
+  }) {
+    items {
+      title
+      description
+      technologyNameListCollection {
+        items {
+          name
+        }
+      }
+    }
+  }
+}
