@@ -6,7 +6,7 @@ const fetchSlugs = async () => {
   return data.items.map((item) => {
     const slug = item.fields.slug;
     const contentType = item.sys.contentType.sys.id; // Assuming the content type ID is stored here
-    if (!['blogPost', 'technology', 'about','techNames','pageHeader'].includes(contentType)) {
+    if (!['blogPost', 'technology', 'about','techNames','pageHeader','projects'].includes(contentType)) {
 
       return {
         loc: `${contentType}/${slug}`,
