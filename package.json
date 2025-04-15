@@ -2,9 +2,10 @@
   "private": true,
   "scripts": {
     "dev": "next",
-    "build": "next build",
+    "build": "next build && next-sitemap",
     "start": "next start",
     "setup": "node ./lib/setup.js",
+    "next-sitemap": "next-sitemap",
     "cypress:open": "cypress open",
     "cypress-open-e2e": "cypress open --e2e",
     "cypress-run-e2e": "cypress run --e2e"
@@ -44,6 +45,7 @@
     "typescript": "^5.1.6"
   },
   "devDependencies": {
-    "cypress": "^14.1.0"
+    "cypress": "^14.1.0",
+    "next-sitemap": "^4.2.3"
   }
 }
