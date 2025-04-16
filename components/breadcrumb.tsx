@@ -1,45 +1,53 @@
-'use client'
- 
-import { usePathname } from 'next/navigation'
-import Link from "next/link";   
-import { sendGTMEvent } from '@next/third-parties/google'
+"use client"
 
+import { usePathname } from 'next/navigation';
+import React from 'react';
 
-function concatArray(arr: string[], index = 0, result: { name: string, path: string }[] = []) {
-  if (index >= arr.length) {return result}; // Stop when the index reaches the array length
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 
-  if (index === 0) {
-      result.push({name: 'home', path: arr[index]}); // First element nothing changes
-  } else {
-      result.push({name: arr[index], path: result[index - 1].path + '/' + arr[index]}); // Concatenate the previous result
-  }
+export default function BreadCrumb() {
 
-  return concatArray(arr, index + 1, result); // Get next element
+    const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
+    const pathname = usePathname();
+    const segments = pathname.split('/').filter(Boolean);
 
+    const breadcrumbs = segments.map((segment, index) => {
+        const path = '/' + segments.slice(0, index + 1).join('/');
+        return {
+        name: decodeURIComponent(segment.replace(/-/g, ' ')),
+        url: `${SITE_URL}${path}`,
+        };
+    });
+
+    return (
+        <>
+          {breadcrumbs.length > 0 && (
+            <Breadcrumb className="container mx-auto px-[15px] uppercase">
+              <BreadcrumbList className="mt-[20px] mb-[20px]">
+                  <BreadcrumbItem>
+                      <BreadcrumbLink href="/" className="text-grey-600">Home</BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  {breadcrumbs.map((elem, index: number) => (
+                      <React.Fragment key={index}>
+                          <BreadcrumbItem>
+                              <BreadcrumbLink href={elem.url} className="text-grey-600">{elem.name}</BreadcrumbLink>
+                          </BreadcrumbItem>
+                          {index < breadcrumbs.length - 1 &&  <BreadcrumbSeparator />}
+                      </React.Fragment>
+                  ))}      
+              </BreadcrumbList>
+            </Breadcrumb>
+          )} 
+        </>
+    )
 }
 
 
-function BreadCrumb() {
-  
-    const pathname = usePathname();
-    const breadcrumb_array = pathname.split('/');
-    const breadcrumb_obj = concatArray(breadcrumb_array);
-
-    return (
-
-      breadcrumb_obj[1].name !== '' && (
-        <>
-          <div className='breadcrumb container mx-auto px-[15px]'>
-            {breadcrumb_obj.map(
-              (elem, index: number) => (
-                <Link onClick={() => sendGTMEvent({ event: 'breadcrumb clicked', value: elem.name.replace(/-/g, " ") })} href={elem.path == '' ? '/' : elem.path} key={index}>{elem.name.replace(/-/g, " ")}</Link>
-              )
-            )}
-          </div>
-        </>   
-      ) 
-  
-    )
-};
-    
-export default BreadCrumb;

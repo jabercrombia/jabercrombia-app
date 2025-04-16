@@ -2,7 +2,8 @@ import "./globals.css";
 import { Roboto } from 'next/font/google'
 import { EXAMPLE_PATH, CMS_NAME } from "@/lib/constants";
 import { GoogleAnalytics } from '@next/third-parties/google'
-import BreadCrumb from "@/components/breadcrumb";
+import BreadCrumbData from "../components/breadcrumbdata";
+import BreadCrumb from "../components/breadcrumb";
 import { Analytics } from "@vercel/analytics/react"
 
 import Footer from "../components/footer";
@@ -40,6 +41,7 @@ export default function RootLayout({
         <body>
             <div className="flex flex-col min-h-screen">
               <Header/>
+              <BreadCrumbData/>
               <BreadCrumb/>
                 <main className="flex-grow">{children}</main>
               <Footer />
