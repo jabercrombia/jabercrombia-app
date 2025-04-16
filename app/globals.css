@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
+html {
+    scroll-behavior: smooth;
+}
+
 p > a {
     color: gray;
 

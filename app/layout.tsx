@@ -43,7 +43,7 @@ export default function RootLayout({
               <Header/>
               <BreadCrumbData/>
               <BreadCrumb/>
-                <main className="flex-grow">{children}</main>
+                <main className="flex-grow relative z-0 flex-grow">{children}</main>
               <Footer />
             </div>
             <Analytics />

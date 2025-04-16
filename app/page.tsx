@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { draftMode } from "next/headers";
-
+import { Button } from "@/components/ui/button"
 import Date from "./date";
 import CoverImage from "./cover-image";
 import Avatar from "./avatar";
@@ -9,6 +9,7 @@ import VisitButton from "../components/visitButton";
 import Image from 'next/image';
 import { getHomepageSections } from "@/lib/api";
 import { CMS_NAME, CMS_URL } from "@/lib/constants";
+import { MoveDown } from "lucide-react";
 
 function HeroPost({
   title,
@@ -56,12 +57,17 @@ export default async function Page() {
 
   return (
     <div>
-
-      <div className="bg-[url(/homepage/sf-banner.jpg)] bg-center w-full h-[500px] flex items-center">
-        <div className="container mx-auto px-[15px]">
-        <h1 className="lg:text-9xl text-[30px] text-center font-medium uppercase text-white opacity-50">Justin Abercrombia</h1>
+      <div className="bg-[url(/homepage/sf-banner.jpg)] bg-center w-full h-[500px] flex items-center h-screen relative">
+          <div className="container mx-auto px-[15px]">
+          <h1 className="lg:text-9xl text-[30px] text-center font-thin uppercase text-white opacity-50">Justin Abercrombia</h1>
+          <div className="flex items-center justify-center">
+            <Button className="font-light"><Link href="#work" className="font-light">Explore My Work</Link></Button>
+          </div>
         </div>
+        <MoveDown className="absolute bottom-3 left-1/2 -translate-x-1/2 w-10 h-10 text-white animate-bounce" />
+
       </div>
+      <section id="work"></section>
 
       {homepageSections.map(
         (elem: { title: string; body: string; heroImage: { url: string, title: string } }, index: number) => (

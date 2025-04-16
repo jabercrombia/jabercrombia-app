@@ -9,7 +9,7 @@ function Header() {
 
   return (
 
-    <header className="bg-black text-white p-[15px] text-center w-full">
+    <header className="absolute top-0 left-0 w-full z-10 bg-black text-white p-[15px] text-center w-full">
         <div className="container mx-auto flex w-full items-center">
           <Logo/>
           <nav className="uppercase">
