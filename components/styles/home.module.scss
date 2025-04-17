@@ -1,0 +1,26 @@
+@import './_variables.scss';
+
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translate(-50%,0); // Start and end at the original position
+  }
+  50% {
+    transform: translate(-50%,-20px); // Move up by 20px
+  }
+}
+
+
+.homePage {
+  svg {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 25px;
+    color: $white;
+    animation: bounce 1s infinite; // 1s duration, infinite repeat
+  }
+}
+  
