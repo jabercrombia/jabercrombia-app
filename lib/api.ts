@@ -160,6 +160,26 @@ export async function getPhotosCollection() {
   return extractPhotosCollectionSection(collection);
 }
 
+// About Page GraphQL
+function extractAboutSection(fetchResponse: any) {
+  return fetchResponse?.data;
+}
+
+export async function getAboutCollection() {
+  const collection = await fetchGraphQL(
+    `query {
+        blankPageCollection (limit: 1){
+          items {
+            _id
+            title
+            body
+          }
+        }
+      }`,
+  );
+  return extractAboutSection(collection);
+}
+
 //Individual Photo Page
 function extractPhotoCollectionEntries(fetchResponse: any): any {
   return fetchResponse?.data;

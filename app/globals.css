@@ -20,6 +20,14 @@ p > a {
     height: 20px;
 }
 
+.aboutme {
+    h3 {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 20px 0 10px;
+    }
+}
+
 .custom-sheet-width {
     width: 75% !important;
   }

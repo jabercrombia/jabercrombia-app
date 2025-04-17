@@ -8,7 +8,6 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 
@@ -25,11 +24,10 @@ export default function BreadCrumb() {
         url: `${SITE_URL}${path}`,
         };
     });
-
     return (
         <>
           {breadcrumbs.length > 0 && (
-            <Breadcrumb className="container mx-auto px-[15px] uppercase">
+            <Breadcrumb className="container mx-auto uppercase">
               <BreadcrumbList className="mt-[20px] mb-[20px]">
                   <BreadcrumbItem>
                       <BreadcrumbLink href="/" className="text-grey-600">Home</BreadcrumbLink>
