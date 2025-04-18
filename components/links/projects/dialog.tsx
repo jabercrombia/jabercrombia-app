@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import StackIcon from "tech-stack-icons";
 import { useState } from 'react';
-
+import { truncateText } from "@/lib/truncatetext";
 import Link from "next/link"
 import {
   Dialog,
@@ -17,22 +17,21 @@ import {
 
 
 interface ModalProps {
-    data: {  
+    data: { 
+        slug: string; 
         title: string; 
         githubUrl: string; 
         description: string, 
         url: string, 
-        photosCollection: { items: { url: string, thumbnail: string, title: string }[] }
+        photosCollection: { items: { url: string, thumbnail: string, title: string, dialog: string }[] }
         technologyNameListCollection: { items: { name: string, techStackIconName: string }[] }
-    }    
+    }
+    open: boolean;
+    setOpen: (open: boolean) => void;   
 }
 
 
-export default function DialogDemo({ data }: ModalProps) {
-
-    const truncatedText = data?.description.length > 100 ? data.description.slice(0, 100) + "..." : data.description;
-
-    const [open, setOpen] = useState(false);
+export default function DialogComponent({ data, open, setOpen }: ModalProps) {
 
     return (
         <div>
@@ -43,7 +42,8 @@ export default function DialogDemo({ data }: ModalProps) {
                 <div>
                     <img className="cursor-pointer border border-black hover:opacity-70" src={data.photosCollection.items[0].thumbnail} alt={data.title} />
                     <p className="mt-[5px]">{data.title}</p>
-                    <p className='text-xs'>{truncatedText}</p>
+                    <p className='text-xs'>{truncateText(data.description, 100)}</p>
+                    <p>{data._id}</p>
                 </div>
 
             </DialogTrigger>
@@ -63,7 +63,9 @@ export default function DialogDemo({ data }: ModalProps) {
                         </div>
                     ))}
                 </div>
-                <img className="border border-black mt-[10px]" src={data.photosCollection.items[0].url} alt={data.title} />
+                <div className="grid place-items-center">
+                    <img className="border border-black mt-[10px]" src={data.photosCollection.items[0].dialog} alt={data.title} />
+                </div>
                 <DialogFooter>
                     <div className={`flex  ${data.githubUrl ? `justify-between`: `justify-end`} w-full`}>
                         {data.githubUrl &&
@@ -74,7 +76,7 @@ export default function DialogDemo({ data }: ModalProps) {
                             </div>
                         }
                         <div>
-                        <Button type="submit"><Link href={data?.url} target="_blank">Go to Page</Link></Button>
+                        <Button type="submit"><Link href={data?.url} target="_blank">Go to Site</Link></Button>
                         </div>
                     </div>
                 </DialogFooter>

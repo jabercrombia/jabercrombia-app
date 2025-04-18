@@ -6,7 +6,6 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET(req: NextRequest) {
   const keyword = req.nextUrl.searchParams.get('q') || '';
   const data = await fetchContentful(SEARCH_CONTENT_QUERY, { keyword });
-  console.log(data);
 
 
     type DataItem = {
@@ -23,6 +22,7 @@ export async function GET(req: NextRequest) {
     const designData = data.design.items.map((item: DataItem) => ({
         ...item,
         type: 'design',
+        url: '/design/' + item.slug,
     }));
 
     type ProjectItem = {
@@ -40,6 +40,7 @@ export async function GET(req: NextRequest) {
   const projectData = data.projects.items.map((item: ProjectItem) => ({
     ...item,
     type: 'projects',
+    url: '/projects?slug=' + item.slug,
   }));
 
   type WebItem = {
@@ -54,10 +55,11 @@ export async function GET(req: NextRequest) {
     };
 };
 
-const webData = data.web.items.map((item: WebItem) => ({
-...item,
-type: 'web',
-}));
+  const webData = data.web.items.map((item: WebItem) => ({
+    ...item,
+    type: 'web',
+    url: '/web/' + item.slug,
+  }));
 
   const combinedResults = [
     ...webData,
@@ -65,6 +67,6 @@ type: 'web',
     ...projectData
   ]
 
-
+  console.log(combinedResults)
   return NextResponse.json({ results: combinedResults });
 }

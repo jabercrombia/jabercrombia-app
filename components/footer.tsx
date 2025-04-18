@@ -6,7 +6,7 @@ import Link from "next/link"
 
 function Footer() {
   return (
-    <footer className="bg-black text-white py-4 text-center w-full mt-5">
+    <footer className="bg-black text-white py-4 text-center w-full">
         <div className="container mx-auto">
           <div className="grid grid-cols-2">
             <div>
@@ -16,7 +16,6 @@ function Footer() {
             <p className="text-xs text-right">Copyright &copy; {new Date().getFullYear()} | <a href="/" className="text-white hover:text-gray-500">jabercrombia</a></p>  
             </div>
           </div>
-            
         </div>
     </footer>
   )

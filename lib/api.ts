@@ -45,7 +45,7 @@ const DESIGN_GRAPHQL_FIELDS = `
   }
 `;
 
-async function fetchGraphQL(query: string, preview = false): Promise<any> {
+async function fetchGraphQL(query: string, variables?: Record<string, any>, preview = false): Promise<any> {
   return fetch(
     `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
     {
@@ -58,7 +58,7 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
             : process.env.CONTENTFUL_ACCESS_TOKEN
         }`,
       },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({ query, variables }),
     },
   ).then((response) => response.json());
 }
@@ -168,11 +168,23 @@ function extractAboutSection(fetchResponse: any) {
 export async function getAboutCollection() {
   const collection = await fetchGraphQL(
     `query {
-        blankPageCollection (limit: 1){
+        aboutCollection(order: startDate_DESC) {
           items {
-            _id
-            title
-            body
+            jobTitle
+            startDate
+            endDate
+            company
+            jobDescription
+            logo {
+              title
+              description
+              contentType
+              fileName
+              size
+              url (transform:{resizeStrategy: SCALE, height: 100, quality:100})
+              width
+              height
+            }
           }
         }
       }`,
@@ -230,13 +242,15 @@ function extractProjectCollectionSection(fetchResponse: any) {
   return fetchResponse?.data;
 }
 
-export async function getProjectCollection() {
+export async function getProjectCollection(limit?: number) {
+ 
   const collection = await fetchGraphQL(
-    `query {
-         projectsCollection (order: order_ASC) {
+    `query GetProjects($limit: Int) {
+          projectsCollection(order: order_ASC, limit: $limit) {
           items {
             description
             title
+            slug
             url
             githubUrl
             technologyNameListCollection (limit:3) {
@@ -248,13 +262,15 @@ export async function getProjectCollection() {
             photosCollection {
               items {
                 url
+                about: url(transform:{resizeFocus:CENTER, resizeStrategy: FILL, width: 400, height: 300, quality: 100})
                 thumbnail: url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:500, height: 350, quality:30})
-                dialog: url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:800,quality:30})
+                dialog: url (transform:{resizeFocus:CENTER, resizeStrategy: SCALE, width: 800})
               }
             }
           }
         } 
       }`,
+      { limit }
   );
   return extractProjectCollectionSection(collection);
 }

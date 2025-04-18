@@ -1,6 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+
 import Dialog from "../../components/links/projects/dialog";
 import StackIcon from "tech-stack-icons";
 
@@ -14,7 +16,7 @@ interface Item {
   description: string;
   url: string;
   technologyNameListCollection: { items: { name: string, techStackIconName: string }[] };
-  photosCollection: { items: { title: string, thumbnail: string, url:string }[] };
+  photosCollection: { items: { title: string, thumbnail: string, url: string, dialog: string }[] };
 }
 
 
@@ -24,7 +26,17 @@ interface FilterListProps {
 
 export default function FilterList({ data }: FilterListProps) {
 
-    const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
+  const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
+  
+  const searchParams = useSearchParams();
+  const slugIdFromUrl = searchParams.get("slug");
+  const [openDialogId, setOpenDialogId] = useState<string | null>(null);
+  
+    useEffect(() => {
+      if (slugIdFromUrl) {
+        setOpenDialogId(slugIdFromUrl);
+      }
+    }, [slugIdFromUrl]);
 
     type TechnologyItem = {
         name: string;
@@ -71,7 +83,7 @@ export default function FilterList({ data }: FilterListProps) {
       );
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto pb-[100px]">
       <div className="flex flex-wrap gap-4 mb-4 justify-center pt-[20px] px-[15px]">
       {uniqueTechItems.map((tech : {name : string, techStackIconName? : string}, index) => (
             <label key={index} className="flex items-center space-x-2">
@@ -91,7 +103,10 @@ export default function FilterList({ data }: FilterListProps) {
            <>
              {filteredProducts.map((item, index : number) => (
                <div key={index}>
-                  <Dialog data={item}/>
+                  <Dialog data={item}
+                    open={openDialogId === item.slug}
+                    setOpen={(open) => setOpenDialogId(open ? item.slug : null)}
+                  />
                </div>
              ))}
            </>
