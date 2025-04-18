@@ -8,6 +8,7 @@ import StackIcon from "tech-stack-icons";
 import { useEffect, useState } from "react";
 
 import { useSearchParams } from "next/navigation";
+import { Suspense } from 'react'
 
 import { truncateText } from "@/lib/truncatetext";
 import Link from "next/link"
@@ -32,13 +33,14 @@ interface ModalProps {
         photosCollection: { items: { url: string, thumbnail: string, title: string, dialog: string }[] }
         technologyNameListCollection: { items: { name: string, techStackIconName: string }[] }
     }
-
+    open: boolean;
+    setOpen: (open: boolean) => void;   
 }
 
 
 
-export default function DialogComponent({ data }: ModalProps) {
-    const [open, setOpen] = useState(false);
+export default function DialogComponent({ data, open, setOpen }: ModalProps) {
+
     const searchParams = useSearchParams();
     const slugIdFromUrl = searchParams.get("slug");
     const [openDialogId, setOpenDialogId] = useState<string | null>(null);
@@ -50,7 +52,7 @@ export default function DialogComponent({ data }: ModalProps) {
       }, [slugIdFromUrl]);
     return (
         <div>
-
+            <Suspense>
             <Dialog open={open} onOpenChange={setOpen}>
 
             <DialogTrigger asChild>
@@ -96,6 +98,7 @@ export default function DialogComponent({ data }: ModalProps) {
                 </DialogFooter>
             </DialogContent>
             </Dialog>
+            </Suspense>
         </div>
     )
 }
