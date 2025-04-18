@@ -1,9 +1,6 @@
 'use client';
 
-import { useEffect, useState } from "react";
-import { Suspense } from "react";
-
-import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 import Dialog from "../../components/links/projects/dialog";
 import StackIcon from "tech-stack-icons";
@@ -30,15 +27,7 @@ export default function FilterList({ data }: FilterListProps) {
 
   const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
   
-  const searchParams = useSearchParams();
-  const slugIdFromUrl = searchParams.get("slug");
-  const [openDialogId, setOpenDialogId] = useState<string | null>(null);
-  
-    useEffect(() => {
-      if (slugIdFromUrl) {
-        setOpenDialogId(slugIdFromUrl);
-      }
-    }, [slugIdFromUrl]);
+
 
     type TechnologyItem = {
         name: string;

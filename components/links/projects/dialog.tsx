@@ -4,7 +4,11 @@ import { Button } from "@/components/ui/button"
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import StackIcon from "tech-stack-icons";
-import { useState } from 'react';
+
+import { useEffect, useState } from "react";
+
+import { useSearchParams } from "next/navigation";
+
 import { truncateText } from "@/lib/truncatetext";
 import Link from "next/link"
 import {
@@ -33,8 +37,18 @@ interface ModalProps {
 }
 
 
+
 export default function DialogComponent({ data, open, setOpen }: ModalProps) {
 
+    const searchParams = useSearchParams();
+    const slugIdFromUrl = searchParams.get("slug");
+    const [openDialogId, setOpenDialogId] = useState<string | null>(null);
+    
+      useEffect(() => {
+        if (slugIdFromUrl) {
+          setOpenDialogId(slugIdFromUrl);
+        }
+      }, [slugIdFromUrl]);
     return (
         <div>
 
