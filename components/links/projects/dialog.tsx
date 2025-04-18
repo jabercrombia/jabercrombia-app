@@ -43,7 +43,6 @@ export default function DialogComponent({ data, open, setOpen }: ModalProps) {
                     <img className="cursor-pointer border border-black hover:opacity-70" src={data.photosCollection.items[0].thumbnail} alt={data.title} />
                     <p className="mt-[5px]">{data.title}</p>
                     <p className='text-xs'>{truncateText(data.description, 100)}</p>
-                    <p>{data._id}</p>
                 </div>
 
             </DialogTrigger>
