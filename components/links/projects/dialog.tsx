@@ -33,8 +33,7 @@ interface ModalProps {
         photosCollection: { items: { url: string, thumbnail: string, title: string, dialog: string }[] }
         technologyNameListCollection: { items: { name: string, techStackIconName: string }[] }
     }
-    open: boolean;
-    setOpen: (open: boolean) => void;   
+
 }
 
 

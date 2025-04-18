@@ -21,6 +21,7 @@ interface Item {
 
 interface FilterListProps {
   data: Item[];
+  
 }
 
 export default function FilterList({ data }: FilterListProps) {
@@ -95,7 +96,7 @@ export default function FilterList({ data }: FilterListProps) {
              {filteredProducts.map((item, index : number) => (
                <div key={index}>
                   <Dialog data={item}
-                    
+
                   />
                </div>
              ))}
