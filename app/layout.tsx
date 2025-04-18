@@ -5,7 +5,6 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import BreadCrumbData from "../components/breadcrumbdata";
 import BreadCrumb from "../components/breadcrumb";
 import { Analytics } from "@vercel/analytics/react"
-import MainWrapper from "../components/mainwrapper";
 import Footer from "../components/footer";
 import Header from "../components/header";
 
