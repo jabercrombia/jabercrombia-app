@@ -1,7 +1,8 @@
 import PageHeader from "../../components/pageheader";
 import Filter from "../../components/ui/filter";
+import { Suspense } from "react";
+
 import { getProjectCollection } from "@/lib/api";
-import Dialog from "../../components/links/projects/dialog";
 export const metadata = {
   title: 'jabercrombia | Projects',
 }
@@ -13,7 +14,10 @@ export default async function PostPage() {
   return (
     <>
       <PageHeader pageID="projects"/>
+      <Suspense fallback={<div>Loading...</div>}>
       <Filter data={projects}/>
+      </Suspense>
+
     </>
     
   );

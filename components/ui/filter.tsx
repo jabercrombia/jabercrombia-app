@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { Suspense } from "react";
 
 import { useSearchParams } from "next/navigation";
 
@@ -85,7 +84,6 @@ export default function FilterList({ data }: FilterListProps) {
       );
 
   return (
-    <Suspense>
     <div className="container mx-auto pb-[100px]">
       <div className="flex flex-wrap gap-4 mb-4 justify-center pt-[20px] px-[15px]">
       {uniqueTechItems.map((tech : {name : string, techStackIconName? : string}, index) => (
@@ -119,6 +117,5 @@ export default function FilterList({ data }: FilterListProps) {
        </div>
 
      </div>
-     </Suspense>
   );
 }
