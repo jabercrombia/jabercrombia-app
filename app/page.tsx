@@ -85,7 +85,7 @@ export default async function PostPage() {
     <Section name="my projects">
         <div className="grid md:grid-cols-3 gap-10">
           {projects.map(
-            (elem: { description: string, title: string, technologyNameListCollection: { items: { name: string, techStackIconName: string }[] }, photosCollection: { items: { url: string, about: string, title: string }[] } }, index: number) => (
+            (elem: { description: string, slug: string, title: string, technologyNameListCollection: { items: { name: string, techStackIconName: string }[] }, photosCollection: { items: { url: string, about: string, title: string }[] } }, index: number) => (
                 <div key={index} className="pb-[20px]">
                   <ProjectCard data={elem} />
                 </div>
