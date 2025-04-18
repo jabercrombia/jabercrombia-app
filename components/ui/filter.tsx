@@ -95,8 +95,7 @@ export default function FilterList({ data }: FilterListProps) {
              {filteredProducts.map((item, index : number) => (
                <div key={index}>
                   <Dialog data={item}
-                    open={openDialogId === item.slug}
-                    setOpen={(open) => setOpenDialogId(open ? item.slug : null)}
+                    
                   />
                </div>
              ))}

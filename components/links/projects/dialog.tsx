@@ -32,14 +32,13 @@ interface ModalProps {
         photosCollection: { items: { url: string, thumbnail: string, title: string, dialog: string }[] }
         technologyNameListCollection: { items: { name: string, techStackIconName: string }[] }
     }
-    open: boolean;
-    setOpen: (open: boolean) => void;   
+
 }
 
 
 
-export default function DialogComponent({ data, open, setOpen }: ModalProps) {
-
+export default function DialogComponent({ data }: ModalProps) {
+    const [open, setOpen] = useState(false);
     const searchParams = useSearchParams();
     const slugIdFromUrl = searchParams.get("slug");
     const [openDialogId, setOpenDialogId] = useState<string | null>(null);
