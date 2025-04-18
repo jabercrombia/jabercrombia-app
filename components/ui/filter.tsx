@@ -85,41 +85,38 @@ export default function FilterList({ data }: FilterListProps) {
       );
 
   return (
-    <Suspense fallback={<div>Loading projects...</div>}>
-      <div className="container mx-auto pb-[100px]">
-            <div className="flex flex-wrap gap-4 mb-4 justify-center pt-[20px] px-[15px]">
-            {uniqueTechItems.map((tech : {name : string, techStackIconName? : string}, index) => (
-                  <label key={index} className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      checked={selectedTechnologies.includes(tech.name)}
-                      onChange={() => handleCheckboxChange(tech.name)}
-                      className="h-4 w-4 border-gray-300 rounded"
-                    />
-                    <span>{tech.name} <StackIcon name={tech?.techStackIconName} className='w-[15px]' /></span>
-                  </label>
-                ))}
-            </div>
-
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-10 px-[15px]'>
-              {filteredProducts.length > 0 ? (
-                <>
-                  {filteredProducts.map((item, index : number) => (
-                    <div key={index}>
-                        <Dialog data={item}
-                          open={openDialogId === item.slug}
-                          setOpen={(open) => setOpenDialogId(open ? item.slug : null)}
-                        />
-                    </div>
-                  ))}
-                </>
-              ) : (
-                <p className="text-gray-500">No products found.</p>
-              )}
-            </div>
-
+    <div className="container mx-auto pb-[100px]">
+      <div className="flex flex-wrap gap-4 mb-4 justify-center pt-[20px] px-[15px]">
+      {uniqueTechItems.map((tech : {name : string, techStackIconName? : string}, index) => (
+            <label key={index} className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={selectedTechnologies.includes(tech.name)}
+                onChange={() => handleCheckboxChange(tech.name)}
+                className="h-4 w-4 border-gray-300 rounded"
+              />
+              <span>{tech.name} <StackIcon name={tech?.techStackIconName} className='w-[15px]' /></span>
+            </label>
+          ))}
       </div>
-    </Suspense>
-    
+
+       <div className='grid grid-cols-1 md:grid-cols-3 gap-10 px-[15px]'>
+         {filteredProducts.length > 0 ? (
+           <>
+             {filteredProducts.map((item, index : number) => (
+               <div key={index}>
+                  <Dialog data={item}
+                    open={openDialogId === item.slug}
+                    setOpen={(open) => setOpenDialogId(open ? item.slug : null)}
+                  />
+               </div>
+             ))}
+           </>
+         ) : (
+           <p className="text-gray-500">No products found.</p>
+         )}
+       </div>
+
+     </div>
   );
 }

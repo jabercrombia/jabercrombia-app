@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
