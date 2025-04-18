@@ -33,7 +33,8 @@ interface ModalProps {
         photosCollection: { items: { url: string, thumbnail: string, title: string, dialog: string }[] }
         technologyNameListCollection: { items: { name: string, techStackIconName: string }[] }
     }
-
+    open: boolean;
+    setOpen: (open: boolean) => void;   
 }
 
 
@@ -51,7 +52,7 @@ export default function DialogComponent({ data, open, setOpen }: ModalProps) {
       }, [slugIdFromUrl]);
     return (
         <div>
-            <Suspense>
+            
             <Dialog open={open} onOpenChange={setOpen}>
 
             <DialogTrigger asChild>
@@ -97,7 +98,6 @@ export default function DialogComponent({ data, open, setOpen }: ModalProps) {
                 </DialogFooter>
             </DialogContent>
             </Dialog>
-            </Suspense>
         </div>
     )
 }

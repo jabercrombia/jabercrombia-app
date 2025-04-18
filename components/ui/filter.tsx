@@ -1,6 +1,9 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Suspense } from "react";
+
+import { useSearchParams } from "next/navigation";
 
 import Dialog from "../../components/links/projects/dialog";
 import StackIcon from "tech-stack-icons";
@@ -21,14 +24,21 @@ interface Item {
 
 interface FilterListProps {
   data: Item[];
-  
 }
 
 export default function FilterList({ data }: FilterListProps) {
 
   const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
   
-
+  const searchParams = useSearchParams();
+  const slugIdFromUrl = searchParams.get("slug");
+  const [openDialogId, setOpenDialogId] = useState<string | null>(null);
+  
+    useEffect(() => {
+      if (slugIdFromUrl) {
+        setOpenDialogId(slugIdFromUrl);
+      }
+    }, [slugIdFromUrl]);
 
     type TechnologyItem = {
         name: string;
@@ -75,6 +85,7 @@ export default function FilterList({ data }: FilterListProps) {
       );
 
   return (
+    <Suspense>
     <div className="container mx-auto pb-[100px]">
       <div className="flex flex-wrap gap-4 mb-4 justify-center pt-[20px] px-[15px]">
       {uniqueTechItems.map((tech : {name : string, techStackIconName? : string}, index) => (
@@ -96,7 +107,8 @@ export default function FilterList({ data }: FilterListProps) {
              {filteredProducts.map((item, index : number) => (
                <div key={index}>
                   <Dialog data={item}
-
+                    open={openDialogId === item.slug}
+                    setOpen={(open) => setOpenDialogId(open ? item.slug : null)}
                   />
                </div>
              ))}
@@ -107,5 +119,6 @@ export default function FilterList({ data }: FilterListProps) {
        </div>
 
      </div>
+     </Suspense>
   );
 }
