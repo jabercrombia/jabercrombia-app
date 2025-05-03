@@ -35,15 +35,12 @@ export default async function PostPage() {
         <div className="w-full">
           <h1 className="text-3xl">Hi, I'm Justin Abercrombia</h1>
           <h2 className="text-xl"></h2>
-          <p className="pb-2">
-          I'm a Full Stack Developer with a passion for building efficient, scalable, and user-friendly web applications. I'm currently expanding my skill set into 
-          Python for Data Engineering, focusing on ETL pipelines, data processing, and cloud storage solutions.
-          </p>
-          <p>
-            This portfolio site is built with Next.js using a headless architecture 
-            powered by Contentful as the CMS. It leverages Tailwind CSS for utility-first styling and shadcn/ui
-            for accessible and beautifully designed component primitives.
-          </p>
+          <p className="pb-2">Front-End Specialist • Full-Stack Engineer • eCommerce Consultant</p>
+
+<p>I design and build modern, high-performance web applications that solve real business problems. With over a decade of experience in front-end development—specializing in React, Next.js, and TypeScript—I help companies launch scalable digital experiences that are fast, accessible, and conversion-focused.</p>
+
+<p>From leading offshore teams to integrating with complex CMS and eCommerce platforms like Shopify and Salesforce Commerce Cloud, I bridge the gap between technical execution and strategic business goals. Whether it’s creating personalized shopping journeys, optimizing site performance, or rolling out A/B testing frameworks, I bring clarity and impact to every project I join.</p>
+
 
 
           <div className="flex gap-4 w-1/2 pt-4">
