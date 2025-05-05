@@ -13,7 +13,7 @@ export default async function PostPage() {
 
   return (
     <>
-      <PageHeader pageID="projects"/>
+      <PageHeader pageID="portfolio"/>
       <Suspense fallback={<div>Loading...</div>}>
       <Filter data={projects}/>
       </Suspense>

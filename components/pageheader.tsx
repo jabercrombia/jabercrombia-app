@@ -12,9 +12,9 @@ async function ImageHeader(pageID: any) {
     return (
   
         <div className="mx-auto mt-[20px] container">
-            <div className="px-[15px] w-full text-center text-black">
+            <div className="px-[15px] w-full text-black">
                 <h1 className="uppercase text-2xl">{pageHeader.title}</h1>
-                <p className="">{pageHeader.body}</p>
+                <p className="text-sm mb-5">{pageHeader.body}</p>
             </div>
         </div>
     )

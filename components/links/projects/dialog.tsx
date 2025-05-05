@@ -54,14 +54,16 @@ export default function DialogComponent({ data, open, setOpen }: ModalProps) {
 
                 </DialogDescription>
                 </DialogHeader>
-                <div className="flex flex-wrap gap-2 items-center technologyList">
-                    <span className="text-xs">Tech Stack:</span>
-                    {data.technologyNameListCollection.items.map((elem: { name: string, techStackIconName: string }, index: number) => (
-                        <div key={index} className="flex items-center">
-                            <StackIcon name={elem.techStackIconName} />
-                        </div>
-                    ))}
-                </div>
+                { data.technologyNameListCollection.items.length > 0 &&
+                    <div className="flex flex-wrap gap-2 items-center technologyList">
+                        <span className="text-xs">Tech Stack:</span>
+                        {data.technologyNameListCollection.items.map((elem: { name: string, techStackIconName: string }, index: number) => (
+                            <div key={index} className="flex items-center">
+                                <StackIcon name={elem.techStackIconName} />
+                            </div>
+                        ))}
+                    </div>
+                }
                 <div className="grid place-items-center">
                     <img className="border border-black mt-[10px]" src={data.photosCollection.items[0].dialog} alt={data.title} />
                 </div>
@@ -75,7 +77,9 @@ export default function DialogComponent({ data, open, setOpen }: ModalProps) {
                             </div>
                         }
                         <div>
-                        <Button type="submit"><Link href={data?.url} target="_blank">Go to Site</Link></Button>
+                        { data.url &&
+                            <Button type="submit"><Link href={data?.url} target="_blank">Go to Site</Link></Button>
+                        }
                         </div>
                     </div>
                 </DialogFooter>

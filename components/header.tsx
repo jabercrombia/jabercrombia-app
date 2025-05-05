@@ -3,7 +3,7 @@ import React from "react"
 import SearchBar from "../components/search";
 import Logo from "../components/logo";
 
-const navigationArray = ['web', 'projects','photos','design'];
+const navigationArray = ['portfolio','photos','design'];
 
 function Header() {
 
