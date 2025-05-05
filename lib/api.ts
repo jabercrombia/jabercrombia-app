@@ -253,7 +253,7 @@ export async function getProjectCollection(limit?: number) {
             slug
             url
             githubUrl
-            technologyNameListCollection (limit:3) {
+            technologyNameListCollection (limit:7) {
               items {
                 name
                 techStackIconName
