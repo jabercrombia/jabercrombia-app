@@ -5,7 +5,10 @@ const fetchSlugs = async () => {
   return data.items.map((item) => {
     const slug = item.fields.slug;
     const contentType = item.sys.contentType.sys.id; // Assuming the content type ID is stored here
-    if (!['blogPost', 'technology', 'about','techNames','pageHeader','projects'].includes(contentType)) {
+    if (
+      slug && 
+      !['blogPost', 'technology', 'about', 'techNames', 'pageHeader', 'projects'].includes(contentType)
+    ) {
 
       return {
         loc: `${contentType}/${slug}`,
@@ -17,12 +20,32 @@ const fetchSlugs = async () => {
   });
 };
 
+const additionalPages = [
+  {
+    'loc': '/',
+    'lastmod': new Date().toISOString()
+  },
+  {
+    'loc': '/portfolio',
+    'lastmod': new Date().toISOString()
+  },
+  {
+    'loc': '/photos',
+    'lastmod': new Date().toISOString()
+  },
+  {
+    'loc': '/design',
+    'lastmod': new Date().toISOString()
+  },
+];
+
 
 module.exports = {
   siteUrl: process.env.SITE_URL, // Your website URL
   generateRobotsTxt: true, // Optional: Generate robots.txt file
   additionalPaths: async () => {
     const dynamicPaths = await fetchSlugs();
-    return dynamicPaths;
+    console.log(dynamicPaths.concat(additionalPages));
+    return dynamicPaths.concat(additionalPages);
   },
 };
