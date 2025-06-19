@@ -2,71 +2,43 @@
 import { fetchContentful } from '@/lib/contentful';
 import { SEARCH_CONTENT_QUERY } from '@/lib/queries';
 import { NextRequest, NextResponse } from 'next/server';
+import { apiRequestDuration } from '@/lib/metrics';
 
 export async function GET(req: NextRequest) {
-  const keyword = req.nextUrl.searchParams.get('q') || '';
-  const data = await fetchContentful(SEARCH_CONTENT_QUERY, { keyword });
+  const endTimer = apiRequestDuration.startTimer({
+    route: '/api/search',
+    method: 'GET'
+  });
 
+  try {
+    const keyword = req.nextUrl.searchParams.get('q') || '';
+    const data = await fetchContentful(SEARCH_CONTENT_QUERY, { keyword });
 
-    type DataItem = {
-        sys: { id: string };
-        title: string;
-        slug: string;
-        description: string;
-        images: {
-            items: {
-            url: string;
-            }[];
-        };
-    };
-    const designData = data.design.items.map((item: DataItem) => ({
-        ...item,
-        type: 'design',
-        url: '/design/' + item.slug,
+    const designData = data.design.items.map((item: any) => ({
+      ...item,
+      type: 'design',
+      url: '/design/' + item.slug,
     }));
 
-    type ProjectItem = {
-        sys: { id: string };
-        title: string;
-        slug: string;
-        description: string;
-        images: {
-            items: {
-            url: string;
-            }[];
-        };
-    };
+    const projectData = data.projects.items.map((item: any) => ({
+      ...item,
+      type: 'projects',
+      url: '/projects?slug=' + item.slug,
+    }));
 
-  const projectData = data.projects.items.map((item: ProjectItem) => ({
-    ...item,
-    type: 'projects',
-    url: '/projects?slug=' + item.slug,
-  }));
+    const webData = data.web.items.map((item: any) => ({
+      ...item,
+      type: 'web',
+      url: '/web/' + item.slug,
+    }));
 
-  type WebItem = {
-    sys: { id: string };
-    title: string;
-    slug: string;
-    description: string;
-    images: {
-        items: {
-        url: string;
-        }[];
-    };
-};
+    const combinedResults = [...webData, ...designData, ...projectData];
 
-  const webData = data.web.items.map((item: WebItem) => ({
-    ...item,
-    type: 'web',
-    url: '/web/' + item.slug,
-  }));
+    endTimer({ status_code: 200 });
 
-  const combinedResults = [
-    ...webData,
-    ...designData,
-    ...projectData
-  ]
-
-  console.log(combinedResults)
-  return NextResponse.json({ results: combinedResults });
+    return NextResponse.json({ results: combinedResults });
+  } catch (error) {
+    endTimer({ status_code: 500 });
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
 }

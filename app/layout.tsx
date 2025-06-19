@@ -10,7 +10,7 @@ import Header from "../components/header";
 
 export const metadata = {
   title: `jabercrombia`,
-  description: `This is a blog built with Next.js and ${CMS_NAME}.`,
+  description: `I design and build modern, high-performance web applications that solve real business problems. With over a decade of experience in front-end development specializing in React, Next.js, and TypeScript I help companies launch scalable digital experiences that are fast, accessible, and conversion-focused.`,
   keywords: ['Next.js', 'React', 'JavaScript'],
   authors: [{ name: 'Justin Abercrombia', url: 'http://www.github.com/jabercrombia' }],
   creator: 'Justin Abercrombia',
