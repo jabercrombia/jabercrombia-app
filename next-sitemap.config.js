@@ -41,8 +41,8 @@ const additionalPages = [
 
 
 module.exports = {
-  siteUrl: process.env.SITE_URL, // Your website URL
-  generateRobotsTxt: true, // Optional: Generate robots.txt file
+  siteUrl: process.env.SITE_URL,
+  generateRobotsTxt: true,
   additionalPaths: async () => {
     const dynamicPaths = await fetchSlugs();
     console.log(dynamicPaths.concat(additionalPages));

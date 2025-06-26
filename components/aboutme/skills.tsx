@@ -62,7 +62,7 @@ const Skills = [
 
 export default function ProjectCard() {
     return (
-        <div className="grid md:grid-cols-2 gap-10 items-center">
+        <div className="grid md:grid-cols-4 gap-10 items-center">
             {Skills.map((item : {name : string, icon : string, technology : string[]}, index: number) => (
                 <div key={index} className="h-full">
                     <Card className="h-full rounded-none">
@@ -75,7 +75,7 @@ export default function ProjectCard() {
                             })()}
                         </CardTitle>
                         <CardDescription className="flex gap-2 items-center">
-                            <h3 className='text-black'>{item.name}</h3>
+                            <h3 className='text-black text-center w-full'>{item.name}</h3>
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="flex flex-wrap gap-2">
