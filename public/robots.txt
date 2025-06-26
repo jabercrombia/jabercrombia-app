@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://job-submission-portal.vercel.app
+Host: https://www.jabercrombia.com
 
 # Sitemaps
-Sitemap: https://job-submission-portal.vercel.app/sitemap.xml
+Sitemap: https://www.jabercrombia.com/sitemap.xml
