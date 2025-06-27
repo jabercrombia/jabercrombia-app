@@ -12,7 +12,7 @@ import Section from "../components/aboutme/sections";
 import Skills from "../components/aboutme/skills";
 import CertificationList from "../components/aboutme/certificationList";
 import ProjectCard from "@/components/aboutme/projectcards";
-import { formatDate } from "@/lib/formatdate";
+import { formatDate } from "@jabercrombia/date-utility";
 export const metadata = {
   title: 'jabercrombia | Home',
 }
