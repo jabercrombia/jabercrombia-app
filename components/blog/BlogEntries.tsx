@@ -3,16 +3,19 @@ import { formatUTCToMonthDayYear } from "@jabercrombia/date-utility";
 import { truncateText } from "../../lib/truncatetext";
 import Link from "next/link";
 
+type Post = {
+  title: string;
+  date: string;
+  excerpt: string;
+  slug: string;
+  coverImage: { url: string; height: number; title: string; width: number };
+  tags?: string[];
+};
+
 export default function BlogContent({
   post,
 }: {
-  post: {
-    title: string;
-    date: string;
-    excerpt: string;
-    slug: string;
-    coverImage: { url: string; height: number; title: string; width: number };
-  };
+  post: Post;
 }) {
   return (
     <div className="pb-5">
