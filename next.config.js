@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   images: {
-    loader: "custom",
     formats: ["image/avif", "image/webp"],
+    domains: ['images.ctfassets.net'],  // add your image host domain here
+
   },
   async redirects() {
     return [

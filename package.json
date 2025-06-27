@@ -11,10 +11,11 @@
     "cypress-run-e2e": "cypress run --e2e"
   },
   "dependencies": {
-    "@contentful/rich-text-react-renderer": "^15.17.1",
+    "@contentful/rich-text-react-renderer": "^15.22.11",
     "@contentful/rich-text-types": "^16.2.1",
     "@contentful/vercel-nextjs-toolkit": "latest",
     "@headlessui/react": "^2.2.0",
+    "@jabercrombia/date-utility": "github:jabercrombia/date-utility",
     "@next/third-parties": "^15.1.6",
     "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-label": "^2.1.2",
