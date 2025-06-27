@@ -304,18 +304,91 @@ export async function getDesignCollectionEntry( slug: string) {
   return extractDesignCollectionEntries(designGraphQL);
 }
 
+//Blog Page Entries
+function PostCollectionEntries(fetchResponse: any): any {
+  return fetchResponse?.data;
+}
+
+export async function getPostCollectionEntries() {
+  const PostGraphQL = await fetchGraphQL(
+    `query {
+        postCollection (order: date_DESC) {
+          items {
+            _id
+            title
+            slug
+            date
+            tags
+            coverImage {
+              height
+              width
+              title
+              url(
+                transform: {
+                  resizeStrategy: FILL
+                  quality: 80,
+                  width: 300,
+                  height: 200
+                }
+              )
+            }
+            excerpt
+            content {
+              json
+              
+            }
+            sys {
+              id
+            }
+          }
+        }
+      }`,
+  );
+  return PostCollectionEntries(PostGraphQL);
+}
+
+//Blog Page Entry
+function PostCollectionEntry(fetchResponse: any): any {
+  return fetchResponse?.data;
+}
+
+export async function getPostCollectionEntry(slug: string) {
+  const PostGraphQL = await fetchGraphQL(
+    `query {
+        postCollection (where: {slug : "${slug}"}) {
+          items {
+            _id
+            title
+            slug
+            date
+            tags
+            content {
+              json
+              
+            }
+            sys {
+              id
+            }
+          }
+        }
+      }`,
+  );
+  return PostCollectionEntries(PostGraphQL);
+}
+
 //Page Header
 function extractPageHeaderEntries(fetchResponse: any): any {
   return fetchResponse?.data;
 }
 
-export async function getPageHeaderCollection( title: string) {
+export async function getPageHeaderCollection( slug: string) {
   const pageHeaderQL = await fetchGraphQL(
     `query {
-        pageHeaderCollection (where:{title : "${title}"}) {
+        pageHeaderCollection (where:{slug : "${slug}"}) {
           items {
             title
             body
+            slug
             heroImage {
               url (transform:{resizeFocus:CENTER, resizeStrategy: FILL, width:2000, height: 300})
             }

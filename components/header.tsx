@@ -3,13 +3,13 @@ import React from "react"
 import SearchBar from "../components/search";
 import Logo from "../components/logo";
 
-const navigationArray = ['portfolio','design','photos'];
+const navigationArray = ['portfolio','design','photos','blog'];
 
 function Header() {
 
   return (
 
-    <header className="absolute top-0 left-0 w-full z-10 bg-black text-white p-[15px] text-center w-full">
+    <div className="absolute top-0 left-0 w-full z-10 bg-black text-white p-[15px] text-center w-full">
         <div className="container mx-auto flex w-full items-center">
           <Logo/>
           <nav className="uppercase">
@@ -27,7 +27,7 @@ function Header() {
             <SearchBar/>
           </div>
         </div>
-    </header>
+    </div>
   )
 }
 
