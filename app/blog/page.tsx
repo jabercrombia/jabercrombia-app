@@ -1,4 +1,3 @@
-import Link from "next/link";
 import PageHeader from "../../components/pageheader";
 import BlogEntries from "../../components/blog/BlogEntries";
 import { getPostCollectionEntries } from "@/lib/api";
@@ -6,17 +5,18 @@ import styles from "../../components/styles/blog/blog.module.scss";
 
 interface Post {
   title: string;
-  date: string;
-  excerpt: string;
   slug: string;
+  date?: string;
+  excerpt?: string;
   tags?: string[];
-  coverImage: {
+  coverImage?: {
     url: string;
     width: number;
     height: number;
     title: string;
   };
 }
+
 
 export const metadata = {
   title: "jabercrombia | Blog",
