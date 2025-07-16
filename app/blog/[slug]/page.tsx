@@ -4,7 +4,7 @@ import { formatUTCToMonthDayYear } from "@jabercrombia/date-utility";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Document } from "@contentful/rich-text-types";
 import Markdown from "react-markdown";
-import styles from "@/components/styles/blog/entry.module.scss";
+import styles from "@/components/styles/blog/blogentry.module.scss";
 import { Metadata } from "next";
 
 interface Props {
@@ -80,7 +80,7 @@ export default async function BlogPage({ params }: Props) {
         };
 
         return (
-          <article key={post.sys.id} className="mx-auto">
+          <article key={post.sys.id} className={`${styles.blogentry} mx-auto`}>
             <script
               type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}

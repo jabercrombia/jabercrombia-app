@@ -1,7 +1,7 @@
 import PageHeader from "../../components/pageheader";
 import BlogEntries from "../../components/blog/BlogEntries";
 import { getPostCollectionEntries } from "@/lib/api";
-import styles from "../../components/styles/blog/blog.module.scss";
+import styles from "../../components/styles/blog/blogentry.module.scss";
 
 interface Post {
   title: string;
