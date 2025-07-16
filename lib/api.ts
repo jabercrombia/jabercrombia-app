@@ -335,7 +335,6 @@ export async function getPostCollectionEntries() {
             excerpt
             content {
               json
-              
             }
             sys {
               id
@@ -358,13 +357,13 @@ export async function getPostCollectionEntry(slug: string) {
         postCollection (where: {slug : "${slug}"}) {
           items {
             _id
+            body
             title
             slug
             date
             tags
             content {
               json
-              
             }
             sys {
               id

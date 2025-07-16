@@ -37,6 +37,10 @@ const additionalPages = [
     'loc': '/design',
     'lastmod': new Date().toISOString()
   },
+  {
+    'loc': '/blog',
+    'lastmod': new Date().toISOString()
+  },
 ];
 
 

@@ -2,7 +2,8 @@ import Link from "next/link";
 import { getPostCollectionEntry } from "@/lib/api";
 import { formatUTCToMonthDayYear } from "@jabercrombia/date-utility";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Document } from '@contentful/rich-text-types';
+import { Document } from "@contentful/rich-text-types";
+import Markdown from "react-markdown";
 import styles from "@/components/styles/blog/entry.module.scss";
 import { Metadata } from "next";
 
@@ -12,9 +13,23 @@ interface Props {
   };
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const data = await getPostCollectionEntry(params.slug);
-  const post = data?.postCollection?.items?.[0];
+interface Post {
+  title: string;
+  body: string;
+  excerpt: string;
+  date: string;
+  updatedAt: string;
+  slug: string;
+  sys: { id: string };
+  tags?: string[];
+  content: { json: Document };
+  coverImage: { url: string };
+}
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const slug = props.params.slug;
+  const data = await getPostCollectionEntry(slug);
+  const post = data?.postCollection?.items?.[0] as Post | undefined;
 
   return {
     title: post ? `${post.title} | jabercrombia` : "Blog | jabercrombia",
@@ -31,12 +46,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function BlogPage({ params }: Props) {
   const { slug } = params;
   const data = await getPostCollectionEntry(slug);
-  const posts = data?.postCollection?.items ?? [];
+  const posts = (data?.postCollection?.items ?? []) as Post[];
 
   return (
     <div className={`w-1/2 mx-auto py-10 ${styles.entry}`}>
-      {/* GOOGLE SCHEMA */}
-      {posts.map((post : {title : string, excerpt: string, date: string, updatedAt : string, slug: string, sys: {id: string}, tags?:string[], content: {json: Document}, coverImage: {url:string}}) => {
+      {posts.length === 0 && <p>No post found for “{slug}”.</p>}
+
+      {posts.map((post) => {
         const schemaData = {
           "@context": "https://schema.org",
           "@type": "Article",
@@ -64,20 +80,25 @@ export default async function BlogPage({ params }: Props) {
         };
 
         return (
-          <article key={post.sys.id} className=" mx-auto">
+          <article key={post.sys.id} className="mx-auto">
             <script
               type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
             />
 
-            <h1>{post.title}</h1>
-            <p className="date text-sm text-gray-500">
+            <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
+            <p className="text-sm text-gray-500 mb-4">
               {formatUTCToMonthDayYear(post.date)}
             </p>
-            <div>{documentToReactComponents(post.content?.json)}</div>
+            {post.body ? (<div className="mb-6"><Markdown>{post.body}</Markdown></div>) : (<div className="prose prose-lg max-w-none mb-6">
+              {documentToReactComponents(post.content?.json)}
+            </div>)}
+            
+
+   
 
             {post.tags && (
-              <ul className="flex space-x-2 mt-4 ml-0">
+              <ul className="flex flex-wrap gap-2 mt-4">
                 {post.tags.map((tag) => (
                   <li key={tag} className="px-2 py-1 bg-gray-200 rounded">
                     {tag}
@@ -95,7 +116,6 @@ export default async function BlogPage({ params }: Props) {
           </article>
         );
       })}
-      {posts.length === 0 && <p>No post found for “{slug}”.</p>}
     </div>
   );
 }
