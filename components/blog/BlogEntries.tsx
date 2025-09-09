@@ -12,6 +12,7 @@ type Post = {
   tags?: string[];
 };
 
+
 export default function BlogContent({
   post,
 }: {
