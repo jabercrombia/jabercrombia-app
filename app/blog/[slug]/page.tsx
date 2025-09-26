@@ -110,7 +110,7 @@ export default async function BlogPage({ params }: Props) {
 
             <Link
               href="/blog"
-              className="mt-6 inline-block text-blue-600 hover:underline" title="back to all blog posts"
+              className="mt-6 inline-block hover:underline" title="back to all blog posts"
             >
               ← Back to all posts
             </Link>
