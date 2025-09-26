@@ -8,9 +8,7 @@ import styles from "@/components/styles/blog/blogentry.module.scss";
 import { Metadata } from "next";
 
 interface Props {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
 interface Post {
@@ -27,7 +25,7 @@ interface Post {
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { slug } = await props.params; // ✅ await here
+  const { slug } = await props.params;
 
   const data = await getPostCollectionEntry(slug);
   const post = data?.postCollection?.items?.[0] as Post | undefined;
