@@ -95,10 +95,7 @@ export default async function PostPage() {
           </Button>
         </div>
     </Section>
-
-
- 
-
+    
     <Section name="experience">
           <>
           {experience.map(

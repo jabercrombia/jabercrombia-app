@@ -16,7 +16,7 @@ function Header() {
           {navigationArray.map(
             (elem, index, array) => (
               <div className={index + 1 === array.length ? 'mr-4 inline-block' : 'mr-4 border-r pr-4 inline-block'} key={index}>
-                <Link href={`/`+elem} className="hover:text-cloudGray">
+                <Link href={`/`+elem} className="hover:text-cloudGray" title={elem}>
                   <p>{elem}</p>
                 </Link>
               </div>

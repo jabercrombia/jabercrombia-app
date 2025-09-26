@@ -4,7 +4,7 @@ import Link from "next/link"
 function Logo() {
 
     return (
-        <Link href="/">
+        <Link href="/" title="home">
             <div className="mr-[20px]">
                 <svg version="1.1" viewBox="0 0 500 500" className="fill-white h-[30px] hover:fill-cloudGray">
                     <g>

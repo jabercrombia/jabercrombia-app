@@ -25,7 +25,7 @@ export default function BlogContent({
         <div>
           <h2 className="text-2xl font-bold mb-4">{post.title}</h2>
           <p>{truncateText(post.excerpt, 60)}</p>
-          <Link href={`blog/${post.slug}`}>Read More</Link>
+          <Link href={`blog/${post.slug}`} title={post.title}>Read More</Link>
         </div>
       </div>
     </div>

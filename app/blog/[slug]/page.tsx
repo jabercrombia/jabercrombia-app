@@ -47,6 +47,7 @@ export default async function BlogPage({ params }: Props) {
   const { slug } = params;
   const data = await getPostCollectionEntry(slug);
   const posts = (data?.postCollection?.items ?? []) as Post[];
+  
 
   return (
     <div className={`w-1/2 mx-auto py-10 ${styles.entry}`}>
