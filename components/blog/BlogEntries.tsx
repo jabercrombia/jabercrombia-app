@@ -23,7 +23,7 @@ export default function BlogContent({
       <div className="p-2 flex">
         <div className="w-1/6">{formatUTCToMonthDayYear(post.date)}</div>
         <div>
-          <h1 className="text-2xl font-bold mb-4">{post.title}</h1>
+          <h2 className="text-2xl font-bold mb-4">{post.title}</h2>
           <p>{truncateText(post.excerpt, 60)}</p>
           <Link href={`blog/${post.slug}`}>Read More</Link>
         </div>
