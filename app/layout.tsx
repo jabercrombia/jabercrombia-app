@@ -39,6 +39,7 @@ export default function RootLayout({
       <html lang="en" className={roboto.className}>
       <GoogleAnalytics gaId={process.env.GOOGLE_TRACKIND_ID || ''} />
       <SpeedInsights/>
+      <meta name="google-site-verification" content="m8chR7z2H5-93nOawLfs2FW30foI--k4eiLnjiPmxhY" />
         <body>
             <div className="flex flex-col min-h-screen">
               <Header/>
