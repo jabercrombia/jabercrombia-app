@@ -6,6 +6,8 @@ import { Document } from "@contentful/rich-text-types";
 import Markdown from "react-markdown";
 import styles from "@/components/styles/blog/blogentry.module.scss";
 import { Metadata } from "next";
+import { truncateRichText } from '@/lib/truncateRichText';
+
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -30,12 +32,18 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const data = await getPostCollectionEntry(slug);
   const post = data?.postCollection?.items?.[0] as Post | undefined;
 
+  // make an excerpt from the content field
+  const excerpt = truncateRichText(post?.content?.json);
+
   return {
     title: post ? `${post.title} | jabercrombia` : "Blog | jabercrombia",
-    description: post?.excerpt || "Blog post from jabercrombia",
+    description: excerpt,
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${post?.slug}`,
+    },
     openGraph: {
       title: post?.title,
-      description: post?.excerpt,
+      description: excerpt,
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${post?.slug}`,
       images: post?.coverImage?.url ? [{ url: post.coverImage.url }] : [],
     },
@@ -48,7 +56,6 @@ export default async function BlogPage({ params }: Props) {
   const data = await getPostCollectionEntry(slug);
   const posts = (data?.postCollection?.items ?? []) as Post[];
   
-
   return (
     <div className={`w-1/2 mx-auto py-10 ${styles.entry}`}>
       {posts.length === 0 && <p>No post found for “{slug}”.</p>}

@@ -13,6 +13,14 @@ type Post = {
 };
 
 
+export const metadata = {
+  title: 'i',
+  description: '',
+  alternates: {
+    canonical: '',
+  }
+};
+
 export default function BlogContent({
   post,
 }: {
@@ -23,7 +31,7 @@ export default function BlogContent({
       <div className="p-2 flex">
         <div className="w-1/6">{formatUTCToMonthDayYear(post.date)}</div>
         <div>
-          <h2 className="text-2xl font-bold mb-4">{post.title}</h2>
+          <h2 className="text-2xl font-bold mb-1"><Link href={`blog/${post.slug}`} title={post.title} className="text-black">{post.title}</Link></h2>
           <p className="pb-4">{truncateText(post.excerpt, 60)}</p>
           <Link href={`blog/${post.slug}`} title={post.title}>Read More</Link>
         </div>

@@ -1,12 +1,14 @@
 import Link from "next/link";
-import PageHeader from "../../components/pageheader";
 
 import { getDesignCollection } from "@/lib/api";
 
-export const metadata = {
-  title: 'jabercrombia | Design',
-}
+import PageHeader, { getPageHeaderMetadata } from "@/components/pageheader";
+import { Metadata } from "next";
 
+// Dynamic metadata at the page level
+export async function generateMetadata(): Promise<Metadata> {
+  return await getPageHeaderMetadata("design");
+}
 export default async function PlatformPage() {
   
   let design = await getDesignCollection();

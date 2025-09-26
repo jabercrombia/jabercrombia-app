@@ -10,13 +10,29 @@ import Header from "../components/header";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
-  title: `jabercrombia`,
+  title: ``,
   description: `I design and build modern, high-performance web applications that solve real business problems. With over a decade of experience in front-end development specializing in React, Next.js, and TypeScript I help companies launch scalable digital experiences that are fast, accessible, and conversion-focused.`,
   keywords: ['Next.js', 'React', 'JavaScript'],
   authors: [{ name: 'Justin Abercrombia', url: 'http://www.github.com/jabercrombia' }],
   creator: 'Justin Abercrombia',
   openGraph: {
     images: '/homepage/homepage_thumb.png',
+  },
+  alternates: {
+    canonical: process.env.SITE_URL,
+  },
+  robots: {
+    index: true,       // index this page
+    follow: true,      // follow links on this page
+    nocache: false,    // optional: prevent caching
+    googleBot: {       // optional: Google-specific rules
+      index: true,
+      follow: true,
+      noimageindex: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 

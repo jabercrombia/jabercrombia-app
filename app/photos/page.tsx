@@ -1,7 +1,14 @@
-import PageHeader from "../../components/pageheader";
 import Head from "next/head";
 import { getPhotosCollection } from "@/lib/api";
 import PhotoLink from "../../components/links/photos/photogrid";
+
+import PageHeader, { getPageHeaderMetadata } from "@/components/pageheader";
+import { Metadata } from "next";
+
+// Dynamic metadata at the page level
+export async function generateMetadata(): Promise<Metadata> {
+  return await getPageHeaderMetadata("photos");
+}
 
 export default async function PostPage() {
 
