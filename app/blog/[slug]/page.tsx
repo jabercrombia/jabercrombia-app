@@ -33,9 +33,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const post = data?.postCollection?.items?.[0] as Post | undefined;
 
   // make an excerpt from the content field
-const excerpt = post?.content?.json
-  ? truncateRichText(post.content.json, 100)
-  : "Blog post from jabercrombia";
+  const excerpt = post?.content?.json
+    ? truncateRichText(post.content.json, 100)
+    : "Blog post from jabercrombia";
 
   return {
     title: post ? `${post.title} | jabercrombia` : "Blog | jabercrombia",
@@ -101,7 +101,7 @@ export default async function BlogPage({ params }: Props) {
               {formatUTCToMonthDayYear(post.date)}
             </p>
             {post.body ? (<div className="mb-6"><Markdown>{post.body}</Markdown></div>) : (<div className="prose prose-lg max-w-none mb-6">
-              {documentToReactComponents(post.content?.json)}
+              {post?.content?.json && documentToReactComponents(post.content.json)}
             </div>)}
             
 
