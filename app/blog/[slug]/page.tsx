@@ -33,7 +33,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const post = data?.postCollection?.items?.[0] as Post | undefined;
 
   // make an excerpt from the content field
-  const excerpt = truncateRichText(post?.content?.json);
+const excerpt = post?.content?.json
+  ? truncateRichText(post.content.json, 100)
+  : "Blog post from jabercrombia";
 
   return {
     title: post ? `${post.title} | jabercrombia` : "Blog | jabercrombia",
