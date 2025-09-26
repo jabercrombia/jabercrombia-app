@@ -1,12 +1,8 @@
-//@import './../variables';
 @use './../variables' as *;
 
 .blogentry {
   hr {
     margin: 20px 0;
-  }
-  a {
-    color: blue;
   }
 }
   

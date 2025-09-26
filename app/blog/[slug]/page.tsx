@@ -27,7 +27,8 @@ interface Post {
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const slug = props.params.slug;
+  const { slug } = await props.params; // ✅ await here
+
   const data = await getPostCollectionEntry(slug);
   const post = data?.postCollection?.items?.[0] as Post | undefined;
 
@@ -43,8 +44,9 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   };
 }
 
+
 export default async function BlogPage({ params }: Props) {
-  const { slug } = params;
+  const { slug } = await params;
   const data = await getPostCollectionEntry(slug);
   const posts = (data?.postCollection?.items ?? []) as Post[];
   
@@ -99,9 +101,9 @@ export default async function BlogPage({ params }: Props) {
    
 
             {post.tags && (
-              <ul className="flex flex-wrap gap-2 mt-4">
+              <ul className="flex flex-wrap gap-2 mt-4 ml-0">
                 {post.tags.map((tag) => (
-                  <li key={tag} className="px-2 py-1 bg-gray-200 rounded">
+                  <li key={tag} className="px-2 py-1 bg-gray-200 rounded list-none">
                     {tag}
                   </li>
                 ))}
@@ -110,7 +112,7 @@ export default async function BlogPage({ params }: Props) {
 
             <Link
               href="/blog"
-              className="mt-6 inline-block text-blue-600 hover:underline"
+              className="mt-6 inline-block text-blue-600 hover:underline" title="back to all blog posts"
             >
               ← Back to all posts
             </Link>

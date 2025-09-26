@@ -24,7 +24,7 @@ export default function BlogContent({
         <div className="w-1/6">{formatUTCToMonthDayYear(post.date)}</div>
         <div>
           <h2 className="text-2xl font-bold mb-4">{post.title}</h2>
-          <p>{truncateText(post.excerpt, 60)}</p>
+          <p className="pb-4">{truncateText(post.excerpt, 60)}</p>
           <Link href={`blog/${post.slug}`} title={post.title}>Read More</Link>
         </div>
       </div>
