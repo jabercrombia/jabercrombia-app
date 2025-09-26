@@ -8,7 +8,7 @@ type Post = {
   date: string;
   excerpt: string;
   slug: string;
-  coverImage: { url: string; height: number; title: string; width: number };
+  coverImage?: { url: string; height: number; title: string; width: number };
   tags?: string[];
 };
 
