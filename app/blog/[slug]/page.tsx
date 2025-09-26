@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getPostCollectionEntry } from "@/lib/api";
 import { formatUTCToMonthDayYear } from "@jabercrombia/date-utility";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Document } from "@contentful/rich-text-types";
+import { Document, Block, Inline } from "@contentful/rich-text-types";
 import Markdown from "react-markdown";
 import styles from "@/components/styles/blog/blogentry.module.scss";
 import { Metadata } from "next";
@@ -22,7 +22,7 @@ interface Post {
   slug: string;
   sys: { id: string };
   tags?: string[];
-  content: { json: Document };
+  content?: { json: Document };
   coverImage: { url: string };
 }
 
