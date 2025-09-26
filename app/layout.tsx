@@ -7,6 +7,7 @@ import BreadCrumb from "../components/breadcrumb";
 import { Analytics } from "@vercel/analytics/react"
 import Footer from "../components/footer";
 import Header from "../components/header";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
   title: `jabercrombia`,
@@ -37,6 +38,7 @@ export default function RootLayout({
     <>
       <html lang="en" className={roboto.className}>
       <GoogleAnalytics gaId={process.env.GOOGLE_TRACKIND_ID || ''} />
+      <SpeedInsights/>
         <body>
             <div className="flex flex-col min-h-screen">
               <Header/>
