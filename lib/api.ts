@@ -175,6 +175,7 @@ export async function getAboutCollection() {
             endDate
             company
             jobDescription
+            summary
             logo {
               title
               description

@@ -36,7 +36,7 @@ export default async function PageHeader({ pageID }: PageHeaderProps) {
     <div className="mx-auto mt-[20px] h-[200px] container flex items-center text-center">
       <header className="px-[15px] w-full text-black">
         <h1 className="uppercase text-4xl">{pageHeader.title}</h1>
-        <p className="text-sm mb-5">{pageHeader.body}</p>
+        <p className="text-sm mb-5 text-left">{pageHeader.body}</p>
       </header>
     </div>
   );

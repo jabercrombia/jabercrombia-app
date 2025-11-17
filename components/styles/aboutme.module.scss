@@ -11,7 +11,6 @@
     h2 {
         font-size: 1.5em;
         margin-bottom: 10px;
-        font-weight: 300;
     }
     a {
         :hover {
@@ -22,27 +21,16 @@
         &:first-of-type {
             padding-top: 0;
         }
-        padding: 7em 0;
+        padding-bottom: 20px;
+       
 
-        & > div {
-            padding: 15px;
-        }
-        &:nth-child(odd) {
-            background-color: $seconday;
-        }
         h2 {
-            font-size: 2em;
-            text-align: center;
-            padding-top: 20px;
-            text-transform: capitalize;
-            padding-bottom: 20px;;
+            padding-top: 0px;
+            padding-bottom: 20px;
         
         }
         h3 {
-            font-size: 1.5em;
-            font-weight: 300;
             margin-bottom: 10px;
-            text-transform: capitalize;
         }
     }
     

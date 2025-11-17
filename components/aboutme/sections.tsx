@@ -8,9 +8,9 @@ interface SectionProps {
 export default function Section({ children, name }: SectionProps) {
 
     return (
-        <section className="w-full">
+        <section>
             <div className="container mx-auto">
-                <h2>{name}</h2>
+                <h2 className="uppercase font-medium text-xs">{name}</h2>
                 {children}
             </div>
         </section>
