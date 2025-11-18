@@ -1,4 +1,5 @@
-import Filter from "../../components/ui/filter";
+import Filter from "../../components/ui/filterNav";
+import FilterDisplay from "../../components/ui/filterDisplay";
 import { Suspense } from "react";
 
 import { getProjectCollection } from "@/lib/api";
@@ -18,12 +19,18 @@ export default async function PostPage() {
 
   return (
     <>
-      <PageHeader pageID="portfolio"/>
-      <Suspense fallback={<div>Loading...</div>}>
-      <Filter data={projects}/>
-      </Suspense>
+      <div className="container mx-auto md:flex gap-10">
+        <div className="w-1/3">
+        <div className="md:sticky top-40">
+          <PageHeader pageID="portfolio"/>
+          <Filter data={projects}/>
+        </div>
+        </div>
+        <div className="w-3/4">
+          <FilterDisplay data={projects}/>
+        </div>
+      </div>
 
     </>
-    
   );
 }
