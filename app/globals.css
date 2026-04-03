@@ -11,7 +11,7 @@ html {
     width: 5px;
 }
 ::-webkit-scrollbar-track {
-    background: #080b10;
+    background: #141b27;
 }
 ::-webkit-scrollbar-thumb {
     background: #1a2030;
@@ -94,11 +94,6 @@ ul.search {
     }
 }
 
-.technologyList {
-    svg {
-
-    }
-}
 .nav-link {
     font-size: 12px;
     letter-spacing: 0.08em;
@@ -203,7 +198,7 @@ ul.search {
 
     body {
         @apply bg-background text-foreground;
-        background-color: #080b10;
+        background-color: #141b27;
         color: #e8eaf0;
         font-weight: 300;
         line-height: 1.7;
