@@ -74,15 +74,14 @@ export default async function PostPage() {
           ) => (
             <div className={`${styles.expItem} ${index === 0 ? "border-t-0" : ""}`} key={index}>
               <div>
+                <div className="bg-white/70 w-auto max-w-[70px]">
                 {elem.logo?.url && (
                   <img
                     src={elem.logo.url}
                     alt={elem.logo.title}
-                    className="mt-2 mb-2 max-h-[30px] w-auto opacity-60 grayscale invert"
+                    className="mt-2 mb-2 w-auto invert"
                   />
                 )}
-                <div className={styles.expDates}>
-                  {formatDate(elem.startDate)} – {elem.endDate ? formatDate(elem.endDate) : "Present"}
                 </div>
                 {!elem.endDate && (
                   <div className={styles.liveTag}>
@@ -92,7 +91,11 @@ export default async function PostPage() {
                 )}
               </div>
               <div>
-                <h4 className="text-lg">{elem.jobTitle}</h4>
+                <div className={styles.expCompany}>{elem.company}</div>
+                <div className={styles.expRole}>{elem.jobTitle}</div>
+                <div className={`${styles.expDates} mb-3`}>
+                  {formatDate(elem.startDate)} – {elem.endDate ? formatDate(elem.endDate) : "Present"}
+                </div>
                 <div className={styles.expDesc}>
                   <Markdown>{elem.jobDescription || elem.summary}</Markdown>
                 </div>
@@ -106,14 +109,15 @@ export default async function PostPage() {
         <Skills />
 
         {/* CERTIFICATIONS */}
-        <div className="flex flex-col md:flex-row">
+        <div className={styles.sectionLabel}>Certifications</div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-16">
           {certifications.map((cert) => (
-            <div className="basis-1/3" key={cert.title}>
-              <div className={styles.badgeTitle}>
-                <span className={styles.badgeDot} />
-                {cert.title}
+            <div key={cert.title} className="bg-[#0e1219] border border-[rgba(255,255,255,0.07)] px-4 py-3">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#4f8ef7] shrink-0" />
+                <span className="text-[12.5px] text-[#e8eaf0] font-medium">{cert.title}</span>
               </div>
-              <div className={styles.badgeOrg}>{cert.org}</div>
+              <div className="text-[10px] tracking-[0.1em] uppercase text-[#4a5068] pl-3.5">{cert.org}</div>
             </div>
           ))}
         </div>
