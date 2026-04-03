@@ -1,37 +1,47 @@
 import { getDesignCollectionEntry } from "@/lib/api";
+import styles from "../../../components/styles/aboutme.module.scss";
 import ImageModal from "../../../components/links/photos/imagemodal";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export default async function PlatformPage({ params }: PageProps) {
+type GalleryItem = { title: string; url: string; thumbnail: string };
 
-const { slug } = await params;
+export default async function DesignEntryPage({ params }: PageProps) {
+  const { slug } = await params;
 
-let dataGraphQL = await getDesignCollectionEntry(slug);
-dataGraphQL = dataGraphQL?.designCollection.items[0];
+  let dataGraphQL = await getDesignCollectionEntry(slug);
+  dataGraphQL = dataGraphQL?.designCollection.items[0];
+
+  const gallery: GalleryItem[] = dataGraphQL?.designGalleryCollection?.items ?? [];
 
   return (
+    <div className={styles.page}>
+      <div className="container mx-auto px-6">
 
-    <div className="container mx-auto px-[15px] grid grid-cols-1 ">
-        <div>
-          <h1 className="uppercase mt-[20px] text-xl">{dataGraphQL?.title}</h1>
-          <p className="text-xl">{dataGraphQL?.body}</p>
+        {/* HEADER */}
+        <section className={styles.hero}>
+          <div className={styles.heroEyebrow}>Design</div>
+          <h1 style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.02em", color: "#e8eaf0", marginBottom: "1rem" }}>
+            {dataGraphQL?.title}
+          </h1>
+          {dataGraphQL?.body && (
+            <p className={styles.heroSub}>{dataGraphQL.body}</p>
+          )}
+        </section>
+
+        {/* GALLERY */}
+        <div className={styles.sectionLabel}>Gallery</div>
+        <div className="columns-1 sm:columns-2 md:columns-3 gap-4 mb-16">
+          {gallery.map((elem, index) => (
+            <div key={index} className="break-inside-avoid mb-4 group cursor-pointer overflow-hidden bg-[#0e1219] border border-[rgba(255,255,255,0.07)]">
+              <ImageModal imageData={elem} />
+            </div>
+          ))}
         </div>
-        <div>
-          <div className="grid grid-cols-1 justify-items-center">
-            {dataGraphQL?.designGalleryCollection.items.map(
-              (elem: { title: string; url: string; thumbnail: string }, index: number) => (
-                <div className="p-4" key={index}>
-                  <ImageModal imageData={elem}/>
-                </div>
-              )
-            )}
-          </div>        
-        </div>
 
-
+      </div>
     </div>
   );
 }
