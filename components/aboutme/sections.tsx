@@ -6,15 +6,15 @@ interface SectionProps {
 }
 
 export default function Section({ children, name }: SectionProps) {
-
-    return (
-        <section>
-            <div className="container mx-auto">
-                <h2 className="uppercase font-medium text-xs">{name}</h2>
-                {children}
-            </div>
-        </section>
-    )
+  return (
+    <section className="mb-10">
+      <div className="container mx-auto">
+        <div className="flex items-center gap-4 mb-6">
+          <h2 className="text-xs uppercase tracking-widest font-semibold text-slate-500 shrink-0">{name}</h2>
+          <div className="flex-1 h-px bg-gradient-to-r from-blue-500/25 to-transparent" />
+        </div>
+        {children}
+      </div>
+    </section>
+  );
 }
-
-

@@ -1,54 +1,85 @@
-
 import { getPhotoCollectionEntry } from "@/lib/api";
 import ImageModal from "../../../components/links/photos/imagemodal";
-
+import styles from "../../../components/styles/aboutme.module.scss";
+import Link from "next/link";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export default async function PlatformPage({ params }: PageProps) {
+type GalleryItem = { title: string; url: string; thumbnail: string };
 
-const { slug } = await params;
+export default async function PhotoEntryPage({ params }: PageProps) {
+  const { slug } = await params;
 
-let dataGraphQL = await getPhotoCollectionEntry(slug);
-dataGraphQL = dataGraphQL.photosCollection.items[0];
+  let dataGraphQL = await getPhotoCollectionEntry(slug);
+  dataGraphQL = dataGraphQL.photosCollection.items[0];
 
-var photoSchema = {
-  "@context": "https://schema.org/",
-  "@type": "ImageGallery",
-  name: dataGraphQL.title,
-  description: dataGraphQL.description,
-  url: `https://jabercrombia.com/photos/${dataGraphQL.slug}`,
-  mainEntity: dataGraphQL?.photosCollection.items.map((photo: { title: string; url: string; thumbnail: string }) => ({
-    "@type": "ImageObject",
-    contentUrl: photo.url,
-    thumbnailUrl: photo.thumbnail,
-    name: photo.title,
-    creditText: "Justin Abercrombia",
-    creator: {
-      "@type": "Person",
-      name: "Justin Abercrombia",
-    },
-  })),
-};
+  const photoSchema = {
+    "@context": "https://schema.org/",
+    "@type": "ImageGallery",
+    name: dataGraphQL.title,
+    description: dataGraphQL.description,
+    url: `https://jabercrombia.com/photos/${dataGraphQL.slug}`,
+    mainEntity: dataGraphQL?.photosCollection.items.map((photo: GalleryItem) => ({
+      "@type": "ImageObject",
+      contentUrl: photo.url,
+      thumbnailUrl: photo.thumbnail,
+      name: photo.title,
+      creditText: "Justin Abercrombia",
+      creator: { "@type": "Person", name: "Justin Abercrombia" },
+    })),
+  };
 
   return (
-    <div className="container mx-auto text-center">
+    <div className={styles.page}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(photoSchema) }}
       />
-       <h1 className="uppercase mt-[20px] text-xl">{dataGraphQL.title}</h1>
-       <p className="">{dataGraphQL.description}</p>
-      <div className="flex flex-wrap justify-center">
-        {dataGraphQL?.photosCollection.items.map(
-          (elem: { title: string; url: string; thumbnail: string }, index: number) => (
-            <div className="w-full lg:w-1/4 m-6 border-2 border-solid" key={index}>
+      <div className="container mx-auto px-6">
+
+        {/* HEADER */}
+        <section className={styles.hero}>
+          <div className={styles.heroEyebrow}>Photography</div>
+          <h1
+            style={{
+              fontFamily: "var(--font-inter), sans-serif",
+              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              fontWeight: 600,
+              lineHeight: 1.1,
+              textTransform: "capitalize",
+              letterSpacing: "-0.02em",
+              color: "#e8eaf0",
+              marginBottom: "1rem",
+            }}
+          >
+            {dataGraphQL.title}
+          </h1>
+          {dataGraphQL.description && (
+            <p className={styles.heroSub}>{dataGraphQL.description}</p>
+          )}
+          <Link
+            href="/photos"
+            className="inline-flex items-center gap-2 text-[11px] tracking-[0.1em] uppercase text-[#4a5068] hover:text-[#4f8ef7] transition-colors mt-2"
+          >
+            ← All photos
+          </Link>
+        </section>
+
+        {/* GALLERY */}
+        <div className={styles.sectionLabel}>Gallery</div>
+        <div className="columns-1 sm:columns-2 md:columns-3 gap-4 mb-16">
+          {dataGraphQL?.photosCollection.items.map((elem: GalleryItem, index: number) => (
+            <div
+              key={index}
+              className="break-inside-avoid mb-4 overflow-hidden bg-[#0e1219] border border-[rgba(255,255,255,0.07)]"
+            >
               <ImageModal imageData={elem} />
             </div>
-          )
-        )}
+          ))}
+        </div>
+
       </div>
     </div>
   );

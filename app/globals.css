@@ -2,18 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-
 html {
     scroll-behavior: smooth;
 }
 
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: #080b10;
+}
+::-webkit-scrollbar-thumb {
+    background: #1a2030;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #4f8ef7;
+}
+
 a {
-    color: gray;
+    color: #7a8099;
+    transition: color 0.2s ease;
+    text-decoration: none;
 
     &:hover {
-        color: black;
+        color: #e8eaf0;
     }
 }
+
 .swatches {
     content: "";
     width: 20px;
@@ -26,23 +43,23 @@ footer {
     }
 }
 
-.aboutme {
-    h3 {
-        font-size: 20px;
-        font-weight: 600;
-        margin: 20px 0 10px;
-    }
-}
-
 .custom-sheet-width {
     width: 75% !important;
-  }
+}
 
 nav {
     font-size: 12px;
-    
+
     a {
-        color: #fff
+        color: #7a8099;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: color 0.2s;
+
+        &:hover {
+            color: #e8eaf0;
+        }
     }
 }
 
@@ -54,15 +71,23 @@ ul {
 }
 
 ul.search {
-    background-color: #fff;
+    background-color: #0e1219;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 6px;
+    overflow: hidden;
+
     li {
         list-style-type: none;
+
         &:hover {
-            background-color: #f5f5f5;
+            background-color: #141920;
         }
     }
+
     a {
-        color: #000;
+        color: #e8eaf0;
+        text-transform: none;
+
         &:hover {
             text-decoration: none;
         }
@@ -71,16 +96,31 @@ ul.search {
 
 .technologyList {
     svg {
-        height: 20px !important;
-        width: 20px !important;
+
+    }
+}
+.nav-link {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #7a8099;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+        color: #e8eaf0;
     }
 }
 
-Button svg {
-    height: 20px !important;
-    width: 20px !important;
-    path {
-        fill: #fff;
+.footer-link {
+    color: #4a5068;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+
+    &:hover {
+        color: #4f8ef7;
     }
 }
 
@@ -88,92 +128,85 @@ Button svg {
     margin-top: 10px;
     text-transform: uppercase;
     font-size: 12px;
+
     a {
         margin-right: 5px;
-        color: rgb(59 130 246);
+        color: #4f8ef7;
     }
+
     a.active {
-        font-weight:  400;  
-        font-weight: 700; 
+        font-weight: 700;
     }
-    &:hover {
-        color: gray;
-    }
+
     a:after {
         content: '/';
         margin-left: 5px;
-        color: #000;
+        color: #4a5068;
     }
+
     a:last-child:after {
         display: none;
     }
 }
 
-
-
 @layer base {
-  :root {
-        --background: 0 0% 100%;
-        --foreground: 0 0% 3.9%;
-        --card: 0 0% 100%;
-        --card-foreground: 0 0% 3.9%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 0 0% 3.9%;
-        --primary: 0 0% 9%;
-        --primary-foreground: 0 0% 98%;
-        --secondary: 0 0% 96.1%;
-        --secondary-foreground: 0 0% 9%;
-        --muted: 0 0% 96.1%;
-        --muted-foreground: 0 0% 45.1%;
-        --accent: 0 0% 96.1%;
-        --accent-foreground: 0 0% 9%;
+    :root {
+        --background: 220 38% 5%;
+        --foreground: 228 23% 93%;
+        --card: 220 32% 8%;
+        --card-foreground: 228 23% 93%;
+        --popover: 220 32% 8%;
+        --popover-foreground: 228 23% 93%;
+        --primary: 214 91% 64%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 217 23% 10%;
+        --secondary-foreground: 228 23% 93%;
+        --muted: 217 23% 8%;
+        --muted-foreground: 228 12% 54%;
+        --accent: 214 91% 64%;
+        --accent-foreground: 0 0% 100%;
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 89.8%;
-        --input: 0 0% 89.8%;
-        --ring: 0 0% 3.9%;
-        --chart-1: 12 76% 61%;
-        --chart-2: 173 58% 39%;
-        --chart-3: 197 37% 24%;
-        --chart-4: 43 74% 66%;
-        --chart-5: 27 87% 67%;
+        --border: 220 20% 12%;
+        --input: 220 20% 12%;
+        --ring: 214 91% 64%;
         --radius: 0.5rem;
     }
-  .dark {
-        --background: 0 0% 3.9%;
-        --foreground: 0 0% 98%;
-        --card: 0 0% 3.9%;
-        --card-foreground: 0 0% 98%;
-        --popover: 0 0% 3.9%;
-        --popover-foreground: 0 0% 98%;
-        --primary: 0 0% 98%;
-        --primary-foreground: 0 0% 9%;
-        --secondary: 0 0% 14.9%;
-        --secondary-foreground: 0 0% 98%;
-        --muted: 0 0% 14.9%;
-        --muted-foreground: 0 0% 63.9%;
-        --accent: 0 0% 14.9%;
-        --accent-foreground: 0 0% 98%;
+
+    .dark {
+        --background: 220 38% 5%;
+        --foreground: 228 23% 93%;
+        --card: 220 32% 8%;
+        --card-foreground: 228 23% 93%;
+        --popover: 220 32% 8%;
+        --popover-foreground: 228 23% 93%;
+        --primary: 214 91% 64%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 217 23% 10%;
+        --secondary-foreground: 228 23% 93%;
+        --muted: 217 23% 8%;
+        --muted-foreground: 228 12% 54%;
+        --accent: 214 91% 64%;
+        --accent-foreground: 0 0% 100%;
         --destructive: 0 62.8% 30.6%;
         --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 14.9%;
-        --input: 0 0% 14.9%;
-        --ring: 0 0% 83.1%;
-        --chart-1: 220 70% 50%;
-        --chart-2: 160 60% 45%;
-        --chart-3: 30 80% 55%;
-        --chart-4: 280 65% 60%;
-        --chart-5: 340 75% 55%;
+        --border: 220 20% 12%;
+        --input: 220 20% 12%;
+        --ring: 214 91% 64%;
     }
 }
 
-
-
 @layer base {
-  * {
-    @apply border-border;
+    * {
+        @apply border-border;
     }
-  body {
-    @apply bg-background text-foreground;
+
+    body {
+        @apply bg-background text-foreground;
+        background-color: #080b10;
+        color: #e8eaf0;
+        font-weight: 300;
+        line-height: 1.7;
+        font-size: 15px;
     }
 }

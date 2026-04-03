@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Roboto } from 'next/font/google'
+import { Inter, Syne } from 'next/font/google'
 import { CMS_NAME } from "@/lib/constants";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import BreadCrumbData from "../components/breadcrumbdata";
@@ -36,11 +36,17 @@ export const metadata = {
   },
 };
 
-const roboto = Roboto({
-  weight: ['100','300','400', '500', '700'],
-  style: ['normal', 'italic'],
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
+  variable: '--font-inter',
+})
+
+const syne = Syne({
+  weight: ['400', '500', '600', '700', '800'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-syne',
 })
 
 
@@ -52,7 +58,7 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <html lang="en" className={roboto.className}>
+      <html lang="en" className={`${inter.variable} ${syne.variable}`}>
       <GoogleAnalytics gaId={process.env.GOOGLE_TRACKIND_ID || ''} />
       <SpeedInsights/>
       <meta name="google-site-verification" content="m8chR7z2H5-93nOawLfs2FW30foI--k4eiLnjiPmxhY" />
