@@ -26,7 +26,7 @@ export default function BreadCrumb() {
         };
     });
     return (
-        <div className="container mx-auto px-[15px] pt-[20px]">
+        <div className="container mx-auto px-[15px] pt-[88px]">
           {breadcrumbs.length > 0 && (
             <Breadcrumb className="container mx-auto uppercase">
               <BreadcrumbList className="mt-[20px] mb-[20px]">

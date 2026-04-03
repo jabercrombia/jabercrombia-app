@@ -10,6 +10,7 @@ type Post = {
   slug: string;
   coverImage?: { url: string; height: number; title: string; width: number };
   tags?: string[];
+  sys?: { id: string; firstPublishedAt: string };
 };
 
 export default function BlogEntries({
@@ -27,17 +28,18 @@ export default function BlogEntries({
       {/* Left col — date + tags */}
       <div>
         <div className="text-[11px] text-[#4a5068] tracking-[0.04em] leading-relaxed mb-2">
-          {formatUTCToMonthDayYear(post.date)}
+          {formatUTCToMonthDayYear(post.date || post.sys?.firstPublishedAt || "")}
         </div>
         {post.tags && post.tags.length > 0 && (
           <div className="flex flex-col gap-1">
             {post.tags.map((tag) => (
-              <span
+              <Link
                 key={tag}
-                className="text-[10px] tracking-[0.1em] uppercase text-[#4f8ef7]"
+                href={`/blog?tag=${encodeURIComponent(tag)}`}
+                className="text-[10px] tracking-[0.1em] uppercase text-[#4f8ef7] hover:opacity-70 transition-opacity"
               >
                 {tag}
-              </span>
+              </Link>
             ))}
           </div>
         )}
@@ -54,7 +56,7 @@ export default function BlogEntries({
           </Link>
         </h2>
         <p className="text-[13.5px] text-[#7a8099] leading-[1.75] mb-4">
-          {truncateText(post.excerpt, 120)}
+          {post.excerpt}
         </p>
         <Link
           href={`blog/${post.slug}`}

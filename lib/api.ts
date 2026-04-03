@@ -313,7 +313,7 @@ function PostCollectionEntries(fetchResponse: any): any {
 export async function getPostCollectionEntries() {
   const PostGraphQL = await fetchGraphQL(
     `query {
-        postCollection (order: date_DESC) {
+        postCollection (order: [date_DESC, sys_firstPublishedAt_DESC]) {
           items {
             _id
             title
@@ -339,17 +339,13 @@ export async function getPostCollectionEntries() {
             }
             sys {
               id
+              firstPublishedAt
             }
           }
         }
       }`,
   );
   return PostCollectionEntries(PostGraphQL);
-}
-
-//Blog Page Entry
-function PostCollectionEntry(fetchResponse: any): any {
-  return fetchResponse?.data;
 }
 
 export async function getPostCollectionEntry(slug: string) {
@@ -368,6 +364,7 @@ export async function getPostCollectionEntry(slug: string) {
             }
             sys {
               id
+              firstPublishedAt
             }
           }
         }

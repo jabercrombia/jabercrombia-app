@@ -27,8 +27,8 @@ export default async function PostPage() {
         <section className={styles.hero}>
           <div className={styles.heroEyebrow}>Available for work</div>
           <h1>
-            Front-End <span className={styles.dim}>Specialist</span> &amp;
-            <span className={styles.hi}>Full-Stack</span>
+            Front-End <span className={styles.dim}>Specialist</span> <br/>&amp;
+            <span className={styles.hi}> Full-Stack</span>
             <span className={styles.dim}>Engineer</span>
           </h1>
           <p className={styles.heroSub}>

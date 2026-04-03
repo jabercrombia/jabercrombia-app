@@ -19,7 +19,7 @@ interface Post {
   date: string;
   updatedAt: string;
   slug: string;
-  sys: { id: string };
+  sys: { id: string; firstPublishedAt: string };
   tags?: string[];
   content?: { json: Document };
   coverImage: { url: string };
@@ -103,17 +103,18 @@ export default async function BlogPage({ params }: Props) {
               {/* Meta */}
               <div className="flex items-center gap-4 mb-6">
                 <span className="text-[11px] text-[#4a5068] tracking-[0.04em]">
-                  {formatUTCToMonthDayYear(post.date)}
+                  {formatUTCToMonthDayYear(post.date || post.sys.firstPublishedAt)}
                 </span>
                 {post.tags && post.tags.length > 0 && (
                   <div className="flex gap-2">
                     {post.tags.map((tag) => (
-                      <span
+                      <Link
                         key={tag}
-                        className="text-[10px] tracking-[0.1em] uppercase text-[#4f8ef7] border border-[rgba(79,142,247,0.3)] px-2 py-0.5 rounded-full"
+                        href={`/blog?tag=${encodeURIComponent(tag)}`}
+                        className="text-[10px] tracking-[0.1em] uppercase text-[#4f8ef7] border border-[rgba(79,142,247,0.3)] px-2 py-0.5 rounded-full hover:opacity-70 transition-opacity"
                       >
                         {tag}
-                      </span>
+                      </Link>
                     ))}
                   </div>
                 )}
