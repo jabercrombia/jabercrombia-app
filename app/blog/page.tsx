@@ -1,7 +1,6 @@
-import PageHeader from "../../components/pageheader";
-import BlogEntries from "../../components/blog/BlogEntries";
 import { getPostCollectionEntries } from "@/lib/api";
-import styles from "../../components/styles/blog/blogentry.module.scss";
+import BlogEntries from "../../components/blog/BlogEntries";
+import styles from "../../components/styles/aboutme.module.scss";
 
 interface Post {
   title: string;
@@ -26,13 +25,28 @@ export default async function BlogPage() {
   const posts: Post[] = data?.postCollection?.items ?? [];
 
   return (
-    <>
-      <PageHeader pageID="blog" />
-      <div className={`${styles.blog} container mx-auto`}>
+    <div className={styles.page}>
+      <div className="container mx-auto px-6">
+
+        {/* HERO */}
+        <section className={styles.hero}>
+          <div className={styles.heroEyebrow}>Writing</div>
+          <h1>
+            Blog<br />
+            <span className={styles.dim}>& Notes</span>
+          </h1>
+          <p className={styles.heroSub}>
+            Thoughts on front-end development, tooling, and the web.
+          </p>
+        </section>
+
+        {/* POSTS */}
+        <div className={styles.sectionLabel}>Posts</div>
         {posts.map((post, index) => (
-          <BlogEntries post={post} key={index} />
+          <BlogEntries post={post} key={index} first={index === 0} />
         ))}
+
       </div>
-    </>
+    </div>
   );
 }

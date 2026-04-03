@@ -1,60 +1,64 @@
-import Head from "next/head";
 import { getPhotosCollection } from "@/lib/api";
 import PhotoLink from "../../components/links/photos/photogrid";
-
-import PageHeader, { getPageHeaderMetadata } from "@/components/pageheader";
+import { getPageHeaderMetadata } from "@/components/pageheader";
 import { Metadata } from "next";
+import styles from "../../components/styles/aboutme.module.scss";
 
-// Dynamic metadata at the page level
 export async function generateMetadata(): Promise<Metadata> {
   return await getPageHeaderMetadata("photos");
 }
 
-export default async function PostPage() {
+type PhotoItem = {
+  title: string;
+  slug: string;
+  photosCollection: { items: { url: string; title: string }[] };
+};
 
+export default async function PhotosPage() {
   let photos = await getPhotosCollection();
-  photos = photos?.photosCollection?.items;
+  photos = photos?.photosCollection?.items as PhotoItem[];
 
-
-
-var photosSchema = photos?.map((photo: { title: string; slug: string, photosCollection: { items: { url: string, title: string }[] } }) => ({
-  "@context": "https://schema.org/",
-  "@type": "ImageObject",
-  contentUrl: photo.photosCollection.items[0].url,
-  name: photo.title,
-  url: `https://jabercrombia.com/photos/${photo.slug}`,
-  creditText: "Justin Abercrombia",
-  creator: {
-    "@type": "Person",
-    name: "Justin Abercrombia",
-  },
-}));
-
-  
+  const photosSchema = photos?.map((photo: PhotoItem) => ({
+    "@context": "https://schema.org/",
+    "@type": "ImageObject",
+    contentUrl: photo.photosCollection.items[0].url,
+    name: photo.title,
+    url: `https://jabercrombia.com/photos/${photo.slug}`,
+    creditText: "Justin Abercrombia",
+    creator: { "@type": "Person", name: "Justin Abercrombia" },
+  }));
 
   return (
-    <>
-    <Head>
-        <title>title</title>
-        <meta name="description" content="{description}" />
-      </Head>
+    <div className={styles.page}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(photosSchema) }}
       />
-      <PageHeader pageID="photos"/>
-      <div className="container mx-auto mt-10">
-        <div className="sm:columns-1 md:columns-3">
-        {photos?.map(
-          (elem: { title: string; slug: string, photosCollection: { items: { url: string, title: string }[] } }, index: number) => (
-              <div className="p-3" key={index}>
-                <PhotoLink elem={elem} />
-              </div>
-          )
-        )}
+      <div className="container mx-auto px-6">
+
+        {/* HERO */}
+        <section className={styles.hero}>
+          <div className={styles.heroEyebrow}>Photography</div>
+          <h1>
+            Photos<br />
+            <span className={styles.dim}>& Series</span>
+          </h1>
+          <p className={styles.heroSub}>
+            A collection of personal photography projects and series.
+          </p>
+        </section>
+
+        {/* GRID */}
+        <div className={styles.sectionLabel}>Series</div>
+        <div className="columns-1 sm:columns-2 md:columns-3 gap-4 mb-16">
+          {photos?.map((elem: PhotoItem, index: number) => (
+            <div className="break-inside-avoid mb-4" key={index}>
+              <PhotoLink elem={elem} priority={index < 3} />
+            </div>
+          ))}
         </div>
+
       </div>
-    </>
-    
+    </div>
   );
 }
