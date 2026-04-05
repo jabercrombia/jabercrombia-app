@@ -91,7 +91,7 @@ export default async function PostPage() {
                 )}
               </div>
               <div>
-                <div className={styles.expCompany}>{elem.company}</div>
+                <div className="text-2xl">{elem.company}</div>
                 <div className={styles.expRole}>{elem.jobTitle}</div>
                 <div className={`${styles.expDates} mb-3`}>
                   {formatDate(elem.startDate)} – {elem.endDate ? formatDate(elem.endDate) : "Present"}
