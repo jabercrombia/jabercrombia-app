@@ -177,3 +177,27 @@ SITE_URL=
 ## Deployment
 
 Deployed on Vercel. `npm run build` runs `next build && next-sitemap` — the sitemap is generated automatically from `next-sitemap.config.js`. Environment variables must be set in the Vercel dashboard.
+
+---
+
+## SEO
+
+- Every page must export `generateMetadata()` with `title`, `description`, `alternates.canonical`, and `openGraph` fields
+- `description` should be 130–160 characters — use `truncateText()` from `lib/truncatetext.ts` when pulling from CMS content
+- Canonical URLs use `process.env.NEXT_PUBLIC_SITE_URL` as the base
+- Dynamic pages (`[slug]`) must generate metadata from the fetched entry, not hardcoded strings
+- Structured data (`application/ld+json`) is used on blog posts (Article), photo galleries (ImageGallery), and photo entries (ImageObject) — maintain this on any new content types
+- The sitemap is auto-generated via `next-sitemap` on every build and commits `public/sitemap*.xml` and `public/robots.txt` back to the repo via GitHub Actions (`.github/workflows/sitemap.yml`)
+- Images should use Next.js `<Image>` with `sizes` and `priority` on above-the-fold images for LCP performance
+
+---
+
+## Accessibility
+
+- All `<img>` and `<Image>` elements must have a meaningful `alt` attribute — never leave it empty unless the image is purely decorative (`alt=""`)
+- Interactive elements (buttons, links) must have visible focus states — do not remove `outline` without a replacement
+- Use semantic HTML: `<header>`, `<footer>`, `<main>`, `<article>`, `<section>`, `<nav>`, `<aside>` where appropriate
+- Links must have descriptive `title` or visible text — avoid "click here" or icon-only links without `aria-label`
+- Color contrast: text must meet WCAG AA — `#7a8099` on `#141b27` is the minimum muted text pairing used in this design
+- Avoid `tabIndex` manipulation; rely on natural DOM order for keyboard navigation
+- Form inputs (e.g. search) must have accessible labels or `aria-label` attributes
