@@ -41,7 +41,7 @@ function Header() {
             <SearchBar />
             <Sheet>
               <SheetTrigger asChild>
-                <button aria-label="Open navigation menu" className="text-[#7a8099] hover:text-[#e8eaf0] transition-colors">
+                <button aria-label="Open navigation menu" className="text-[var(--primary-color)] hover:text-[#e8eaf0] transition-colors">
                   <Menu size={20} />
                 </button>
               </SheetTrigger>
@@ -60,7 +60,7 @@ function Header() {
                         key={index}
                         href={`/` + elem}
                         title={elem}
-                        className="text-[12px] tracking-[0.1em] uppercase text-[#7a8099] hover:text-[#e8eaf0] transition-colors py-3 border-b border-[rgba(255,255,255,0.07)]"
+                        className="text-[12px] tracking-[0.1em] uppercase text-[var(--primary-color)] hover:text-[#e8eaf0] transition-colors py-3 border-b border-[rgba(255,255,255,0.07)]"
                       >
                         {elem}
                       </Link>

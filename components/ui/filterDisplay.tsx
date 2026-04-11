@@ -96,7 +96,7 @@ export default function FilterDisplay({ data }: FilterListProps) {
             />
 
             <SheetDescription asChild>
-              <div className="text-[13.5px] text-[#7a8099] leading-[1.75] mb-6 prose prose-invert prose-sm max-w-none">
+              <div className="text-[13.5px] text-[var(--primary-color)] leading-[1.75] mb-6 prose prose-invert prose-sm max-w-none">
                 <Markdown>{item.description}</Markdown>
               </div>
             </SheetDescription>
@@ -106,7 +106,7 @@ export default function FilterDisplay({ data }: FilterListProps) {
               {item.technologyNameListCollection.items.map((tech, i) => (
                 <span
                   key={i}
-                  className="flex items-center gap-1.5 text-[11px] text-[#7a8099] bg-[#141920] border border-[rgba(255,255,255,0.07)] px-2 py-1 rounded"
+                  className="flex items-center gap-1.5 text-[11px] text-[var(--primary-color)] bg-[#141920] border border-[rgba(255,255,255,0.07)] px-2 py-1 rounded"
                 >
                   <StackIcon name={tech.techStackIconName} className="w-3.5 h-3.5" />
                   {tech.name}
@@ -119,7 +119,7 @@ export default function FilterDisplay({ data }: FilterListProps) {
               {item.githubUrl && (
                 <Link
                   href={item.githubUrl}
-                  className="flex items-center gap-1.5 text-[12px] text-[#7a8099] hover:text-[#e8eaf0] transition-colors"
+                  className="flex items-center gap-1.5 text-[12px] text-[var(--primary-color)] hover:text-[#e8eaf0] transition-colors"
                   target="_blank"
                 >
                   <GitBranch size={14} /> GitHub
