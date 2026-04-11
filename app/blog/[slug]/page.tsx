@@ -107,15 +107,18 @@ export default async function BlogPage({ params }: Props) {
                 </span>
                 {post.tags && post.tags.length > 0 && (
                   <div className="flex gap-2">
-                    {post.tags.map((tag) => (
-                      <Link
-                        key={tag}
-                        href={`/blog?tag=${encodeURIComponent(tag)}`}
-                        className="text-[10px] tracking-[0.1em] uppercase text-[#4f8ef7] border border-[rgba(79,142,247,0.3)] px-2 py-0.5 rounded-full hover:opacity-70 transition-opacity"
-                      >
-                        {tag}
-                      </Link>
-                    ))}
+                    {post.tags.map((tag) => {
+                      const normalized = tag.toLowerCase().replace(/\s+/g, "-");
+                      return (
+                        <Link
+                          key={tag}
+                          href={`/blog?tag=${normalized}`}
+                          className="text-[10px] tracking-[0.1em] uppercase text-[#4f8ef7] border border-[rgba(79,142,247,0.3)] px-2 py-0.5 rounded-full hover:opacity-70 transition-opacity"
+                        >
+                          {normalized}
+                        </Link>
+                      );
+                    })}
                   </div>
                 )}
               </div>
