@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --primary-color: #ffffff;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -22,7 +26,7 @@ html {
 }
 
 a {
-    color: #7a8099;
+    color: var(--primary-color);
     transition: color 0.2s ease;
     text-decoration: none;
 
@@ -51,7 +55,7 @@ nav {
     font-size: 12px;
 
     a {
-        color: #7a8099;
+        color: var(--primary-color);
         letter-spacing: 0.08em;
         text-transform: uppercase;
         text-decoration: none;
@@ -98,7 +102,7 @@ ul.search {
     font-size: 12px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #7a8099;
+    color: var(--primary-color);
     text-decoration: none;
     transition: color 0.2s;
 
@@ -199,7 +203,7 @@ ul.search {
     body {
         @apply bg-background text-foreground;
         background-color: #141b27;
-        color: #e8eaf0;
+        color: #ffffff;
         font-weight: 300;
         line-height: 1.7;
         font-size: 15px;

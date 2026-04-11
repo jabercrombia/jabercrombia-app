@@ -91,14 +91,16 @@ The site uses the **Portfolio.jsx** design language — dark, editorial, minimal
 
 ### Color Palette
 
-| Variable | Hex | Usage |
+All colors must use CSS custom properties — **never hardcode hex values** in components, SCSS modules, or inline styles. Define new colors as variables in the `:root` block in `app/globals.css` and reference them via `var(--variable-name)`.
+
+| Variable | Value | Usage |
 |---|---|---|
 | `--bg` | `#080b10` | Page background |
 | `--bg2` | `#0e1219` | Card / skill group background |
 | `--bg3` | `#141920` | Badge / elevated surface |
 | `--border` | `rgba(255,255,255,0.07)` | All borders and dividers |
-| `--text` | `#e8eaf0` | Primary text |
-| `--text2` | `#7a8099` | Secondary / muted text |
+| `--text` | `#ffffff` | Primary body text |
+| `--primary-color` | `#ffffff` | Secondary / muted text (links, nav) |
 | `--text3` | `#4a5068` | Dimmed text, dates, labels |
 | `--accent` | `#4f8ef7` | Blue accent — links, highlights |
 
@@ -146,6 +148,7 @@ SITE_URL=
 ## Styling Conventions
 
 - **Tailwind CSS is the primary styling tool** — use it for all layout, spacing, typography, color, flexbox, grid, and responsive utilities
+- **Always use CSS variables for colors** — reference `var(--variable-name)` from the palette defined in `app/globals.css`; never write raw hex values (`#xxxxxx`) or `rgb()`/`rgba()` literals in components, SCSS, or inline styles. If a needed color has no variable, add one to `:root` in `globals.css` first
 - **shadcn/ui is the primary UI component library** — use its components (Button, Card, Dialog, Sheet, etc.) before building custom ones
 - **SCSS Modules are legacy** — do not add new SCSS modules; migrate existing ones to Tailwind when touching a file
 - **Inline styles** only as a last resort for values with no Tailwind equivalent (e.g. `backdropFilter`)
@@ -198,6 +201,6 @@ Deployed on Vercel. `npm run build` runs `next build && next-sitemap` — the si
 - Interactive elements (buttons, links) must have visible focus states — do not remove `outline` without a replacement
 - Use semantic HTML: `<header>`, `<footer>`, `<main>`, `<article>`, `<section>`, `<nav>`, `<aside>` where appropriate
 - Links must have descriptive `title` or visible text — avoid "click here" or icon-only links without `aria-label`
-- Color contrast: text must meet WCAG AA — `#7a8099` on `#141b27` is the minimum muted text pairing used in this design
+- Color contrast: text must meet WCAG AA — `var(--primary-color)` on `var(--bg3)` is the minimum muted text pairing used in this design
 - Avoid `tabIndex` manipulation; rely on natural DOM order for keyboard navigation
 - Form inputs (e.g. search) must have accessible labels or `aria-label` attributes

@@ -111,7 +111,7 @@ export default async function SearchPage({
                 >
                   {item.title}
                 </h2>
-                <p className="text-[13px] text-[#7a8099] leading-relaxed line-clamp-2">
+                <p className="text-[13px] text-[var(--primary-color)] leading-relaxed line-clamp-2">
                   {item.description}
                 </p>
               </div>

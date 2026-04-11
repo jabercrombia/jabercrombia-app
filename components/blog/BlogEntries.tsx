@@ -27,7 +27,7 @@ export default function BlogEntries({
     >
       {/* Left col — date + tags */}
       <div>
-        <div className="text-[11px] text-[#4a5068] tracking-[0.04em] leading-relaxed mb-2">
+        <div className="text-[11px] text-[var(--text3)] tracking-[0.04em] leading-relaxed mb-2">
           {formatUTCToMonthDayYear(post.date || post.sys?.firstPublishedAt || "")}
         </div>
         {post.tags && post.tags.length > 0 && (
@@ -55,7 +55,7 @@ export default function BlogEntries({
             {post.title}
           </Link>
         </h2>
-        <p className="text-[13.5px] text-[#7a8099] leading-[1.75] mb-4">
+        <p className="text-[13.5px] text-[var(--primary-color)] leading-[1.75] mb-4">
           {post.excerpt}
         </p>
         <Link

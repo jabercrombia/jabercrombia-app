@@ -58,7 +58,7 @@ export default async function BlogPage({ params }: Props) {
     <div className={styles.page}>
       <div className="container mx-auto px-6">
         {posts.length === 0 && (
-          <p className="text-[#7a8099] py-20">No post found for "{slug}".</p>
+          <p className="text-[var(--primary-color)] py-20">No post found for "{slug}".</p>
         )}
 
         {posts.map((post) => {
@@ -136,7 +136,7 @@ export default async function BlogPage({ params }: Props) {
               <div className="border-t border-[rgba(255,255,255,0.07)] mb-8" />
 
               {/* Body */}
-              <div className="prose prose-invert prose-sm max-w-none text-[#7a8099] leading-[1.8] [&_h2]:text-[#e8eaf0] [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_a]:text-[#4f8ef7] [&_a]:no-underline [&_a:hover]:underline [&_hr]:border-[rgba(255,255,255,0.07)] [&_hr]:my-6">
+              <div className="prose prose-invert prose-sm max-w-none text-[var(--primary-color)] leading-[1.8] [&_h2]:text-[#e8eaf0] [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_a]:text-[#4f8ef7] [&_a]:no-underline [&_a:hover]:underline [&_hr]:border-[rgba(255,255,255,0.07)] [&_hr]:my-6">
                 {post.body
                   ? <Markdown>{post.body}</Markdown>
                   : post?.content?.json && documentToReactComponents(post.content.json)
