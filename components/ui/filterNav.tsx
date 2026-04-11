@@ -28,7 +28,7 @@ export default function FilterList({ data }: FilterListProps) {
   useEffect(() => {
     const params = new URLSearchParams();
     selectedTechnologies.forEach((tech) => params.append("filter", tech));
-    router.replace(`?${params.toString()}`);
+    router.replace(`?${params.toString()}`, { scroll: false });
   }, [selectedTechnologies, router]);
 
   const handleToggle = (tech: string) => {
