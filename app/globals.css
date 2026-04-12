@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    /* Site tokens */
+    --primary-color: #ffffff;                      /* nav/link text */
+    --text-subtle: #4a5068;                              /* dimmed text, dates, labels */
+    --accent-color: #4f8ef7;                       /* blue accent — links, highlights */
+    --border-subtle: rgba(255, 255, 255, 0.07);    /* subtle borders and dividers */
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -11,23 +19,23 @@ html {
     width: 5px;
 }
 ::-webkit-scrollbar-track {
-    background: #141b27;
+    background: hsl(var(--background));
 }
 ::-webkit-scrollbar-thumb {
-    background: #1a2030;
+    background: hsl(var(--muted));
     border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #4f8ef7;
+    background: var(--accent-color);
 }
 
 a {
-    color: #7a8099;
+    color: var(--primary-color);
     transition: color 0.2s ease;
     text-decoration: none;
 
     &:hover {
-        color: #e8eaf0;
+        color: hsl(var(--foreground));
     }
 }
 
@@ -51,14 +59,14 @@ nav {
     font-size: 12px;
 
     a {
-        color: #7a8099;
+        color: var(--primary-color);
         letter-spacing: 0.08em;
         text-transform: uppercase;
         text-decoration: none;
         transition: color 0.2s;
 
         &:hover {
-            color: #e8eaf0;
+            color: hsl(var(--foreground));
         }
     }
 }
@@ -71,8 +79,8 @@ ul {
 }
 
 ul.search {
-    background-color: #0e1219;
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    background-color: hsl(var(--muted));
+    border: 1px solid var(--border-subtle);
     border-radius: 6px;
     overflow: hidden;
 
@@ -80,12 +88,12 @@ ul.search {
         list-style-type: none;
 
         &:hover {
-            background-color: #141920;
+            background-color: hsl(var(--card));
         }
     }
 
     a {
-        color: #e8eaf0;
+        color: hsl(var(--foreground));
         text-transform: none;
 
         &:hover {
@@ -98,24 +106,24 @@ ul.search {
     font-size: 12px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #7a8099;
+    color: var(--primary-color);
     text-decoration: none;
     transition: color 0.2s;
 
     &:hover {
-        color: #e8eaf0;
+        color: hsl(var(--foreground));
     }
 }
 
 .footer-link {
-    color: #4a5068;
+    color: var(--text-subtle);
     text-decoration: none;
     transition: color 0.2s;
     font-size: 11px;
     letter-spacing: 0.06em;
 
     &:hover {
-        color: #4f8ef7;
+        color: var(--accent-color);
     }
 }
 
@@ -126,7 +134,7 @@ ul.search {
 
     a {
         margin-right: 5px;
-        color: #4f8ef7;
+        color: var(--accent-color);
     }
 
     a.active {
@@ -136,7 +144,7 @@ ul.search {
     a:after {
         content: '/';
         margin-left: 5px;
-        color: #4a5068;
+        color: var(--text-subtle);
     }
 
     a:last-child:after {
@@ -198,8 +206,8 @@ ul.search {
 
     body {
         @apply bg-background text-foreground;
-        background-color: #141b27;
-        color: #e8eaf0;
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
         font-weight: 300;
         line-height: 1.7;
         font-size: 15px;

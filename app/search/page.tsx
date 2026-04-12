@@ -75,7 +75,7 @@ export default async function SearchPage({
         </div>
 
         {results.length === 0 && query.length > 0 && (
-          <p className="text-[#4a5068] text-sm py-8">
+          <p className="text-muted-foreground text-sm py-8">
             No results found for &ldquo;{query}&rdquo;. Try a different search term.
           </p>
         )}
@@ -85,11 +85,11 @@ export default async function SearchPage({
             <Link
               key={item.sys?.id ?? index}
               href={item.url}
-              className={`group flex gap-6 items-start py-7 ${index === 0 ? "" : "border-t border-[rgba(255,255,255,0.07)]"} hover:opacity-80 transition-opacity`}
+              className={`group flex gap-6 items-start py-7 ${index === 0 ? "" : "border-t border-[var(--border-subtle)]"} hover:opacity-80 transition-opacity`}
             >
               {/* Thumbnail */}
               {item.images?.items?.[0]?.url && (
-                <div className="shrink-0 w-20 h-16 overflow-hidden bg-[#0e1219] border border-[rgba(255,255,255,0.07)]">
+                <div className="shrink-0 w-20 h-16 overflow-hidden bg-muted border border-[var(--border-subtle)]">
                   <img
                     src={item.images.items[0].url}
                     alt={item.title}
@@ -101,17 +101,17 @@ export default async function SearchPage({
               {/* Content */}
               <div className="min-w-0">
                 <div className="flex items-center gap-3 mb-1.5">
-                  <span className="text-[10px] tracking-[0.12em] uppercase text-[#4f8ef7]">
+                  <span className="text-[10px] tracking-[0.12em] uppercase text-[var(--accent-color)]">
                     {typeLabel[item.type] ?? item.type}
                   </span>
                 </div>
                 <h2
-                  className="text-[#e8eaf0] text-base font-semibold mb-1 group-hover:text-[#4f8ef7] transition-colors"
+                  className="text-foreground text-base font-semibold mb-1 group-hover:text-[var(--accent-color)] transition-colors"
                   style={{ fontFamily: "var(--font-syne), sans-serif" }}
                 >
                   {item.title}
                 </h2>
-                <p className="text-[13px] text-[#7a8099] leading-relaxed line-clamp-2">
+                <p className="text-[13px] text-[var(--primary-color)] leading-relaxed line-clamp-2">
                   {item.description}
                 </p>
               </div>

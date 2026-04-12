@@ -40,8 +40,8 @@ export default function SearchBar() {
   return (
     <div className="relative">
       {/* Input */}
-      <div className="flex items-center gap-2 px-3 py-1.5 bg-[#0e1219] border border-[rgba(255,255,255,0.07)] rounded focus-within:border-[rgba(79,142,247,0.4)] transition-colors">
-        <Search size={12} className="text-[#4a5068] shrink-0" />
+      <div className="flex items-center gap-2 px-3 py-1.5 bg-muted border border-[var(--border-subtle)] rounded focus-within:border-ring/40 transition-colors">
+        <Search size={12} className="text-muted-foreground shrink-0" />
         <input
           type="text"
           placeholder="Search…"
@@ -49,33 +49,33 @@ export default function SearchBar() {
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           onBlur={handleBlur}
-          className="bg-transparent text-[12px] text-[#e8eaf0] placeholder-[#4a5068] outline-none w-[120px] tracking-[0.03em]"
+          className="bg-transparent text-[12px] text-foreground placeholder-muted-foreground outline-none w-[120px] tracking-[0.03em]"
         />
       </div>
 
       {/* Dropdown */}
       {results.length > 0 && (
-        <ul className="absolute top-full right-0 mt-2 w-[280px] bg-[#0e1219] border border-[rgba(255,255,255,0.07)] rounded overflow-hidden z-50 shadow-xl">
+        <ul className="absolute top-full right-0 mt-2 w-[280px] bg-muted border border-[var(--border-subtle)] rounded overflow-hidden z-50 shadow-xl">
           {results.map((item, index) => (
             <li key={item.sys.id}>
               <a
                 href={`${window.location.origin}/${item.url}`}
                 target="_parent"
                 rel="noopener noreferrer"
-                className="flex gap-3 items-center px-3 py-2.5 hover:bg-[#141920] transition-colors group"
+                className="flex gap-3 items-center px-3 py-2.5 hover:bg-card transition-colors group"
               >
                 {item.images?.items?.[0]?.url && (
                   <img
                     src={item.images.items[0].url}
                     alt={item.title}
-                    className="w-10 h-10 object-cover shrink-0 border border-[rgba(255,255,255,0.07)]"
+                    className="w-10 h-10 object-cover shrink-0 border border-[var(--border-subtle)]"
                   />
                 )}
                 <div className="min-w-0">
-                  <p className="text-[12px] text-[#e8eaf0] font-medium truncate group-hover:text-[#4f8ef7] transition-colors">
+                  <p className="text-[12px] text-foreground font-medium truncate group-hover:text-[var(--accent-color)] transition-colors">
                     {item.title}
                   </p>
-                  <p className="text-[11px] text-[#4a5068] truncate">
+                  <p className="text-[11px] text-muted-foreground truncate">
                     {item.description?.slice(0, 60)}{item.description?.length > 60 ? "…" : ""}
                   </p>
                 </div>

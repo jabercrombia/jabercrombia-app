@@ -47,7 +47,7 @@ export default function FilterList({ data }: FilterListProps) {
 
   return (
     <div className="flex flex-col gap-1 pt-2">
-      <div className="text-[10px] tracking-[0.15em] uppercase text-[#4a5068] mb-3">
+      <div className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground mb-3">
         Filter by tech
       </div>
       {uniqueTechItems.map((tech, index) => {
@@ -58,8 +58,8 @@ export default function FilterList({ data }: FilterListProps) {
             onClick={() => handleToggle(tech.name)}
             className={`flex items-center gap-2 px-3 py-2 mb-1 rounded text-left text-[12px] tracking-[0.03em] transition-colors w-full border ${
               active
-                ? "bg-[#141920] text-[#4f8ef7] border-[rgba(79,142,247,0.3)]"
-                : "bg-[#0e1219] text-[#7a8099] border-[rgba(255,255,255,0.07)] hover:text-[#e8eaf0] hover:border-[rgba(255,255,255,0.15)]"
+                ? "bg-card text-[var(--accent-color)] border-ring/30"
+                : "bg-muted text-[var(--primary-color)] border-[var(--border-subtle)] hover:text-foreground hover:border-foreground/15"
             }`}
           >
             <StackIcon name={tech.techStackIconName} className="w-4 h-4 shrink-0" />
@@ -70,7 +70,7 @@ export default function FilterList({ data }: FilterListProps) {
       {selectedTechnologies.length > 0 && (
         <button
           onClick={() => setSelectedTechnologies([])}
-          className="mt-3 text-[10px] tracking-[0.1em] uppercase text-[#4a5068] hover:text-[#e8eaf0] transition-colors text-left"
+          className="mt-3 text-[10px] tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors text-left"
         >
           Clear filters
         </button>

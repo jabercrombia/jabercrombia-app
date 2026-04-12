@@ -50,7 +50,7 @@ export default async function PhotoEntryPage({ params }: PageProps) {
               lineHeight: 1.1,
               textTransform: "capitalize",
               letterSpacing: "-0.02em",
-              color: "#e8eaf0",
+              color: "hsl(var(--foreground))",
               marginBottom: "1rem",
             }}
           >
@@ -61,7 +61,7 @@ export default async function PhotoEntryPage({ params }: PageProps) {
           )}
           <Link
             href="/photos"
-            className="inline-flex items-center gap-2 text-[11px] tracking-[0.1em] uppercase text-[#4a5068] hover:text-[#4f8ef7] transition-colors mt-2"
+            className="inline-flex items-center gap-2 text-[11px] tracking-[0.1em] uppercase text-muted-foreground hover:text-[var(--accent-color)] transition-colors mt-2"
           >
             ← All photos
           </Link>
@@ -73,7 +73,7 @@ export default async function PhotoEntryPage({ params }: PageProps) {
           {dataGraphQL?.photosCollection.items.map((elem: GalleryItem, index: number) => (
             <div
               key={index}
-              className="break-inside-avoid mb-4 overflow-hidden bg-[#0e1219] border border-[rgba(255,255,255,0.07)]"
+              className="break-inside-avoid mb-4 overflow-hidden bg-muted border border-[var(--border-subtle)]"
             >
               <ImageModal imageData={elem} />
             </div>
