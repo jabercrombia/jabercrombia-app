@@ -44,7 +44,7 @@ export default async function DesignPage() {
             <Link
               href={`design/${elem.slug}`}
               key={index}
-              className="group block bg-[#0e1219] overflow-hidden"
+              className="group block bg-muted overflow-hidden"
             >
               <div className="relative overflow-hidden aspect-video">
                 <Image
@@ -55,16 +55,16 @@ export default async function DesignPage() {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   priority={index < 3}
                 />
-                <div className="absolute inset-0 bg-[#080b10] opacity-0 group-hover:opacity-40 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-background opacity-0 group-hover:opacity-40 transition-opacity duration-300" />
               </div>
-              <div className="p-6 border-t border-[rgba(255,255,255,0.07)]">
+              <div className="p-6 border-t border-[var(--border-subtle)]">
                 <h2
-                  className="text-[#e8eaf0] text-base font-semibold tracking-tight"
+                  className="text-foreground text-base font-semibold tracking-tight"
                   style={{ fontFamily: "var(--font-inter), sans-serif" }}
                 >
                   {elem?.title}
                 </h2>
-                <p className="text-[11px] tracking-[0.1em] uppercase text-[#4a5068] mt-1">
+                <p className="text-[11px] tracking-[0.1em] uppercase text-muted-foreground mt-1">
                   View project ↗
                 </p>
               </div>

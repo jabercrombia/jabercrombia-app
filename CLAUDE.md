@@ -91,17 +91,29 @@ The site uses the **Portfolio.jsx** design language — dark, editorial, minimal
 
 ### Color Palette
 
+<<<<<<< HEAD
+> For neutral grays and surface token reference, see [`ai-agent-ux-design/palettes/neutral.md`](ai-agent-ux-design/palettes/neutral.md).
+
+| Variable | Hex | Usage |
+=======
 All colors must use CSS custom properties — **never hardcode hex values** in components, SCSS modules, or inline styles. Define new colors as variables in the `:root` block in `app/globals.css` and reference them via `var(--variable-name)`.
 
 | Variable | Value | Usage |
+>>>>>>> main
 |---|---|---|
 | `--bg` | `#080b10` | Page background |
 | `--bg2` | `#0e1219` | Card / skill group background |
 | `--bg3` | `#141920` | Badge / elevated surface |
 | `--border` | `rgba(255,255,255,0.07)` | All borders and dividers |
+<<<<<<< HEAD
+| `--text` | `#e8eaf0` | Primary text |
+| `--text2` | `#7a8099` | Secondary / muted text |
+| `--text-subtle` | `#4a5068` | Dimmed text, dates, labels |
+=======
 | `--text` | `#ffffff` | Primary body text |
 | `--primary-color` | `#ffffff` | Secondary / muted text (links, nav) |
 | `--text3` | `#4a5068` | Dimmed text, dates, labels |
+>>>>>>> main
 | `--accent` | `#4f8ef7` | Blue accent — links, highlights |
 
 ### Typography
@@ -197,6 +209,9 @@ Deployed on Vercel. `npm run build` runs `next build && next-sitemap` — the si
 
 ## Accessibility
 
+<<<<<<< HEAD
+See [`ai-agent-ux-design/instructions/accessibility.md`](ai-agent-ux-design/instructions/accessibility.md).
+=======
 - All `<img>` and `<Image>` elements must have a meaningful `alt` attribute — never leave it empty unless the image is purely decorative (`alt=""`)
 - Interactive elements (buttons, links) must have visible focus states — do not remove `outline` without a replacement
 - Use semantic HTML: `<header>`, `<footer>`, `<main>`, `<article>`, `<section>`, `<nav>`, `<aside>` where appropriate
@@ -204,3 +219,4 @@ Deployed on Vercel. `npm run build` runs `next build && next-sitemap` — the si
 - Color contrast: text must meet WCAG AA — `var(--primary-color)` on `var(--bg3)` is the minimum muted text pairing used in this design
 - Avoid `tabIndex` manipulation; rely on natural DOM order for keyboard navigation
 - Form inputs (e.g. search) must have accessible labels or `aria-label` attributes
+>>>>>>> main

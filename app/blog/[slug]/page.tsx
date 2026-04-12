@@ -95,14 +95,14 @@ export default async function BlogPage({ params }: Props) {
               {/* Back link */}
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-2 text-[11px] tracking-[0.1em] uppercase text-[#4a5068] hover:text-[#4f8ef7] transition-colors mb-8"
+                className="inline-flex items-center gap-2 text-[11px] tracking-[0.1em] uppercase text-muted-foreground hover:text-[var(--accent-color)] transition-colors mb-8"
               >
                 ← Blog
               </Link>
 
               {/* Meta */}
               <div className="flex items-center gap-4 mb-6">
-                <span className="text-[11px] text-[#4a5068] tracking-[0.04em]">
+                <span className="text-[11px] text-muted-foreground tracking-[0.04em]">
                   {formatUTCToMonthDayYear(post.date || post.sys.firstPublishedAt)}
                 </span>
                 {post.tags && post.tags.length > 0 && (
@@ -125,7 +125,7 @@ export default async function BlogPage({ params }: Props) {
 
               {/* Title */}
               <h1
-                className="text-[#e8eaf0] font-bold leading-tight mb-4"
+                className="text-foreground font-bold leading-tight mb-4"
                 style={{
                   fontFamily: "var(--font-syne), sans-serif",
                   fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
@@ -136,10 +136,14 @@ export default async function BlogPage({ params }: Props) {
               </h1>
 
               {/* Divider */}
-              <div className="border-t border-[rgba(255,255,255,0.07)] mb-8" />
+              <div className="border-t border-[var(--border-subtle)] mb-8" />
 
               {/* Body */}
+<<<<<<< HEAD
+              <div className="prose prose-invert prose-sm max-w-none text-[var(--primary-color)] leading-[1.8] [&_h2]:text-foreground [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_a]:text-[var(--accent-color)] [&_a]:no-underline [&_a:hover]:underline [&_hr]:border-[var(--border-subtle)] [&_hr]:my-6">
+=======
               <div className="prose prose-invert prose-sm max-w-none text-[var(--primary-color)] leading-[1.8] [&_h2]:text-[#e8eaf0] [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_a]:text-[#4f8ef7] [&_a]:no-underline [&_a:hover]:underline [&_hr]:border-[rgba(255,255,255,0.07)] [&_hr]:my-6">
+>>>>>>> main
                 {post.body
                   ? <Markdown>{post.body}</Markdown>
                   : post?.content?.json && documentToReactComponents(post.content.json)

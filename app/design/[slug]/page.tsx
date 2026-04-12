@@ -23,7 +23,7 @@ export default async function DesignEntryPage({ params }: PageProps) {
         {/* HEADER */}
         <section className={styles.hero}>
           <div className={styles.heroEyebrow}>Design</div>
-          <h1 style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.02em", color: "#e8eaf0", marginBottom: "1rem" }}>
+          <h1 style={{ fontFamily: "var(--font-inter), sans-serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 800, lineHeight: 1.1, letterSpacing: "-0.02em", color: "hsl(var(--foreground))", marginBottom: "1rem" }}>
             {dataGraphQL?.title}
           </h1>
           {dataGraphQL?.body && (
@@ -35,7 +35,7 @@ export default async function DesignEntryPage({ params }: PageProps) {
         <div className={styles.sectionLabel}>Gallery</div>
         <div className="columns-1 sm:columns-2 md:columns-3 gap-4 mb-16">
           {gallery.map((elem, index) => (
-            <div key={index} className="break-inside-avoid mb-4 group cursor-pointer overflow-hidden bg-[#0e1219] border border-[rgba(255,255,255,0.07)]">
+            <div key={index} className="break-inside-avoid mb-4 group cursor-pointer overflow-hidden bg-muted border border-[var(--border-subtle)]">
               <ImageModal imageData={elem} />
             </div>
           ))}

@@ -43,7 +43,7 @@ export default function FilterDisplay({ data }: FilterListProps) {
       {filteredProjects.map((item, index) => (
         <Sheet key={index}>
           <SheetTrigger asChild>
-            <div className="group bg-[#0e1219] border border-[rgba(255,255,255,0.07)] overflow-hidden cursor-pointer hover:border-[rgba(79,142,247,0.3)] transition-colors">
+            <div className="group bg-muted border border-[var(--border-subtle)] overflow-hidden cursor-pointer hover:border-ring/30 transition-colors">
 
               {/* Thumbnail */}
               <div className="relative overflow-hidden aspect-video">
@@ -52,15 +52,15 @@ export default function FilterDisplay({ data }: FilterListProps) {
                   alt={item.title}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                  className="object-cover transition-all duration-500"
                   priority={index < 3}
                 />
               </div>
 
               {/* Info */}
-              <div className="p-4 border-t border-[rgba(255,255,255,0.07)]">
+              <div className="p-4 border-t border-[var(--border-subtle)]">
                 <h3
-                  className="text-[#e8eaf0] text-sm font-semibold mb-2 leading-snug"
+                  className="text-foreground text-sm font-semibold mb-2 leading-snug"
                   style={{ fontFamily: "var(--font-syne), sans-serif" }}
                 >
                   {item.title}
@@ -70,17 +70,17 @@ export default function FilterDisplay({ data }: FilterListProps) {
                     <StackIcon key={i} name={tech.techStackIconName} className="w-4 h-4" />
                   ))}
                 </div>
-                <p className="text-[10px] tracking-[0.1em] uppercase text-[#4a5068] group-hover:text-[#4f8ef7] transition-colors">
+                <p className="text-[10px] tracking-[0.1em] uppercase text-muted-foreground group-hover:text-[var(--accent-color)] transition-colors">
                   View details ↗
                 </p>
               </div>
             </div>
           </SheetTrigger>
 
-          <SheetContent className="bg-[#0e1219] border-l border-[rgba(255,255,255,0.07)] text-[#e8eaf0] overflow-y-auto">
+          <SheetContent className="bg-muted border-l border-[var(--border-subtle)] text-foreground overflow-y-auto">
             <SheetHeader className="mb-6">
               <SheetTitle
-                className="text-[#e8eaf0] text-xl font-bold"
+                className="text-foreground text-xl font-bold"
                 style={{ fontFamily: "var(--font-syne), sans-serif" }}
               >
                 {item.title}
@@ -88,7 +88,7 @@ export default function FilterDisplay({ data }: FilterListProps) {
             </SheetHeader>
 
             <Image
-              className="w-full mb-6 border border-[rgba(255,255,255,0.07)]"
+              className="w-full mb-6 border border-[var(--border-subtle)]"
               src={item.photosCollection.items[0]?.url}
               width={600}
               height={340}
@@ -106,7 +106,11 @@ export default function FilterDisplay({ data }: FilterListProps) {
               {item.technologyNameListCollection.items.map((tech, i) => (
                 <span
                   key={i}
+<<<<<<< HEAD
+                  className="flex items-center gap-1.5 text-[11px] text-[var(--primary-color)] bg-card border border-[var(--border-subtle)] px-2 py-1 rounded"
+=======
                   className="flex items-center gap-1.5 text-[11px] text-[var(--primary-color)] bg-[#141920] border border-[rgba(255,255,255,0.07)] px-2 py-1 rounded"
+>>>>>>> main
                 >
                   <StackIcon name={tech.techStackIconName} className="w-3.5 h-3.5" />
                   {tech.name}
@@ -115,11 +119,15 @@ export default function FilterDisplay({ data }: FilterListProps) {
             </div>
 
             {/* Links */}
-            <div className="flex gap-4 border-t border-[rgba(255,255,255,0.07)] pt-4">
+            <div className="flex gap-4 border-t border-[var(--border-subtle)] pt-4">
               {item.githubUrl && (
                 <Link
                   href={item.githubUrl}
+<<<<<<< HEAD
+                  className="flex items-center gap-1.5 text-[12px] text-[var(--primary-color)] hover:text-foreground transition-colors"
+=======
                   className="flex items-center gap-1.5 text-[12px] text-[var(--primary-color)] hover:text-[#e8eaf0] transition-colors"
+>>>>>>> main
                   target="_blank"
                 >
                   <GitBranch size={14} /> GitHub
@@ -128,7 +136,7 @@ export default function FilterDisplay({ data }: FilterListProps) {
               {item.url && (
                 <Link
                   href={item.url}
-                  className="flex items-center gap-1.5 text-[12px] text-[#4f8ef7] hover:opacity-75 transition-opacity"
+                  className="flex items-center gap-1.5 text-[12px] text-[var(--accent-color)] hover:opacity-75 transition-opacity"
                   target="_blank"
                 >
                   <ExternalLink size={14} /> Visit site
