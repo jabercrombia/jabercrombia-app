@@ -35,7 +35,9 @@ export default async function BlogPage({
     return dateB - dateA;
   });
   const posts = tag
-    ? allPosts.filter((p) => p.tags?.includes(tag))
+    ? allPosts.filter((p) =>
+        p.tags?.some((t) => t.toLowerCase().replace(/\s+/g, "-") === tag)
+      )
     : allPosts;
 
   return (

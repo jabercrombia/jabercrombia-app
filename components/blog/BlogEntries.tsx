@@ -3,6 +3,8 @@ import { formatUTCToMonthDayYear } from "@jabercrombia/date-utility";
 import { truncateText } from "../../lib/truncatetext";
 import Link from "next/link";
 
+const normalizeTag = (tag: string) => tag.toLowerCase().replace(/\s+/g, "-");
+
 type Post = {
   title: string;
   date: string;
@@ -27,7 +29,11 @@ export default function BlogEntries({
     >
       {/* Left col — date + tags */}
       <div>
+<<<<<<< HEAD
         <div className="text-[11px] text-muted-foreground tracking-[0.04em] leading-relaxed mb-2">
+=======
+        <div className="text-[11px] text-[var(--text3)] tracking-[0.04em] leading-relaxed mb-2">
+>>>>>>> main
           {formatUTCToMonthDayYear(post.date || post.sys?.firstPublishedAt || "")}
         </div>
         {post.tags && post.tags.length > 0 && (
@@ -35,10 +41,15 @@ export default function BlogEntries({
             {post.tags.map((tag) => (
               <Link
                 key={tag}
+<<<<<<< HEAD
                 href={`/blog?tag=${encodeURIComponent(tag)}`}
                 className="text-[10px] tracking-[0.1em] uppercase text-[var(--accent-color)] hover:opacity-70 transition-opacity"
+=======
+                href={`/blog?tag=${normalizeTag(tag)}`}
+                className="text-[10px] tracking-[0.1em] uppercase text-[#4f8ef7] hover:opacity-70 transition-opacity"
+>>>>>>> main
               >
-                {tag}
+                {normalizeTag(tag)}
               </Link>
             ))}
           </div>

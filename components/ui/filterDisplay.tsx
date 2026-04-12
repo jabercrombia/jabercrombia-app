@@ -106,7 +106,11 @@ export default function FilterDisplay({ data }: FilterListProps) {
               {item.technologyNameListCollection.items.map((tech, i) => (
                 <span
                   key={i}
+<<<<<<< HEAD
                   className="flex items-center gap-1.5 text-[11px] text-[var(--primary-color)] bg-card border border-[var(--border-subtle)] px-2 py-1 rounded"
+=======
+                  className="flex items-center gap-1.5 text-[11px] text-[var(--primary-color)] bg-[#141920] border border-[rgba(255,255,255,0.07)] px-2 py-1 rounded"
+>>>>>>> main
                 >
                   <StackIcon name={tech.techStackIconName} className="w-3.5 h-3.5" />
                   {tech.name}
@@ -119,7 +123,11 @@ export default function FilterDisplay({ data }: FilterListProps) {
               {item.githubUrl && (
                 <Link
                   href={item.githubUrl}
+<<<<<<< HEAD
                   className="flex items-center gap-1.5 text-[12px] text-[var(--primary-color)] hover:text-foreground transition-colors"
+=======
+                  className="flex items-center gap-1.5 text-[12px] text-[var(--primary-color)] hover:text-[#e8eaf0] transition-colors"
+>>>>>>> main
                   target="_blank"
                 >
                   <GitBranch size={14} /> GitHub

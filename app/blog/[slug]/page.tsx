@@ -107,15 +107,18 @@ export default async function BlogPage({ params }: Props) {
                 </span>
                 {post.tags && post.tags.length > 0 && (
                   <div className="flex gap-2">
-                    {post.tags.map((tag) => (
-                      <Link
-                        key={tag}
-                        href={`/blog?tag=${encodeURIComponent(tag)}`}
-                        className="text-[10px] tracking-[0.1em] uppercase text-[var(--accent-color)] border border-ring/30 px-2 py-0.5 rounded-full hover:opacity-70 transition-opacity"
-                      >
-                        {tag}
-                      </Link>
-                    ))}
+                    {post.tags.map((tag) => {
+                      const normalized = tag.toLowerCase().replace(/\s+/g, "-");
+                      return (
+                        <Link
+                          key={tag}
+                          href={`/blog?tag=${normalized}`}
+                          className="text-[10px] tracking-[0.1em] uppercase text-[#4f8ef7] border border-[rgba(79,142,247,0.3)] px-2 py-0.5 rounded-full hover:opacity-70 transition-opacity"
+                        >
+                          {normalized}
+                        </Link>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -136,7 +139,11 @@ export default async function BlogPage({ params }: Props) {
               <div className="border-t border-[var(--border-subtle)] mb-8" />
 
               {/* Body */}
+<<<<<<< HEAD
               <div className="prose prose-invert prose-sm max-w-none text-[var(--primary-color)] leading-[1.8] [&_h2]:text-foreground [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_a]:text-[var(--accent-color)] [&_a]:no-underline [&_a:hover]:underline [&_hr]:border-[var(--border-subtle)] [&_hr]:my-6">
+=======
+              <div className="prose prose-invert prose-sm max-w-none text-[var(--primary-color)] leading-[1.8] [&_h2]:text-[#e8eaf0] [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_a]:text-[#4f8ef7] [&_a]:no-underline [&_a:hover]:underline [&_hr]:border-[rgba(255,255,255,0.07)] [&_hr]:my-6">
+>>>>>>> main
                 {post.body
                   ? <Markdown>{post.body}</Markdown>
                   : post?.content?.json && documentToReactComponents(post.content.json)

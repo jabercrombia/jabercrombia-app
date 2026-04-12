@@ -206,8 +206,13 @@ ul.search {
 
     body {
         @apply bg-background text-foreground;
+<<<<<<< HEAD
         background-color: hsl(var(--background));
         color: hsl(var(--foreground));
+=======
+        background-color: #141b27;
+        color: #ffffff;
+>>>>>>> main
         font-weight: 300;
         line-height: 1.7;
         font-size: 15px;

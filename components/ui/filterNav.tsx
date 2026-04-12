@@ -28,7 +28,7 @@ export default function FilterList({ data }: FilterListProps) {
   useEffect(() => {
     const params = new URLSearchParams();
     selectedTechnologies.forEach((tech) => params.append("filter", tech));
-    router.replace(`?${params.toString()}`);
+    router.replace(`?${params.toString()}`, { scroll: false });
   }, [selectedTechnologies, router]);
 
   const handleToggle = (tech: string) => {
@@ -58,8 +58,13 @@ export default function FilterList({ data }: FilterListProps) {
             onClick={() => handleToggle(tech.name)}
             className={`flex items-center gap-2 px-3 py-2 mb-1 rounded text-left text-[12px] tracking-[0.03em] transition-colors w-full border ${
               active
+<<<<<<< HEAD
                 ? "bg-card text-[var(--accent-color)] border-ring/30"
                 : "bg-muted text-[var(--primary-color)] border-[var(--border-subtle)] hover:text-foreground hover:border-foreground/15"
+=======
+                ? "bg-[#141920] text-[#4f8ef7] border-[rgba(79,142,247,0.3)]"
+                : "bg-[#0e1219] text-[var(--primary-color)] border-[rgba(255,255,255,0.07)] hover:text-[#e8eaf0] hover:border-[rgba(255,255,255,0.15)]"
+>>>>>>> main
             }`}
           >
             <StackIcon name={tech.techStackIconName} className="w-4 h-4 shrink-0" />
