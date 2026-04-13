@@ -17,9 +17,8 @@ interface Post {
   body: string;
   excerpt: string;
   date: string;
-  updatedAt: string;
   slug: string;
-  sys: { id: string; firstPublishedAt: string };
+  sys: { id: string; firstPublishedAt: string; publishedAt: string };
   tags?: string[];
   content?: { json: Document };
   coverImage: { url: string };
@@ -66,8 +65,8 @@ export default async function BlogPage({ params }: Props) {
             "@context": "https://schema.org",
             "@type": "Article",
             headline: post.title,
-            datePublished: post.date,
-            dateModified: post.updatedAt || post.date,
+            datePublished: post.date || post.sys.firstPublishedAt,
+            dateModified: post.sys.publishedAt || post.date || post.sys.firstPublishedAt,
             author: { "@type": "Person", name: "Justin Abercrombia" },
             publisher: {
               "@type": "Organization",
@@ -139,7 +138,7 @@ export default async function BlogPage({ params }: Props) {
               <div className="border-t border-[rgba(255,255,255,0.07)] mb-8" />
 
               {/* Body */}
-              <div className="prose prose-invert prose-sm max-w-none text-[var(--primary-color)] leading-[1.8] [&_h2]:text-[#e8eaf0] [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_a]:text-[#4f8ef7] [&_a]:no-underline [&_a:hover]:underline [&_hr]:border-[rgba(255,255,255,0.07)] [&_hr]:my-6">
+              <div className="prose prose-invert prose-sm max-w-none text-[var(--primary-color)] leading-[1.8] [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_a]:text-[#4f8ef7] [&_a]:no-underline [&_a:hover]:underline [&_hr]:border-[rgba(255,255,255,0.07)] [&_hr]:my-6 [&_ul]:pl-0 [&_ul]:mt-0 [&_li]:my-0 [&_ul_p]:m-0 [&_ol_li_p]:m-0">
                 {post.body
                   ? <Markdown>{post.body}</Markdown>
                   : post?.content?.json && documentToReactComponents(post.content.json)
