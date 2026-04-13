@@ -365,6 +365,7 @@ export async function getPostCollectionEntry(slug: string) {
             sys {
               id
               firstPublishedAt
+              publishedAt
             }
           }
         }
