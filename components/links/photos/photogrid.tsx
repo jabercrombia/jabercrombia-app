@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import Link from "next/link";
@@ -9,6 +11,7 @@ interface PhotoLinkProps {
 }
 
 const PhotoLink: React.FC<PhotoLinkProps> = ({ elem, priority = false }) => {
+
   const handleClick = () => {
     if (typeof window !== "undefined" && window.gtag) {
       window.gtag("event", "photo_click", {

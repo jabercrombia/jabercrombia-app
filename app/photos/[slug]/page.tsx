@@ -2,6 +2,7 @@ import { getPhotoCollectionEntry } from "@/lib/api";
 import ImageModal from "../../../components/links/photos/imagemodal";
 import styles from "../../../components/styles/aboutme.module.scss";
 import Link from "next/link";
+import { cacheLife } from 'next/cache';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -10,6 +11,8 @@ interface PageProps {
 type GalleryItem = { title: string; url: string; thumbnail: string };
 
 export default async function PhotoEntryPage({ params }: PageProps) {
+  'use cache'
+  cacheLife('hours')
   const { slug } = await params;
 
   let dataGraphQL = await getPhotoCollectionEntry(slug);

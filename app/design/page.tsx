@@ -4,6 +4,7 @@ import { getDesignCollection } from "@/lib/api";
 import { getPageHeaderMetadata } from "@/components/pageheader";
 import { Metadata } from "next";
 import styles from "../../components/styles/aboutme.module.scss";
+import { cacheLife } from 'next/cache'
 
 export async function generateMetadata(): Promise<Metadata> {
   return await getPageHeaderMetadata("design");
@@ -18,6 +19,10 @@ type DesignItem = {
 };
 
 export default async function DesignPage() {
+  'use cache'
+  cacheLife('days')
+
+
   let design = await getDesignCollection();
   design = design?.designCollection?.items as DesignItem[];
 

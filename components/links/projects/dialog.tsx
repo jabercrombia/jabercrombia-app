@@ -4,7 +4,9 @@ import remarkGfm from 'remark-gfm';
 import StackIcon from "tech-stack-icons";
 import { useState } from 'react';
 import { truncateText } from "@/lib/truncatetext";
-import Link from "next/link"
+import Link from "next/link";
+import { cacheLife } from 'next/cache'
+
 import {
   Dialog,
   DialogContent,
@@ -32,6 +34,8 @@ interface ModalProps {
 
 
 export default function DialogComponent({ data, open, setOpen }: ModalProps) {
+  'use cache'
+  cacheLife('days')
 
     return (
         <div>

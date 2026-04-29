@@ -1,6 +1,7 @@
 import { getDesignCollectionEntry } from "@/lib/api";
 import styles from "../../../components/styles/aboutme.module.scss";
 import ImageModal from "../../../components/links/photos/imagemodal";
+import { cacheLife } from 'next/cache'
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -9,6 +10,9 @@ interface PageProps {
 type GalleryItem = { title: string; url: string; thumbnail: string };
 
 export default async function DesignEntryPage({ params }: PageProps) {
+  'use cache'
+  cacheLife('days')
+
   const { slug } = await params;
 
   let dataGraphQL = await getDesignCollectionEntry(slug);
@@ -33,9 +37,9 @@ export default async function DesignEntryPage({ params }: PageProps) {
 
         {/* GALLERY */}
         <div className={styles.sectionLabel}>Gallery</div>
-        <div className="columns-1 sm:columns-2 md:columns-3 gap-4 mb-16">
+        <div className="flex flex-wrap justify-center mb-16">
           {gallery.map((elem, index) => (
-            <div key={index} className="break-inside-avoid mb-4 group cursor-pointer overflow-hidden bg-[#0e1219] border border-[rgba(255,255,255,0.07)]">
+            <div key={index} className="w-1/3 px-4 group cursor-pointer overflow-hidden">
               <ImageModal imageData={elem} />
             </div>
           ))}
