@@ -1,7 +1,6 @@
 import Link from "next/link";
 import styles from "../components/styles/aboutme.module.scss";
-import { getAboutCollection } from "@/lib/api";
-import Markdown from "react-markdown";
+import { getAllExperience } from "@/lib/sanity";
 import Skills from "../components/aboutme/skills";
 import { formatDate } from "@jabercrombia/date-utility";
 
@@ -16,8 +15,7 @@ const certifications = [
 ];
 
 export default async function PostPage() {
-  const allPosts = await getAboutCollection();
-  const experience = allPosts.aboutCollection.items;
+  const experience = await getAllExperience();
 
   return (
     <div className={styles.page}>
@@ -59,20 +57,12 @@ export default async function PostPage() {
 
         {/* EXPERIENCE */}
         <h2 className={`${styles.sectionLabel} text-lg`}>Experience</h2>
-        {experience.map(
-          (
-            elem: {
-              jobTitle: string;
-              summary: string;
-              jobDescription: string;
-              startDate: string;
-              endDate: string;
-              company: string;
-              logo: { url: string; title: string } | null;
-            },
-            index: number
-          ) => (
-            <div className={`${styles.expItem} ${index === 0 ? "border-t-0" : ""}`} key={index}>
+        {experience.map((elem, index) => (
+            <div
+              className={`${styles.expItem} ${index === 0 ? "border-t-0" : ""}`}
+              style={index === experience.length - 1 ? { borderBottom: 'none' } : {}}
+              key={index}
+            >
               <div>
                 <div className="bg-white/70 w-auto max-w-[70px]">
                 {elem.logo?.url && (
@@ -97,7 +87,14 @@ export default async function PostPage() {
                   {formatDate(elem.startDate)} – {elem.endDate ? formatDate(elem.endDate) : "Present"}
                 </div>
                 <div className={styles.expDesc}>
-                  <Markdown>{elem.jobDescription || elem.summary}</Markdown>
+                  <ul className="list-disc space-y-1">
+                    {(elem.jobDescription || elem.summary || "")
+                      .split("\n")
+                      .filter((line) => line.trim())
+                      .map((line, i) => (
+                        <li key={i}>{line.trim()}</li>
+                      ))}
+                  </ul>
                 </div>
               </div>
             </div>
