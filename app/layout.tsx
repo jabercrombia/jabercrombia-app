@@ -1,4 +1,5 @@
 import "./globals.css";
+import { headers } from "next/headers";
 import { Inter, Syne } from 'next/font/google'
 import { CMS_NAME } from "@/lib/constants";
 import { GoogleAnalytics } from '@next/third-parties/google'
@@ -51,14 +52,16 @@ const syne = Syne({
 
 
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const headersList = await headers();
+  const locale = headersList.get("x-locale") ?? "en";
   return (
     <>
-      <html lang="en" className={`${inter.variable} ${syne.variable}`}>
+      <html lang={locale} className={`${inter.variable} ${syne.variable}`}>
       <GoogleAnalytics gaId={process.env.GOOGLE_TRACKIND_ID || ''} />
       <SpeedInsights/>
       <meta name="google-site-verification" content="m8chR7z2H5-93nOawLfs2FW30foI--k4eiLnjiPmxhY" />

@@ -4,10 +4,22 @@ import { getAboutCollection } from "@/lib/api";
 import Markdown from "react-markdown";
 import Skills from "../components/aboutme/skills";
 import { formatDate } from "@jabercrombia/date-utility";
+import { headers } from "next/headers";
+import { homeTranslations, metadataTranslations, generateHreflang, type Locale } from "@/lib/translations";
 
-export const metadata = {
-  title: "Justin Abercrombia | Home",
-};
+export async function generateMetadata() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") ?? "en") as Locale;
+  const m = metadataTranslations[locale].home;
+  return {
+    title: m.title,
+    description: m.description,
+    alternates: {
+      canonical: process.env.SITE_URL,
+      languages: generateHreflang('/'),
+    },
+  };
+}
 
 const certifications = [
   { title: "Python Data Science: EDA", org: "Udemy" },
@@ -16,6 +28,10 @@ const certifications = [
 ];
 
 export default async function PostPage() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") ?? "en") as Locale;
+  const t = homeTranslations[locale];
+
   const allPosts = await getAboutCollection();
   const experience = allPosts.aboutCollection.items;
 
@@ -25,15 +41,12 @@ export default async function PostPage() {
 
         {/* HERO */}
         <section className={styles.hero}>
-          <div className={styles.heroEyebrow}>Available for work</div>
+          <div className={styles.heroEyebrow}>{t.eyebrow}</div>
           <h1>
-            Front-End <span className={styles.dim}>Specialist</span> <br/>&amp;
-            <span className={styles.hi}> Full-Stack</span>
-            <span className={styles.dim}>Engineer</span>
+            {t.heading1} <span className={styles.dim}>{t.heading2}</span><br />
+            {t.heading3} <span className={styles.dim}>{t.heading4}</span>
           </h1>
-          <p className={styles.heroSub}>
-            Building high-performance eCommerce and web applications. Specializing in React, Salesforce Commerce, and DevOps infrastructure.
-          </p>
+          <p className={styles.heroSub}>{t.subtitle}</p>
           <div className="flex items-center gap-4 flex-wrap">
       
             <Link
@@ -58,7 +71,7 @@ export default async function PostPage() {
         </section>
 
         {/* EXPERIENCE */}
-        <h2 className={`${styles.sectionLabel} text-lg`}>Experience</h2>
+        <h2 className={`${styles.sectionLabel} text-lg`}>{t.experience}</h2>
         {experience.map(
           (
             elem: {
