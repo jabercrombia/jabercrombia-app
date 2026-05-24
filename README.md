@@ -1,74 +1,104 @@
-# Justins Personal Site
+# Justin Abercrombia — Personal Site
 
 ![homepage image](/public/homepage/homepage_thumb.png)
 
-This is the repository for my personal website, built with Next.js, powered by Contentful as a headless CMS, and deployed via Vercel.
+Personal portfolio site for Justin Abercrombia. Built with Next.js 15 App Router, content managed via Contentful (portfolio, design, photos) and Sanity (blog posts, experience), and deployed on Vercel.
 
 ## Features
-- **Next.js** for a fast, modern React-based framework
-- **Contentful CMS** for easy content management
-- **Vercel** for seamless deployment and hosting
-- **SEO Optimized** with meta tags and Open Graph support
-- **Responsive Design** to ensure compatibility across devices 
-- **Cypress Testing** for end-to-end testing to ensure site functionality
 
-## Technologies Used
-- [Next.js](https://nextjs.org/)
-- [React](https://reactjs.org/)
-- [Contentful](https://www.contentful.com/)
-- [Vercel](https://vercel.com/)
-- [Shadcn](https://ui.shadcn.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Cypress](https://www.cypress.io/) for end-to-end testing
+- **Next.js 15** App Router with server components
+- **Contentful CMS** for portfolio, design, and photo content
+- **Sanity CMS** for blog posts and work experience
+- **i18n** — locale routing (`/es/`, `/fr/`, `/it/`) with translated nav, page heroes, and metadata
+- **hreflang tags** for multilingual SEO
+- **Vercel Analytics + Speed Insights** built in
+- **Tailwind CSS 4** + shadcn/ui component library
+- **SEO** — `generateMetadata`, Open Graph, JSON-LD structured data, auto-generated sitemap
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 15 (App Router) |
+| Language | TypeScript 5 |
+| Styling | Tailwind CSS 4 + shadcn/ui |
+| CMS (content) | Contentful (GraphQL) |
+| CMS (blog/experience) | Sanity (GROQ) |
+| Fonts | Inter + Syne via `next/font/google` |
+| Deployment | Vercel + Cloudflare (DNS / CDN) |
 
 ## Getting Started
 
 ### Prerequisites
-Ensure you have the following installed:
-- Node.js (LTS version recommended)
-- npm or yarn
+
+- Node.js LTS
+- npm
 
 ### Environment Variables
-Create a `.env.local` file in the root directory and add the following variables:
-```
-NEXT_PUBLIC_CONTENTFUL_SPACE_ID=your_space_id
-NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN=your_access_token
-```
-Replace `your_space_id` and `your_access_token` with your actual Contentful credentials.
 
-### Running the Development Server
-Start the local development server with:
-```sh
+Copy `.env.example` to `.env.local` and fill in your credentials:
+
+```bash
+cp .env.example .env.local
+```
+
+```bash
+# Contentful
+CONTENTFUL_SPACE_ID=
+CONTENTFUL_ACCESS_TOKEN=
+CONTENTFUL_PREVIEW_ACCESS_TOKEN=
+
+# Sanity
+NEXT_PUBLIC_SANITY_PROJECT_ID=
+NEXT_PUBLIC_SANITY_DATASET=
+SANITY_API_TOKEN=
+
+# Site
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+SITE_URL=https://www.jabercrombia.com
+GOOGLE_TRACKIND_ID=
+NEXT_PUBLIC_GA_ID=
+```
+
+### Development
+
+```bash
+npm install
 npm run dev
-# or
-yarn dev
 ```
-The website will be available at `http://localhost:3000/`.
 
-### Building for Production
-To build and test the production version locally:
-```sh
+The site runs at `http://localhost:3000`.
+
+### Production build
+
+```bash
 npm run build
 npm start
-# or
-yarn build
-yarn start
 ```
 
-## Running Cypress Tests
-To run the Cypress end-to-end tests, use the following command:
-```sh
-npm run cypress:open
-# or
-yarn cypress:open
-```
-This will open the Cypress test runner, allowing you to run tests and ensure everything is working as expected.
+`npm run build` also generates the sitemap via `next-sitemap`.
+
+## i18n
+
+Locale routing is handled by Next.js rewrites + middleware. English is the default (no prefix).
+
+| URL | Locale |
+|---|---|
+| `/portfolio` | English |
+| `/es/portfolio` | Spanish |
+| `/fr/portfolio` | French |
+| `/it/portfolio` | Italian |
+
+Translations live in `lib/translations.ts`. The `<html lang={locale}>` attribute is set server-side via the `x-locale` middleware header — it reflects the active locale rather than being hardcoded to `"en"`.
+
+## Sanity Setup
+
+Blog posts and work experience are managed in a separate Sanity Studio repo. See `SANITY_EXPERIENCE_SCHEMA.md` for the experience schema definition.
+
+Required document types:
+- `post` — blog posts (`title`, `slug`, `body`, `excerpt`, `tags`, `publishedAt`)
+- `experience` — work history (`company`, `jobTitle`, `startDate`, `endDate`, `jobDescription`, `logo`)
 
 ## Deployment
-The site is automatically deployed to Vercel on each push to the `main` branch.
 
-## Contributing
-Feel free to fork this repository and submit pull requests for improvements or feature additions.
-
-## License
-This project is licensed under the MIT License.
+Deployed on Vercel. Push to `main` triggers an automatic production deployment. Cloudflare is used for DNS management and CDN/caching in front of the Vercel deployment. The sitemap is regenerated on each build via a GitHub Actions workflow.

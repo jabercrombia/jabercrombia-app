@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import React from 'react';
+import { locales } from '@/lib/translations';
 
 import {
   Breadcrumb,
@@ -16,7 +17,8 @@ export default function BreadCrumb() {
 
     const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
     const pathname = usePathname();
-    const segments = pathname.split('/').filter(Boolean);
+    const rawSegments = pathname.split('/').filter(Boolean);
+    const segments = rawSegments.filter(s => !(locales as readonly string[]).includes(s));
 
     const breadcrumbs = segments.map((segment, index) => {
         const path = '/' + segments.slice(0, index + 1).join('/');

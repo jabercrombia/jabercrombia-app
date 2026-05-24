@@ -1,12 +1,23 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getDesignCollection } from "@/lib/api";
-import { getPageHeaderMetadata } from "@/components/pageheader";
 import { Metadata } from "next";
 import styles from "../../components/styles/aboutme.module.scss";
+import { headers } from "next/headers";
+import { designTranslations, metadataTranslations, generateHreflang, type Locale } from "@/lib/translations";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return await getPageHeaderMetadata("design");
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") ?? "en") as Locale;
+  const m = metadataTranslations[locale].design;
+  return {
+    title: m.title,
+    description: m.description,
+    alternates: {
+      canonical: `${process.env.SITE_URL}/design`,
+      languages: generateHreflang('/design'),
+    },
+  };
 }
 
 type DesignItem = {
@@ -18,6 +29,10 @@ type DesignItem = {
 };
 
 export default async function DesignPage() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") ?? "en") as Locale;
+  const t = designTranslations[locale];
+
   let design = await getDesignCollection();
   design = design?.designCollection?.items as DesignItem[];
 
@@ -27,18 +42,16 @@ export default async function DesignPage() {
 
         {/* HERO */}
         <section className={styles.hero}>
-          <div className={styles.heroEyebrow}>Creative work</div>
+          <div className={styles.heroEyebrow}>{t.eyebrow}</div>
           <h1>
-            Design<br />
-            <span className={styles.dim}>Portfolio</span>
+            {t.heading}<br />
+            <span className={styles.dim}>{t.headingSub}</span>
           </h1>
-          <p className={styles.heroSub}>
-            Visual design, brand systems, and UI work across web and print.
-          </p>
+          <p className={styles.heroSub}>{t.subtitle}</p>
         </section>
 
         {/* GRID */}
-        <div className={styles.sectionLabel}>Projects</div>
+        <div className={styles.sectionLabel}>{t.sectionLabel}</div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {design?.map((elem: DesignItem, index: number) => (
             <Link
