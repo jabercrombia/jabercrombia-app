@@ -211,6 +211,13 @@ export const designTranslations: Record<Locale, {
   },
 };
 
+export const breadcrumbTranslations: Record<Locale, Record<string, string>> = {
+  en: { home: 'Home', portfolio: 'Portfolio', design: 'Design', photos: 'Photos', blog: 'Blog', web: 'Web' },
+  es: { home: 'Inicio', portfolio: 'Portafolio', design: 'Diseño', photos: 'Fotos', blog: 'Blog', web: 'Web' },
+  fr: { home: 'Accueil', portfolio: 'Portfolio', design: 'Design', photos: 'Photos', blog: 'Blog', web: 'Web' },
+  it: { home: 'Home', portfolio: 'Portfolio', design: 'Design', photos: 'Foto', blog: 'Blog', web: 'Web' },
+};
+
 export function getLocaleFromPath(pathname: string): Locale {
   const first = pathname.split('/')[1] ?? '';
   return (locales as readonly string[]).includes(first) ? (first as Locale) : 'en';
