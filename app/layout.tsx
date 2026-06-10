@@ -9,33 +9,47 @@ import { Analytics } from "@vercel/analytics/react"
 import Footer from "../components/footer";
 import Header from "../components/header";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { generateHreflang, type Locale } from "@/lib/translations";
 
-export const metadata = {
-  title: ``,
-  description: `I design and build modern, high-performance web applications that solve real business problems. With over a decade of experience in front-end development specializing in React, Next.js, and TypeScript I help companies launch scalable digital experiences that are fast, accessible, and conversion-focused.`,
-  keywords: ['Next.js', 'React', 'JavaScript'],
-  authors: [{ name: 'Justin Abercrombia', url: 'http://www.github.com/jabercrombia' }],
-  creator: 'Justin Abercrombia',
-  openGraph: {
-    images: '/homepage/homepage_thumb.png',
-  },
-  alternates: {
-    canonical: process.env.SITE_URL,
-  },
-  robots: {
-    index: true,       // index this page
-    follow: true,      // follow links on this page
-    nocache: false,    // optional: prevent caching
-    googleBot: {       // optional: Google-specific rules
+const ogLocaleMap: Record<Locale, string> = {
+  en: 'en_US',
+  es: 'es_ES',
+  fr: 'fr_FR',
+  it: 'it_IT',
+};
+
+export async function generateMetadata() {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") ?? "en") as Locale;
+  return {
+    title: ``,
+    description: `I design and build modern, high-performance web applications that solve real business problems. With over a decade of experience in front-end development specializing in React, Next.js, and TypeScript I help companies launch scalable digital experiences that are fast, accessible, and conversion-focused.`,
+    keywords: ['Next.js', 'React', 'JavaScript'],
+    authors: [{ name: 'Justin Abercrombia', url: 'http://www.github.com/jabercrombia' }],
+    creator: 'Justin Abercrombia',
+    openGraph: {
+      images: '/homepage/homepage_thumb.png',
+      locale: ogLocaleMap[locale],
+    },
+    alternates: {
+      canonical: process.env.SITE_URL,
+      languages: generateHreflang('/'),
+    },
+    robots: {
       index: true,
       follow: true,
-      noimageindex: false,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
-  },
-};
+  };
+}
 
 const inter = Inter({
   subsets: ['latin'],

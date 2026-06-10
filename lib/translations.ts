@@ -83,6 +83,13 @@ export function generateHreflang(path: string): Record<string, string> {
   };
 }
 
+export function generateCanonical(path: string, locale: Locale): string {
+  const base = process.env.SITE_URL ?? 'https://jabercrombia.com';
+  const p = path === '/' ? '' : (path.startsWith('/') ? path : `/${path}`);
+  if (locale === 'en') return `${base}${p || '/'}`;
+  return `${base}/${locale}${p}`;
+}
+
 export const portfolioTranslations: Record<Locale, {
   eyebrow: string;
   heading: string;

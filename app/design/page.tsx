@@ -4,7 +4,7 @@ import { getDesignCollection } from "@/lib/api";
 import { Metadata } from "next";
 import styles from "../../components/styles/aboutme.module.scss";
 import { headers } from "next/headers";
-import { designTranslations, metadataTranslations, generateHreflang, type Locale } from "@/lib/translations";
+import { designTranslations, metadataTranslations, generateHreflang, generateCanonical, type Locale } from "@/lib/translations";
 
 export async function generateMetadata(): Promise<Metadata> {
   const headersList = await headers();
@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: m.title,
     description: m.description,
     alternates: {
-      canonical: `${process.env.SITE_URL}/design`,
+      canonical: generateCanonical('/design', locale),
       languages: generateHreflang('/design'),
     },
   };
