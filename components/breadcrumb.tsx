@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import React from 'react';
-import { locales } from '@/lib/translations';
+import { locales, breadcrumbTranslations, getLocaleFromPath } from '@/lib/translations';
 
 import {
   Breadcrumb,
@@ -18,13 +18,16 @@ export default function BreadCrumb() {
     const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
     const pathname = usePathname();
     const rawSegments = pathname.split('/').filter(Boolean);
+    const locale = getLocaleFromPath(pathname);
+    const t = breadcrumbTranslations[locale];
     const segments = rawSegments.filter(s => !(locales as readonly string[]).includes(s));
 
     const breadcrumbs = segments.map((segment, index) => {
+        const decoded = decodeURIComponent(segment.replace(/-/g, ' '));
         const path = '/' + segments.slice(0, index + 1).join('/');
         return {
-        name: decodeURIComponent(segment.replace(/-/g, ' ')),
-        url: `${SITE_URL}${path}`,
+            name: t[segment] ?? decoded,
+            url: `${SITE_URL}${path}`,
         };
     });
     return (
@@ -33,7 +36,7 @@ export default function BreadCrumb() {
             <Breadcrumb className="container mx-auto uppercase">
               <BreadcrumbList className="mt-[20px] mb-[20px]">
                   <BreadcrumbItem>
-                      <BreadcrumbLink href="/" className="text-grey-600">Home</BreadcrumbLink>
+                      <BreadcrumbLink href="/" className="text-grey-600">{t.home}</BreadcrumbLink>
                   </BreadcrumbItem>
                   <BreadcrumbSeparator />
                   {breadcrumbs.map((elem, index: number) => (
