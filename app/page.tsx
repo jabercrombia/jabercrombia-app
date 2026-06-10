@@ -5,7 +5,7 @@ import Markdown from "react-markdown";
 import Skills from "../components/aboutme/skills";
 import { formatDate } from "@jabercrombia/date-utility";
 import { headers } from "next/headers";
-import { homeTranslations, metadataTranslations, generateHreflang, type Locale } from "@/lib/translations";
+import { homeTranslations, metadataTranslations, generateHreflang, generateCanonical, type Locale } from "@/lib/translations";
 
 export async function generateMetadata() {
   const headersList = await headers();
@@ -15,7 +15,7 @@ export async function generateMetadata() {
     title: m.title,
     description: m.description,
     alternates: {
-      canonical: process.env.SITE_URL,
+      canonical: generateCanonical('/', locale),
       languages: generateHreflang('/'),
     },
   };
