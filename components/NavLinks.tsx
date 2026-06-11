@@ -10,32 +10,36 @@ import {
   type Locale,
 } from "@/lib/translations";
 
-const navItems = ["portfolio", "design", "photos", "blog"] as const;
+const navItems = ["portfolio", "design", "photos"] as const;
 
 export function NavLinks({ mobile = false }: { mobile?: boolean }) {
   const pathname = usePathname();
   const locale = getLocaleFromPath(pathname);
   const t = navTranslations[locale];
 
+  const linkClass = mobile
+    ? "text-[12px] tracking-[0.1em] uppercase text-[var(--primary-color)] hover:text-[#e8eaf0] transition-colors py-3 border-b border-[rgba(255,255,255,0.07)]"
+    : "nav-link";
+
   return (
     <>
       {navItems.map((item) => {
         const href = locale === "en" ? `/${item}` : `/${locale}/${item}`;
         return (
-          <Link
-            key={item}
-            href={href}
-            title={t[item]}
-            className={
-              mobile
-                ? "text-[12px] tracking-[0.1em] uppercase text-[var(--primary-color)] hover:text-[#e8eaf0] transition-colors py-3 border-b border-[rgba(255,255,255,0.07)]"
-                : "nav-link"
-            }
-          >
+          <Link key={item} href={href} title={t[item]} className={linkClass}>
             {t[item]}
           </Link>
         );
       })}
+      <a
+        href="https://blog.jabercrombia.com/"
+        title={t.blog}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={linkClass}
+      >
+        {t.blog}
+      </a>
     </>
   );
 }
