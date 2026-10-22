@@ -1,6 +1,6 @@
 import "./globals.css";
 import { headers } from "next/headers";
-import { Inter, Syne } from 'next/font/google'
+import { Inter, Syne, JetBrains_Mono } from 'next/font/google'
 import { CMS_NAME } from "@/lib/constants";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import BreadCrumbData from "../components/breadcrumbdata";
@@ -23,8 +23,8 @@ export async function generateMetadata() {
   const locale = (headersList.get("x-locale") ?? "en") as Locale;
   return {
     title: ``,
-    description: `I design and build modern, high-performance web applications that solve real business problems. With over a decade of experience in front-end development specializing in React, Next.js, and TypeScript I help companies launch scalable digital experiences that are fast, accessible, and conversion-focused.`,
-    keywords: ['Next.js', 'React', 'JavaScript'],
+    description: `DevOps & platform engineer building cloud infrastructure with Terraform, CI/CD pipelines, and observability for fast, reliable web platforms.`,
+    keywords: ['DevOps', 'Platform Engineering', 'Terraform', 'Cloudflare', 'AWS', 'CI/CD', 'Observability', 'Next.js'],
     authors: [{ name: 'Justin Abercrombia', url: 'http://www.github.com/jabercrombia' }],
     creator: 'Justin Abercrombia',
     openGraph: {
@@ -64,6 +64,13 @@ const syne = Syne({
   variable: '--font-syne',
 })
 
+const mono = JetBrains_Mono({
+  weight: ['400', '500'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
+})
+
 
 
 export default async function RootLayout({
@@ -75,7 +82,7 @@ export default async function RootLayout({
   const locale = headersList.get("x-locale") ?? "en";
   return (
     <>
-      <html lang={locale} className={`${inter.variable} ${syne.variable}`}>
+      <html lang={locale} className={`${inter.variable} ${syne.variable} ${mono.variable}`}>
       <GoogleAnalytics gaId={process.env.GOOGLE_TRACKIND_ID || ''} />
       <SpeedInsights/>
       <meta name="google-site-verification" content="m8chR7z2H5-93nOawLfs2FW30foI--k4eiLnjiPmxhY" />

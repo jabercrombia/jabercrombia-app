@@ -11,6 +11,15 @@
     --bg2: #0e1219;
     --bg3: #141920;
     --divider: rgba(255, 255, 255, 0.07);
+    --page-bg: #141b27;
+    --text-bright: #e8eaf0;
+    --text-dim: #4a5068;
+    --text-muted: #8b94a5;
+    --accent-soft: rgba(79, 142, 247, 0.3);
+    --accent-faint: rgba(79, 142, 247, 0.08);
+    --success: #3fb950;
+    --warning: #d29922;
+    --terminal-bg: #0a0d13;
 }
 
 html {

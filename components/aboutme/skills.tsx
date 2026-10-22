@@ -1,37 +1,35 @@
-"use client"
-
-import styles from '../styles/aboutme.module.scss';
-
 const skillGroups = [
   {
-    category: "Front-End",
-    items: ["React", "Next.js", "JavaScript", "TypeScript", "HTML / CSS", "Tailwind CSS", "Shadcn/ui"],
+    category: "Infrastructure & Cloud",
+    items: ["AWS", "Cloudflare Workers / R2", "Terraform", "Docker", "Vercel"],
   },
   {
-    category: "Back-End",
-    items: ["Node.js", "Express", "GraphQL", "RESTful APIs", "PostgreSQL"],
+    category: "CI/CD & Automation",
+    items: ["GitHub Actions", "CI/CD Pipelines", "Git", "Playwright", "Cypress", "Selenium"],
   },
   {
-    category: "DevOps",
-    items: ["AWS", "Docker", "CI/CD", "Git", "GitHub Actions"],
+    category: "Observability",
+    items: ["Datadog", "Grafana", "Prometheus", "Logging & Alerting"],
   },
   {
-    category: "Testing",
-    items: ["Selenium", "Cypress"],
+    category: "Application",
+    items: ["React", "Next.js", "TypeScript", "Node.js", "GraphQL", "PostgreSQL"],
   },
 ];
 
 export default function Skills() {
   return (
-    <div className={styles.skillsGrid}>
+    <div className="mb-12 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-[var(--divider)] bg-[var(--divider)] lg:grid-cols-4">
       {skillGroups.map((group) => (
-        <div className={styles.skillGroup} key={group.category}>
-          <h3>{group.category}</h3>
-          <div className={styles.skillList}>
+        <div className="bg-[var(--bg2)] p-6" key={group.category}>
+          <h3 className="mb-4 text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--accent)]">{group.category}</h3>
+          <ul className="m-0 flex list-none flex-col gap-1.5 p-0">
             {group.items.map((skill) => (
-              <span key={skill}>{skill}</span>
+              <li key={skill} className="text-[12.5px] text-[var(--primary-color)]" style={{ listStyleType: "none" }}>
+                {skill}
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       ))}
     </div>

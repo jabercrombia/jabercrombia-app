@@ -26,6 +26,10 @@ const additionalPages = [
     'lastmod': new Date().toISOString()
   },
   {
+    'loc': '/writing',
+    'lastmod': new Date().toISOString()
+  },
+  {
     'loc': '/portfolio',
     'lastmod': new Date().toISOString()
   },
