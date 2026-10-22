@@ -1,11 +1,17 @@
 import Link from "next/link";
-import styles from "../components/styles/aboutme.module.scss";
+import { ArrowRight } from "lucide-react";
 import { getAboutCollection } from "@/lib/api";
+import { getMediumArticles, MEDIUM_PROFILE_URL } from "@/lib/medium";
 import Markdown from "react-markdown";
 import Skills from "../components/aboutme/skills";
+import Pipeline from "../components/aboutme/pipeline";
+import Terminal from "../components/aboutme/terminal";
+import SectionLabel from "../components/aboutme/sectionLabel";
+import ArticleCard from "../components/writing/articleCard";
+import { GitHubIcon, LinkedInIcon, MediumIcon } from "../components/socialIcons";
 import { formatDate } from "@jabercrombia/date-utility";
 import { headers } from "next/headers";
-import { homeTranslations, metadataTranslations, generateHreflang, generateCanonical, type Locale } from "@/lib/translations";
+import { homeTranslations, metadataTranslations, writingTranslations, generateHreflang, generateCanonical, type Locale } from "@/lib/translations";
 
 export async function generateMetadata() {
   const headersList = await headers();
@@ -18,6 +24,12 @@ export async function generateMetadata() {
       canonical: generateCanonical('/', locale),
       languages: generateHreflang('/'),
     },
+    openGraph: {
+      title: m.title,
+      description: m.description,
+      url: generateCanonical('/', locale),
+      images: '/homepage/homepage_thumb.png',
+    },
   };
 }
 
@@ -27,113 +39,155 @@ const certifications = [
   { title: "B2C Commerce Developer", org: "Salesforce" },
 ];
 
-export default async function PostPage() {
+const socialLinks = [
+  { href: "https://github.com/jabercrombia", label: "GitHub", Icon: GitHubIcon },
+  { href: "https://www.linkedin.com/in/justinabercrombia", label: "LinkedIn", Icon: LinkedInIcon },
+  { href: MEDIUM_PROFILE_URL, label: "Medium", Icon: MediumIcon },
+];
+
+type ExperienceItem = {
+  jobTitle: string;
+  summary: string;
+  jobDescription: string;
+  startDate: string;
+  endDate: string;
+  company: string;
+  logo: { url: string; title: string } | null;
+};
+
+export default async function HomePage() {
   const headersList = await headers();
   const locale = (headersList.get("x-locale") ?? "en") as Locale;
   const t = homeTranslations[locale];
+  const w = writingTranslations[locale];
+  const writingHref = locale === "en" ? "/writing" : `/${locale}/writing`;
 
-  const allPosts = await getAboutCollection();
-  const experience = allPosts.aboutCollection.items;
+  const [allPosts, articles] = await Promise.all([getAboutCollection(), getMediumArticles(3)]);
+  const experience: ExperienceItem[] = allPosts.aboutCollection.items;
 
   return (
-    <div className={styles.page}>
+    <div className="min-h-screen bg-[var(--page-bg)] text-[15px] font-light leading-[1.7] text-[var(--text-bright)]">
       <div className="container mx-auto px-6">
 
         {/* HERO */}
-        <section className={styles.hero}>
-          <div className={styles.heroEyebrow}>{t.eyebrow}</div>
-          <h1>
-            {t.heading1} <span className={styles.dim}>{t.heading2}</span><br />
-            {t.heading3} <span className={styles.dim}>{t.heading4}</span>
-          </h1>
-          <p className={styles.heroSub}>{t.subtitle}</p>
-          <div className="flex items-center gap-4 flex-wrap">
-      
-            <Link
-              href="https://github.com/jabercrombia"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[12px] tracking-[0.05em] text-[var(--primary-color)] hover:text-[#e8eaf0] transition-colors"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-              GitHub
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/justinabercrombia"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[12px] tracking-[0.05em] text-[var(--primary-color)] hover:text-[#e8eaf0] transition-colors"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              LinkedIn
-            </Link>
+        <section className="grid items-center gap-12 pt-4 lg:grid-cols-[1.15fr_1fr]">
+          <div>
+            <div className="mb-7 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.15em] text-[var(--accent)] before:block before:h-px before:w-6 before:bg-[var(--accent)]">
+              {t.eyebrow}
+            </div>
+            <h1 className="mb-6 font-[family-name:var(--font-syne)] text-[clamp(2.8rem,6.5vw,5rem)] font-medium leading-none tracking-[-0.02em] text-[var(--text-bright)]">
+              {t.heading1} <span className="text-[var(--text-dim)]">{t.heading2}</span>
+              <br />
+              {t.heading3}
+            </h1>
+            <p className="mb-10 max-w-[520px] text-[15px] leading-[1.8] text-[var(--text3)]">{t.subtitle}</p>
+            <div className="flex flex-wrap items-center gap-6">
+              {socialLinks.map(({ href, label, Icon }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={label}
+                  className="inline-flex items-center gap-2 text-[12px] tracking-[0.05em] text-[var(--primary-color)] transition-colors hover:text-[var(--accent)]"
+                >
+                  <Icon />
+                  {label}
+                </Link>
+              ))}
+            </div>
           </div>
+          <Terminal />
         </section>
 
+        {/* PIPELINE */}
+        <section aria-labelledby="pipeline-heading">
+          <SectionLabel id="pipeline-heading">{t.pipelineLabel}</SectionLabel>
+          <Pipeline stages={t.pipeline} />
+        </section>
+
+        {/* WRITING */}
+        {articles.length > 0 && (
+          <section aria-labelledby="writing-heading">
+            <SectionLabel
+              id="writing-heading"
+              action={
+                <Link
+                  href={writingHref}
+                  title={t.allArticles}
+                  className="inline-flex shrink-0 items-center gap-1.5 text-[11px] uppercase tracking-[0.1em] text-[var(--accent)] hover:text-[var(--text-bright)]"
+                >
+                  {t.allArticles}
+                  <ArrowRight size={13} aria-hidden="true" />
+                </Link>
+              }
+            >
+              {t.writing}
+            </SectionLabel>
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {articles.map((article) => (
+                <ArticleCard key={article.id} article={article} readLabel={w.readOn} />
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* EXPERIENCE */}
-        <h2 className={`${styles.sectionLabel} text-lg`}>{t.experience}</h2>
-        {experience.map(
-          (
-            elem: {
-              jobTitle: string;
-              summary: string;
-              jobDescription: string;
-              startDate: string;
-              endDate: string;
-              company: string;
-              logo: { url: string; title: string } | null;
-            },
-            index: number
-          ) => (
-            <div className={`${styles.expItem} ${index === 0 ? "border-t-0" : ""}`} key={index}>
+        <section aria-labelledby="experience-heading">
+          <SectionLabel id="experience-heading">{t.experience}</SectionLabel>
+          {experience.map((elem, index) => (
+            <article
+              key={index}
+              className="grid grid-cols-1 gap-2 border-b border-[var(--divider)] py-8 md:grid-cols-[100px_1fr] md:gap-8"
+            >
               <div>
-                <div className="bg-white/70 w-auto max-w-[70px]">
                 {elem.logo?.url && (
-                  <img
-                    src={elem.logo.url}
-                    alt={elem.logo.title}
-                    className="mt-2 mb-2 w-auto invert"
-                  />
+                  <div className="w-auto max-w-[70px] bg-white/70">
+                    <img src={elem.logo.url} alt={elem.logo.title} className="my-2 w-auto invert" />
+                  </div>
                 )}
-                </div>
                 {!elem.endDate && (
-                  <div className={styles.liveTag}>
-                    <span className={styles.liveDot} />
-                    Current
+                  <div className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-[var(--accent-soft)] px-2 py-0.5 text-[10px] uppercase tracking-[0.1em] text-[var(--accent)]">
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--accent)]" aria-hidden="true" />
+                    {t.current}
                   </div>
                 )}
               </div>
               <div>
-                <div className="text-2xl">{elem.company}</div>
-                <div className={styles.expRole}>{elem.jobTitle}</div>
-                <div className={`${styles.expDates} mb-3`}>
-                  {formatDate(elem.startDate)} – {elem.endDate ? formatDate(elem.endDate) : "Present"}
+                <h3 className="text-2xl font-light">{elem.company}</h3>
+                <div className="mb-2 text-[1.15rem] font-semibold leading-snug text-[var(--text-bright)]">{elem.jobTitle}</div>
+                <div className="mb-3 font-[family-name:var(--font-mono)] text-[11px] tracking-[0.04em] text-[var(--text-muted)]">
+                  {formatDate(elem.startDate)} – {elem.endDate ? formatDate(elem.endDate) : t.present}
                 </div>
-                <div className={styles.expDesc}>
+                <div className="text-[13.5px] leading-[1.75] text-[var(--primary-color)] [&_p]:m-0 [&_ul]:ml-4 [&_ul]:mt-1">
                   <Markdown>{elem.jobDescription || elem.summary}</Markdown>
                 </div>
               </div>
-            </div>
-          )
-        )}
+            </article>
+          ))}
+        </section>
 
         {/* SKILLS */}
-        <h2 className={`${styles.sectionLabel} text-lg`}>Skills</h2>
-        <Skills />
+        <section aria-labelledby="skills-heading">
+          <SectionLabel id="skills-heading">{t.skills}</SectionLabel>
+          <Skills />
+        </section>
 
         {/* CERTIFICATIONS */}
-        <div className={styles.sectionLabel}>Certifications</div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-16">
-          {certifications.map((cert) => (
-            <div key={cert.title} className="bg-[#0e1219] border border-[rgba(255,255,255,0.07)] px-4 py-3">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#4f8ef7] shrink-0" />
-                <span className="text-[12.5px] text-[#e8eaf0] font-medium">{cert.title}</span>
+        <section aria-labelledby="certifications-heading">
+          <SectionLabel id="certifications-heading" className="pt-4">{t.certifications}</SectionLabel>
+          <div className="mb-16 grid grid-cols-1 gap-3 md:grid-cols-3">
+            {certifications.map((cert) => (
+              <div key={cert.title} className="border border-[var(--divider)] bg-[var(--bg2)] px-4 py-3">
+                <div className="mb-1 flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" aria-hidden="true" />
+                  <span className="text-[12.5px] font-medium text-[var(--text-bright)]">{cert.title}</span>
+                </div>
+                <div className="pl-3.5 text-[10px] uppercase tracking-[0.1em] text-[var(--text-muted)]">{cert.org}</div>
               </div>
-              <div className="text-[10px] tracking-[0.1em] uppercase text-[#4a5068] pl-3.5">{cert.org}</div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </section>
 
       </div>
     </div>

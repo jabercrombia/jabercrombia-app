@@ -10,7 +10,7 @@ import {
   type Locale,
 } from "@/lib/translations";
 
-const navItems = ["portfolio", "design", "photos"] as const;
+const navItems = ["writing", "portfolio", "design", "photos"] as const;
 
 export function NavLinks({ mobile = false }: { mobile?: boolean }) {
   const pathname = usePathname();
@@ -31,15 +31,6 @@ export function NavLinks({ mobile = false }: { mobile?: boolean }) {
           </Link>
         );
       })}
-      <a
-        href="https://blog.jabercrombia.com/"
-        title={t.blog}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={linkClass}
-      >
-        {t.blog}
-      </a>
     </>
   );
 }

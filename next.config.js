@@ -2,7 +2,7 @@
 module.exports = {
   images: {
     formats: ["image/avif", "image/webp"],
-    domains: ['images.ctfassets.net'],
+    domains: ['images.ctfassets.net', 'cdn-images-1.medium.com'],
   },
   async redirects() {
     return [
@@ -15,7 +15,7 @@ module.exports = {
   },
   async rewrites() {
     const locales = ['es', 'fr', 'it'];
-    const sections = ['portfolio', 'design', 'photos', 'blog'];
+    const sections = ['writing', 'portfolio', 'design', 'photos', 'blog'];
     return [
       ...locales.map((locale) => ({
         source: `/${locale}`,
